@@ -1,0 +1,18 @@
+<table>
+  <thead>
+    <tr>
+      <th>User_id</th>
+      <th>Produto_id</th>
+      <th>Quantidade</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @inventory_lists.each do |inventorylist| %>
+      <tr>
+        <td><%= inventorylist.user_id %></td>
+        <td><%= inventorylist.produto_id %></td>        
+        <td><%= inventorylist.quantity %></td>      
+      </tr>
+    <% end %>
+  </tbody>
+</table>

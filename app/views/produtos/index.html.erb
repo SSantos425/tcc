@@ -1,0 +1,56 @@
+<%= link_to "Home", home_path%>
+
+
+<% if user_signed_in? %> 
+  <hr>
+ <div> Welcome <%= current_user.email %> </div> 
+  <hr>
+  <%= button_to "Sign out", destroy_user_session_path, method: :delete %> 
+  <hr>
+<% else %>
+  <hr>
+  <%= button_to "Sign in", new_user_session_path %> 
+    <hr>
+<% end %>
+
+
+<%= link_to "New produto", new_produto_path %>
+
+
+
+
+
+<table>
+  <thead>
+    <tr>
+      <th>Nome</th>
+      <th>Preço</th>
+      <th>Ações</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @produtos.each do |produto| %>
+      <tr>
+        <td><%= produto.nome %></td>
+        <td><%= number_to_currency(produto.preco) %></td>
+        
+        <td>
+          <%= link_to "Destroy", produto_path(produto), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %> 
+          <%= link_to "Adicionar ao estoque", adicionar_ao_estoque_path(user_id: current_user.id, produto_id: produto.id, quantity: 10), data: { turbo_method: :post }%>
+
+          <%= form_with(url: adicionar_ao_estoque_path, method: :post) do |form| %>
+            <%= form.hidden_field :user_id , value:current_user.id%><br>
+            <%= form.hidden_field :produto_id , value:produto.id%><br>
+
+            <%= form.number_field :quantity, placeholder: 'Quantidade' %><br>
+            <%= form.submit 'Add ao totoke' %>
+          <% end %>
+
+
+
+        
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
