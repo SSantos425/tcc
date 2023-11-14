@@ -1,16 +1,17 @@
-<table>
+<h1>Estoque de produtos</h1>
+
+
+<table class='table table-hover'>
   <thead>
     <tr>
-      <th>User_id</th>
-      <th>Produto_id</th>
-      <th>Quantidade</th>
+      <th>Nome do Produto</th>
+      <th>Quantidade disponivel no estoque</th>
     </tr>
   </thead>
   <tbody>
     <% @inventory_lists.each do |inventorylist| %>
       <tr>
-        <td><%= inventorylist.user_id %></td>
-        <td><%= inventorylist.produto_id %></td>        
+        <td><%= inventorylist.produto.nome %></td>      
         <td><%= inventorylist.quantity %></td>      
       </tr>
     <% end %>

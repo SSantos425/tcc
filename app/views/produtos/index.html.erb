@@ -2,25 +2,18 @@
 
 
 <% if user_signed_in? %> 
-  <hr>
  <div> Welcome <%= current_user.email %> </div> 
-  <hr>
   <%= button_to "Sign out", destroy_user_session_path, method: :delete %> 
-  <hr>
 <% else %>
-  <hr>
   <%= button_to "Sign in", new_user_session_path %> 
-    <hr>
+
 <% end %>
 
 
-<%= link_to "New produto", new_produto_path %>
+<%= link_to "Novo Produto", new_produto_path %>
 
 
-
-
-
-<table>
+<table class="table table-hover">
   <thead>
     <tr>
       <th>Nome</th>
@@ -34,23 +27,46 @@
         <td><%= produto.nome %></td>
         <td><%= number_to_currency(produto.preco) %></td>
         
-        <td>
+       <!--  <td>
           <%= link_to "Destroy", produto_path(produto), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %> 
-          <%= link_to "Adicionar ao estoque", adicionar_ao_estoque_path(user_id: current_user.id, produto_id: produto.id, quantity: 10), data: { turbo_method: :post }%>
-
+        </td>
+        -->
+        <td>
           <%= form_with(url: adicionar_ao_estoque_path, method: :post) do |form| %>
-            <%= form.hidden_field :user_id , value:current_user.id%><br>
-            <%= form.hidden_field :produto_id , value:produto.id%><br>
+            <%= form.hidden_field :user_id , value:current_user.id%>
+            <%= form.hidden_field :produto_id , value:produto.id%>
 
-            <%= form.number_field :quantity, placeholder: 'Quantidade' %><br>
-            <%= form.submit 'Add ao totoke' %>
+            <%= form.number_field :quantity, placeholder: 'Quantidade' %>
+            <%= form.submit 'Adicionar quantidade ao estoque' %>
           <% end %>
 
-
-
-        
+          
         </td>
       </tr>
     <% end %>
   </tbody>
 </table>
+
+<!--
+
+<form class="form" >
+  <div class="section">
+    <div class="control-group">
+      <label class="control-label">Selecione algo</label>
+      <select class="control">
+            <option disabled>Selecione Algo</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="control-group">
+      <label class="control-label">Escreva algo</label>
+      <input type="text" class="control"/>
+    </div>
+
+  </div>
+</form>
+
+
+-->
