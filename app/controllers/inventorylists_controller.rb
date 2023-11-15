@@ -3,28 +3,28 @@ class InventorylistsController < ApplicationController
     @inventory_lists = Inventorylist.all
   end
 
-  def new
-    @inventorylist = Inventorylist.new
-  end
-
   def adicionar_ao_estoque
     user_id = params[:user_id]
     produto_id = params[:produto_id]
-    quantity = params[:quantity]
+    quantity = params[:quantity].to_i
 
-    puts "User ID: #{user_id}" # Adicione esta linha para verificar o ID do usuário
-    puts "Produto ID: #{produto_id}" # Adicione esta linha para verificar o ID do produto
-    puts "QQUANDITADE: #{quantity}" # Adicione esta linha para verificar o ID do usuário
-   
-  
-    inventory_list = Inventorylist.create(user_id: user_id, produto_id: produto_id, quantity: quantity)
-  
-    if inventory_list.save
+    inventory_list = Inventorylist.find_by(user_id: user_id, produto_id: produto_id)
+
+    if inventory_list.nil?
+      inventory_list = Inventorylist.new(user_id: user_id, produto_id: produto_id, quantity: quantity)
+      inventory_list.save
+      puts("#{inventory_list.errors.full_messages}")
       flash[:success] = "Produto adicionado ao estoque com sucesso!"
       redirect_to root_path
+      
     else
-      redirect_to produtos_path, alert: "Erro ao adicionar produto ao estoque."
+      inventory_list.update(quantity: inventory_list.quantity + quantity)
+      flash[:notice] = "Produto ATUALIZADO com sucesso!"
+
+      redirect_to root_path
     end
+    
+   
   end
   
 
