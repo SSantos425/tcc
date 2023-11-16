@@ -1,0 +1,2 @@
+module VendalistsHelper
+end

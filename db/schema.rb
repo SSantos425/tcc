@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_11_13_184347) do
+ActiveRecord::Schema[7.0].define(version: 2023_11_16_195141) do
   create_table "inventorylists", force: :cascade do |t|
     t.integer "user_id"
     t.integer "produto_id"
@@ -40,6 +40,27 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_13_184347) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  create_table "vendas", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "produto_id"
+    t.integer "quantity"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["produto_id"], name: "index_vendas_on_produto_id"
+    t.index ["user_id"], name: "index_vendas_on_user_id"
+  end
+
+  create_table "wallets", force: :cascade do |t|
+    t.integer "user_id"
+    t.float "balance"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_wallets_on_user_id"
+  end
+
   add_foreign_key "inventorylists", "produtos"
   add_foreign_key "inventorylists", "users"
+  add_foreign_key "vendas", "produtos"
+  add_foreign_key "vendas", "users"
+  add_foreign_key "wallets", "users"
 end

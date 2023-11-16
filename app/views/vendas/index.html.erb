@@ -1,0 +1,37 @@
+<h1>Fazer uma venda</h1>
+<p>Selecione um produto e a quantidade abaixo para vendelo<P>
+
+
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>Nome</th>
+      <th>Preço</th>
+      <th>Ações</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @produtos.each do |produto| %>
+      <tr>
+        <td><%= produto.nome %></td>
+        <td><%= number_to_currency(produto.preco) %></td>
+        
+       <!--  <td>
+          <%= link_to "Destroy", produto_path(produto), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %> 
+        </td>
+        -->
+        <td>
+          <%= form_with(url: adicionar_uma_venda_path, method: :post) do |form| %>
+            <%= form.hidden_field :user_id , value:current_user.id%>
+            <%= form.hidden_field :produto_id , value:produto.id%>
+
+            <%= form.number_field :quantity, placeholder: 'Quantidade' %>
+            <%= form.submit 'Fazer uma venda' %>
+          <% end %>
+
+          
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

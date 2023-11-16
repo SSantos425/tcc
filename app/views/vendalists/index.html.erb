@@ -1,0 +1,34 @@
+<h1>Lista de Vendas</h1>
+
+<table class='table table-hover'>
+  <thead>
+    <tr>
+      <th>Data da venda</th>
+      <th>Nome do Produto</th>
+      <th>quantidade vendida</th>
+      <th>Ações</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @venda.each do |venda| %>
+      <tr>
+        <td>#</td>
+        <td><%= venda.produto.nome%></td>
+        <td><%= venda.quantity%></td>
+        
+     
+        <td>
+          <%= form_with(url: vender_path, method: :post) do |form| %>
+            <%= form.hidden_field :user_id , value:current_user.id%>
+            <%= form.hidden_field :produto_id , value:venda.produto.id%>
+
+            <%= form.number_field :quantity, value:venda.quantity %>
+            <%= form.submit 'Fazer uma venda' %>
+          <% end %>
+
+          
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

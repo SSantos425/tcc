@@ -1,0 +1,22 @@
+class VendalistsController < ApplicationController
+    def index
+        @venda = Venda.all
+        @user = User.all
+
+    end
+
+    def vender
+        user_id = params[:user_id]
+        produto_id = params[:produto_id]
+        quantity = params[:quantity].to_i
+
+        inventory_list = Inventorylist.find_by(user_id: user_id, produto_id: produto_id)
+
+        
+        inventory_list.update(quantity: inventory_list.quantity - quantity)
+        flash[:notice] = "Produto ATUALIZADO com sucesso!"
+
+        redirect_to root_path
+   
+    end
+end

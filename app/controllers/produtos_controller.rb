@@ -20,17 +20,6 @@ class ProdutosController < ApplicationController
     
   end
 
-  def adicionar_ao_estoque
-    produto = Produto.find(params[:id])
-    quantidade_adicionada_ao_estoque = params[:produto][:quantidade].to_i
-
-    
-    
-    redirect_to produtos_path
-  end
-
- 
-
   def destroy
     @produto = Produto.find(params[:id]) 
     @produto.destroy
