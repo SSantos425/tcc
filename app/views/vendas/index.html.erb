@@ -21,17 +21,16 @@
         </td>
         -->
         <td>
-          <%= form_with(url: adicionar_uma_venda_path, method: :post) do |form| %>
-            <%= form.hidden_field :user_id , value:current_user.id%>
-            <%= form.hidden_field :produto_id , value:produto.id%>
-
-            <%= form.number_field :quantity, placeholder: 'Quantidade' %>
-            <%= form.submit 'Fazer uma venda' %>
+          <%= form_with(url: add_path) do |f| %>
+            <%= f.hidden_field :user_id, value: current_user.id %>
+            <%= f.hidden_field :id, value: produto.id %>
+            <%= f.number_field :quantity, value: 0, min: 1 %>
+            <%= f.submit "Add To Cart" %>
           <% end %>
-
           
         </td>
       </tr>
     <% end %>
   </tbody>
 </table>
+

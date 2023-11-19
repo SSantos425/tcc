@@ -11,7 +11,12 @@
   </head>
 
   <body>
+    <%= render partial: "carts/cart" if @render_cart %>
     <%= link_to "Home", home_path%>
+    <% if user_signed_in?%>
+      <%= current_user.wallet.balance%>
+    <% end %>
+    
     <%= yield %>
   </body>
 </html>

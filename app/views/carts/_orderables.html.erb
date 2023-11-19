@@ -1,0 +1,64 @@
+<!--
+
+<% @cart.orderables.each do |orderable| %>
+  <% product = orderable.produto %>
+  <div id="<%= "cart-#{product.id}" %>">
+    <div style="display:flex;justify-content:space-between;margin: 0em 5em;">
+      <strong>Name:</strong>
+      <%= product.nome %>
+      <strong>Price:</strong>
+      <%= product.preco %>
+      <%= form_with(url: add_path) do |f| %>
+        <%= f.hidden_field :id, value: product.id %>
+        <%= f.number_field :quantity, value: orderable.quantity, min: 0 %>
+        <%= f.submit "Add To Cart" %>
+      <% end %>
+      <%= form_with(url: remove_path) do |f| %>
+        <%= f.hidden_field :id, value: orderable.id %>
+        <%= f.submit "X" %>
+      <% end %>
+      <strong>Total:</strong>
+      <%= orderable.total %>
+    </div>
+  </div>
+<% end %>
+-->
+
+<div style="display:flex;justify-content:space-between;margin: 0em 5em;">
+
+  <table class="table table-dark">
+    <thead>
+      <tr>
+        <th>Nome do produto</th>     
+        <th>Preço</th>
+        <th>Açoes</th>
+        <th>Total</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @cart.orderables.each do |orderable| %>
+        <% product = orderable.produto %>
+        <tr>
+          <td><%= product.nome %></td>
+          <td><%= product.preco %></td>
+          <td style="display: flex;">
+            <%= form_with(url: add_path) do |f| %>
+              <%= f.hidden_field :id, value: product.id %>
+              <%= f.number_field :quantity, value: orderable.quantity, min: 0 %>
+              <%= f.submit "Atualizar a quantidade" %>
+            <% end %>  
+
+            <%= form_with(url: remove_path) do |f| %>
+              <%= f.hidden_field :id, value: orderable.id %>
+              <%= f.submit "Remover do carrinho" %>
+            <% end %>         
+          </td>            
+          <td>
+            <%= orderable.total %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  
+</div>

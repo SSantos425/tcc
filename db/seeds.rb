@@ -7,6 +7,7 @@
 #   Character.create(name: "Luke", movie: movies.first)
 
 user = User.create(email:"admin@admin.com", password:123456)
+wallet = Wallet.create(user_id:user.id, balance:0)
 
 produto = Produto.create(nome: "ripa" ,  preco: 10 )
 Produto.create(nome: "sarrafo" ,  preco: 20 )
@@ -15,4 +16,3 @@ Produto.create( nome: "taxi-preto" ,  preco: 40 )
 
 #estoque na verdade é a list de produtos no estoque
 Inventorylist.create(user_id: user.id, produto_id: produto.id, quantity:1)
-Venda.create(user_id: user.id, produto_id: produto.id, quantity:1)

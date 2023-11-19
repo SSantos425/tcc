@@ -15,6 +15,11 @@ Rails.application.routes.draw do
   get "/home", to: "home_page#index"
 
 
+  get 'cart', to: 'carts#show', as: 'cart'
+  post 'add', to: 'carts#add', as: 'add'
+  post 'remove', to: 'carts#remove', as: 'remove'
+
+
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")

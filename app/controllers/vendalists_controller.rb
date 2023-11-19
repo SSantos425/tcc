@@ -16,6 +16,8 @@ class VendalistsController < ApplicationController
         inventory_list.update(quantity: inventory_list.quantity - quantity)
         flash[:notice] = "Produto ATUALIZADO com sucesso!"
 
+        user = User.first
+        user.wallet.update(balance: user.wallet.balance + inventory_list.produto.preco*quantity)
         redirect_to root_path
    
     end
