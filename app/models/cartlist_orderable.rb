@@ -1,0 +1,2 @@
+class CartlistOrderable < ApplicationRecord
+end

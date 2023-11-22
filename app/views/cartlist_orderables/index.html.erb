@@ -1,0 +1,42 @@
+<h1>lista de carrinhos</h1>
+<table class="table table-hover">
+    <thead>
+      <tr>
+        <th>Id do cart_list</th>     
+        <th>ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @cartlist.each do |cartlist| %>
+        <tr>
+          <td><%= cartlist.id%></td>
+          <td><%= link_to 'Mostrar venda', cartlist_orderable_path(cartlist) %></td>
+        </tr>        
+      <% end %>
+    </tbody>
+  </table>
+
+<!--fazer o show -->
+
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>id</th>     
+        <th>user_id</th>
+        <th>produto_id</th>
+        <th>cartlist_id</th>
+        <th>quantity</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @cartorderable.each do |cartlist| %>
+        <tr>
+          <td><%= cartlist.id%></td>
+          <td><%= cartlist.user_id%></td>
+          <td><%= cartlist.produto_id%></td>
+          <td><%= cartlist.cartlist_id%></td>
+          <td><%= cartlist.quantity%></td>
+        </tr>        
+      <% end %>
+    </tbody>
+  </table>

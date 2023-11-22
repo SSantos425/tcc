@@ -39,4 +39,43 @@ class CartsController < ApplicationController
       end
     end
   end
+
+  def empty_cart
+    @cart.orderables.destroy_all
+  
+    respond_to do |format|
+      format.turbo_stream do
+        render turbo_stream: turbo_stream.replace('cart',
+                                                  partial: 'carts/cart',
+                                                  locals: { cart: @cart })
+      end
+    end
+    
+  end
+
+
+  def adicionar_ao_cartlist
+    cartlist = Cartlist.create()
+    user = User.first
+
+    @cart.orderables.each do |orderable|
+      produto = orderable.produto
+      cartlist_orderable = CartlistOrderable.create( user_id: user.id,
+                                                      produto_id: produto.id,
+                                                      cartlist_id: cartlist.id,
+                                                      quantity: orderable.quantity)
+    end
+
+    @cart.orderables.destroy_all
+
+    respond_to do |format|
+      format.turbo_stream do
+        render turbo_stream: turbo_stream.replace('cart',
+                                                  partial: 'carts/cart',
+                                                  locals: { cart: @cart })
+      end
+    end
+  
+
+  end  
 end

@@ -14,5 +14,6 @@ Produto.create(nome: "sarrafo" ,  preco: 20 )
 Produto.create( nome: "ripa 4m" ,  preco: 30 )
 Produto.create( nome: "taxi-preto" ,  preco: 40 )
 
+
 #estoque na verdade é a list de produtos no estoque
-Inventorylist.create(user_id: user.id, produto_id: produto.id, quantity:1)
+Inventorylist.create(user_id: user.id, produto_id: produto.id, quantity:10)

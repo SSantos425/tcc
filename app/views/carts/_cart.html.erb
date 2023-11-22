@@ -4,9 +4,6 @@
   
   <% if @cart.orderables.count > 0 %>
     <%= render "carts/orderables" %>
-    <div style="display:flex;justify-content:space-between;margin: 0em 5em;">
-      <button><%= "Finalizar venda: #{@cart.total}" %></button>
-    </div>
   <% else %>
     <p>Your cart is empty</p>
   <% end %>

@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   resources :inventorylists #COLOCAR O ONLY AQUI PRA NAO FICAR UMAS ROTAS AVULSAS
   resources :vendas #COLOCAR O ONLY AQUI PRA NAO FICAR UMAS ROTAS AVULSAS
   resources :vendalists #COLOCAR O ONLY AQUI PRA NAO FICAR UMAS ROTAS AVULSAS
+  resources :cartlist #COLOCAR O ONLY AQUI PRA NAO FICAR UMAS ROTAS AVULSAS
+  resources :cartlist_orderables #COLOCAR O ONLY AQUI PRA NAO FICAR UMAS ROTAS AVULSAS
 
   #post 'adicionar_ao_estoque/:user_id/:produto_id/:quantity', to: 'inventorylists#adicionar_ao_estoque', as: 'adicionar_ao_estoque'
   post 'adicionar_ao_estoque', to: 'inventorylists#adicionar_ao_estoque', as: 'adicionar_ao_estoque'
@@ -18,7 +20,8 @@ Rails.application.routes.draw do
   get 'cart', to: 'carts#show', as: 'cart'
   post 'add', to: 'carts#add', as: 'add'
   post 'remove', to: 'carts#remove', as: 'remove'
-
+  post 'adicionar_ao_cartlist', to: 'carts#adicionar_ao_cartlist', as: 'adicionar_ao_cartlist'
+  post 'empty_cart', to: 'carts#empty_cart', as: 'empty_cart'
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

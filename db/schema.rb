@@ -10,7 +10,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_11_18_213145) do
+ActiveRecord::Schema[7.0].define(version: 2023_11_21_013614) do
+  create_table "cartlist_orderables", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "produto_id"
+    t.integer "cartlist_id"
+    t.integer "quantity"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["cartlist_id"], name: "index_cartlist_orderables_on_cartlist_id"
+    t.index ["produto_id"], name: "index_cartlist_orderables_on_produto_id"
+    t.index ["user_id"], name: "index_cartlist_orderables_on_user_id"
+  end
+
+  create_table "cartlists", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "carts", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -75,6 +92,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_18_213145) do
     t.index ["user_id"], name: "index_wallets_on_user_id"
   end
 
+  add_foreign_key "cartlist_orderables", "cartlists"
+  add_foreign_key "cartlist_orderables", "produtos"
+  add_foreign_key "cartlist_orderables", "users"
   add_foreign_key "inventorylists", "produtos"
   add_foreign_key "inventorylists", "users"
   add_foreign_key "orderables", "carts"

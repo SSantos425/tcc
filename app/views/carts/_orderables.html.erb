@@ -24,8 +24,9 @@
 <% end %>
 -->
 
-<div style="display:flex;justify-content:space-between;margin: 0em 5em;">
 
+<div style="display:flex;justify-content:space-between;margin: 0em 5em;">
+  <button><%= link_to "Esvaziar carrinho", empty_cart_path, data: { turbo_method: :post } %></button>
   <table class="table table-dark">
     <thead>
       <tr>
@@ -33,10 +34,12 @@
         <th>Preço</th>
         <th>Açoes</th>
         <th>Total</th>
+        <th>Vender</th>
       </tr>
     </thead>
     <tbody>
       <% @cart.orderables.each do |orderable| %>
+        <% valor_total = @cart.total %>
         <% product = orderable.produto %>
         <tr>
           <td><%= product.nome %></td>
@@ -56,9 +59,12 @@
           <td>
             <%= orderable.total %>
           </td>
-        </tr>
+          <td>
+          #
+          </td>
+        </tr>        
       <% end %>
     </tbody>
   </table>
-  
+  <button><%= link_to "Vender: #{@cart.total}", adicionar_ao_cartlist_path,data: { turbo_method: :post }%></button>
 </div>

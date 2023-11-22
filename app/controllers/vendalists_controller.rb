@@ -1,7 +1,6 @@
 class VendalistsController < ApplicationController
     def index
-        @venda = Venda.all
-        @user = User.all
+        @cartlists = Cartlist.all 
 
     end
 

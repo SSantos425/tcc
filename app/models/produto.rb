@@ -8,4 +8,7 @@ class Produto < ApplicationRecord
     has_many :orderables
     has_many :carts, through: :orderables
 
+    has_many :cartlist_orderables
+    has_many :cartlists, through: :cartlist_orderables
+
 end
