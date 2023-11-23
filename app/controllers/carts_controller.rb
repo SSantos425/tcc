@@ -55,14 +55,14 @@ class CartsController < ApplicationController
 
 
   def adicionar_ao_cartlist
-    cartlist = Cartlist.create()
+    cartlist = Cartlist.create(valor:@cart.total)
     user = User.first
 
     @cart.orderables.each do |orderable|
       produto = orderable.produto
       cartlist_orderable = CartlistOrderable.create( user_id: user.id,
                                                       produto_id: produto.id,
-                                                      cartlist_id: cartlist.id,
+                                                      cartlist_id: cartlist.id,                                                    
                                                       quantity: orderable.quantity)
     end
 

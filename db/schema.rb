@@ -24,6 +24,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_21_013614) do
   end
 
   create_table "cartlists", force: :cascade do |t|
+    t.float "valor"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

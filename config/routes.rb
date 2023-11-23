@@ -22,6 +22,7 @@ Rails.application.routes.draw do
   post 'remove', to: 'carts#remove', as: 'remove'
   post 'adicionar_ao_cartlist', to: 'carts#adicionar_ao_cartlist', as: 'adicionar_ao_cartlist'
   post 'empty_cart', to: 'carts#empty_cart', as: 'empty_cart'
+  post 'dar_baixa_na_venda/:id', to:'cartlist_orderables#dar_baixa_na_venda', as:'dar_baixa_na_venda'
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
