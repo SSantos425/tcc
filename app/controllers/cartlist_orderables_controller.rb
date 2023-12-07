@@ -13,7 +13,7 @@ class CartlistOrderablesController < ApplicationController
     wallet = user.wallet
 
     cartlist = Cartlist.find(params[:id])
-    cartlist_orderables = CartlistOrderable.where(params[:id])
+    cartlist_orderables = CartlistOrderable.where(cartlist_id:params[:id])
 
     cartlist_orderables.each do |cartlist_orderable|
       inventory_list = Inventorylist.find_by(user_id: user.id, produto_id: cartlist_orderable.produto.id)
