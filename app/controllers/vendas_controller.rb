@@ -2,6 +2,7 @@ class VendasController < ApplicationController
   def index
     @produtos = Produto.all
     @user = User.all
+    @cliente = Cliente.first
   end
 
   def adicionar_uma_venda

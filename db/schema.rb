@@ -10,26 +10,47 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_11_21_013614) do
+ActiveRecord::Schema[7.0].define(version: 2023_12_08_120450) do
   create_table "cartlist_orderables", force: :cascade do |t|
     t.integer "user_id"
     t.integer "produto_id"
     t.integer "cartlist_id"
+    t.integer "cliente_id"
     t.integer "quantity"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["cartlist_id"], name: "index_cartlist_orderables_on_cartlist_id"
+    t.index ["cliente_id"], name: "index_cartlist_orderables_on_cliente_id"
     t.index ["produto_id"], name: "index_cartlist_orderables_on_produto_id"
     t.index ["user_id"], name: "index_cartlist_orderables_on_user_id"
   end
 
   create_table "cartlists", force: :cascade do |t|
     t.float "valor"
+    t.integer "forma_de_pagamento"
+    t.integer "cliente_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["cliente_id"], name: "index_cartlists_on_cliente_id"
+  end
+
+  create_table "carts", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "carts", force: :cascade do |t|
+  create_table "clientes", force: :cascade do |t|
+    t.string "nome"
+    t.string "cpf"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "fornecedors", force: :cascade do |t|
+    t.string "nome"
+    t.string "endereco"
+    t.string "cnpj"
+    t.string "insc_estadual"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -48,10 +69,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_21_013614) do
     t.integer "user_id"
     t.integer "produto_id"
     t.integer "cart_id"
+    t.integer "cliente_id"
     t.integer "quantity"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["cart_id"], name: "index_orderables_on_cart_id"
+    t.index ["cliente_id"], name: "index_orderables_on_cliente_id"
     t.index ["produto_id"], name: "index_orderables_on_produto_id"
     t.index ["user_id"], name: "index_orderables_on_user_id"
   end
@@ -94,11 +117,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_21_013614) do
   end
 
   add_foreign_key "cartlist_orderables", "cartlists"
+  add_foreign_key "cartlist_orderables", "clientes"
   add_foreign_key "cartlist_orderables", "produtos"
   add_foreign_key "cartlist_orderables", "users"
+  add_foreign_key "cartlists", "clientes"
   add_foreign_key "inventorylists", "produtos"
   add_foreign_key "inventorylists", "users"
   add_foreign_key "orderables", "carts"
+  add_foreign_key "orderables", "clientes"
   add_foreign_key "orderables", "produtos"
   add_foreign_key "orderables", "users"
   add_foreign_key "vendas", "produtos"

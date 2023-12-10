@@ -1,6 +1,5 @@
 <h1>Fazer uma venda</h1>
-<p>Selecione um produto e a quantidade abaixo para vendelo<P>
-
+<p>Selecione um produto e a quantidade abaixo para vende-lo<P>
 
 <table class="table table-hover">
   <thead>
@@ -22,6 +21,9 @@
         -->
         <td>
           <%= form_with(url: add_path) do |f| %>
+            <%= f.label :cliente_id, "ID do Cliente"  %>
+            <%= f.number_field :cliente_id %>
+
             <%= f.hidden_field :user_id, value: current_user.id %>
             <%= f.hidden_field :id, value: produto.id %>
             <%= f.number_field :quantity, value: 0, min: 1 %>

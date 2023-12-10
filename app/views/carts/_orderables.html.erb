@@ -1,30 +1,3 @@
-<!--
-
-<% @cart.orderables.each do |orderable| %>
-  <% product = orderable.produto %>
-  <div id="<%= "cart-#{product.id}" %>">
-    <div style="display:flex;justify-content:space-between;margin: 0em 5em;">
-      <strong>Name:</strong>
-      <%= product.nome %>
-      <strong>Price:</strong>
-      <%= product.preco %>
-      <%= form_with(url: add_path) do |f| %>
-        <%= f.hidden_field :id, value: product.id %>
-        <%= f.number_field :quantity, value: orderable.quantity, min: 0 %>
-        <%= f.submit "Add To Cart" %>
-      <% end %>
-      <%= form_with(url: remove_path) do |f| %>
-        <%= f.hidden_field :id, value: orderable.id %>
-        <%= f.submit "X" %>
-      <% end %>
-      <strong>Total:</strong>
-      <%= orderable.total %>
-    </div>
-  </div>
-<% end %>
--->
-
-
 <div style="display:flex;justify-content:space-between;margin: 0em 5em;">
   <button><%= link_to "Esvaziar carrinho", empty_cart_path, data: { turbo_method: :post } %></button>
   <table class="table table-dark">
@@ -35,6 +8,8 @@
         <th>Açoes</th>
         <th>Total</th>
         <th>Vender</th>
+        <th>Nome do cliente</th>
+        <th>AÇÕES</th>
       </tr>
     </thead>
     <tbody>
@@ -62,9 +37,31 @@
           <td>
           #
           </td>
+          <td>
+            <%= orderable.cliente.nome %>
+          </td>
+          <td>
+            <%= form_with(url: adicionar_ao_cartlist_vista_path) do |f| %>
+              <%= f.hidden_field :cliente_id, value: orderable.cliente_id %>
+              <%= f.submit "Vender a VISTA" %>
+            <% end %> 
+          </td>
+
+          <td>
+            <%= form_with(url: adicionar_ao_cartlist_prazo_path) do |f| %>
+              <%= f.hidden_field :cliente_id, value: orderable.cliente_id %>
+              <%= f.submit "Vender a PRAZO" %>
+            <% end %> 
+          </td>
         </tr>        
       <% end %>
     </tbody>
   </table>
-  <button><%= link_to "Vender: #{@cart.total}", adicionar_ao_cartlist_path,data: { turbo_method: :post }%></button>
+  <!--
+  <button><%= link_to "Vender a VISTA: #{@cart.total}", adicionar_ao_cartlist_vista_path,data: { turbo_method: :post }%></button>
+  <button><%= link_to "Vender a PRAZO: #{@cart.total}", adicionar_ao_cartlist_prazo_path,data: { turbo_method: :post }%></button>
+  -->
+ 
+  
 </div>
+

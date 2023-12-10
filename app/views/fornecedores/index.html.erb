@@ -1,0 +1,23 @@
+<h1>Lista de fornecedores</h1>
+
+
+<table class='table table-hover'>
+  <thead>
+    <tr>
+      <th>Nome </th>
+      <th>endereco</th>
+      <th>cnpj</th>
+      <th>insc_estadual</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @fornecedores.each do |fornecedor| %>
+      <tr>
+        <td><%= fornecedor.nome %></td>      
+        <td><%= fornecedor.endereco %></td>  
+        <td><%= fornecedor.cnpj %></td>     
+        <td><%= fornecedor.insc_estadual %></td>         
+      </tr>
+    <% end %>
+  </tbody>
+</table>

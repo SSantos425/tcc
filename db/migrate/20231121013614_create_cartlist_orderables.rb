@@ -4,6 +4,7 @@ class CreateCartlistOrderables < ActiveRecord::Migration[7.0]
       t.references :user, foreign_key: true
       t.references :produto, foreign_key: true
       t.references :cartlist, foreign_key: true
+      t.references :cliente,foreign_key: true
       t.integer :quantity
 
       t.timestamps

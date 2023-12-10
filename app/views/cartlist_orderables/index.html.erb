@@ -3,7 +3,8 @@
     <thead>
       <tr>
         <th>ID do cartlist</th>
-        <th>Data da venda</th>     
+        <th>Data da venda</th> 
+        <th>Forma de Pagamento</th>        
         <th>Para quem foi a venda</th>
         <th>Valor da venda</th>
         <th>ações</th>
@@ -12,12 +13,42 @@
     <tbody>
       <% @cartlist.each do |cartlist| %>
         <tr>
-          <td><%= cartlist.id%></td>
-          <td>#</td>
-          <td>#</td>
-          <td><%= cartlist.valor%></td>
-          <td><%= link_to 'Mostrar venda', show_path(cartlist.id) %></td>
+          <% if cartlist.forma_de_pagamento === 1 %>
+            <td><%= cartlist.id%></td>
+            <td>DD/MM/AAAA</td>        
+            <td>A VISTA</td>           
+            <td><%= cartlist.cliente.nome %></td>
+            <td><%= cartlist.valor%></td>
+            <td><%= link_to 'Finalizar Venda', show_path(cartlist.id) %></td>
+          <% end %>
         </tr>        
       <% end %>
     </tbody>
+</table>
+
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>ID do cartlist</th>
+      <th>Data da venda</th> 
+      <th>Forma de Pagamento</th>        
+      <th>Para quem foi a venda</th>
+      <th>Valor da venda</th>
+      <th>ações</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @cartlist.each do |cartlist| %>
+      <tr>
+        <% if cartlist.forma_de_pagamento === 2 %>
+          <td><%= cartlist.id%></td>
+          <td>DD/MM/AAAA</td>        
+          <td>A PRAZO</td>           
+          <td><%= cartlist.cliente.nome %></td>
+          <td><%= cartlist.valor%></td>
+          <td><%= link_to 'Finalizar Venda', show_path(cartlist.id) %></td>
+        <% end %>
+      </tr>        
+    <% end %>
+  </tbody>
 </table>

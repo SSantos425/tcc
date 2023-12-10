@@ -1,0 +1,19 @@
+<h1>Lista de clientes</h1>
+
+
+<table class='table table-hover'>
+  <thead>
+    <tr>
+      <th>Nome </th>
+      <th>cpf</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @clientes.each do |cliente| %>
+      <tr>
+        <td><%= cliente.nome %></td>      
+        <td><%= cliente.cpf %></td>         
+      </tr>
+    <% end %>
+  </tbody>
+</table>
