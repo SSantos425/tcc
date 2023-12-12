@@ -7,14 +7,18 @@
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_include_tag "turbo", type: "module" %>
     <%= javascript_importmap_tags %>
   </head>
 
   <body>
-    <%= render partial: "carts/cart" if @render_cart %>
-    <%= link_to "Home", home_path%>
+  
+    
     <% if user_signed_in?%>
+    
+      <%= render partial: "carts/cart" if @render_cart %>
       <%= current_user.wallet.balance%>
+      <%= link_to "Home", home_path%>
     <% end %>
     
     <%= yield %>

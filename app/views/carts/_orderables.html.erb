@@ -29,7 +29,8 @@
             <%= form_with(url: remove_path) do |f| %>
               <%= f.hidden_field :id, value: orderable.id %>
               <%= f.submit "Remover do carrinho" %>
-            <% end %>         
+            <% end %>   
+                  
           </td>            
           <td>
             <%= orderable.total %>

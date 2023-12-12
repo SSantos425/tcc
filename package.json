@@ -1,0 +1,13 @@
+{
+  "name": "tcc",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:SSantos425/tcc.git",
+  "author": "SSantos425 <samuel.tri@hotmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "animate": "^1.0.0",
+    "font-awesome": "^4.7.0",
+    "nprogress": "^0.2.0"
+  }
+}
