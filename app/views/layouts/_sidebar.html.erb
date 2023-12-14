@@ -1,0 +1,106 @@
+<aside class="main-sidebar sidebar-dark-primary elevation-4">
+  <!-- Brand Logo -->
+  <a href="index3.html" class="brand-link">
+    <div style="opacity: .8">
+      <span class="fa fa-home"> Home</span>
+    </div>
+
+  </a>
+
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <!-- Sidebar user (optional) -->
+    <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+      <div class="image">
+        <img src="" class="img-circle elevation-2" alt="m_ideal">
+      </div>
+      <div class="info">
+        <a href="#" class="d-block">
+          <%= current_user.email %>
+        </a>
+      </div>
+    </div>
+
+    <!-- SidebarSearch Form 
+      <div class="form-inline">
+        <div class="input-group" data-widget="sidebar-search">
+          <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
+          <div class="input-group-append">
+            <button class="btn btn-sidebar">
+              <i class="fas fa-search fa-fw"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+      -->
+
+    <!-- Sidebar Menu -->
+    <nav class="mt-2">
+      <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+        <!-- Add icons to the links using the .nav-icon class
+               with font-awesome or any other icon font library -->
+
+        <li class="nav-header">Menu Principal</li>
+ 
+        <li class="nav-item">
+          <%= link_to new_wallet_path(user_id: current_user.id), class: "nav-link" do %>
+            <i class="nav-icon fa fa-cash-register"></i>
+            <p>Abrir wallet/caixa</p>
+          <% end %>
+        </li>
+        
+        <li class="nav-item">
+          <%= link_to produtos_path, class: "nav-link" do %>
+            <i class="nav-icon fa fa-tree"></i>
+            <p>Adicionar Produtos</p>
+          <% end %>
+        </li>
+        
+        <li class="nav-item">
+          <%= link_to inventorylists_path, class: "nav-link" do %>
+            <i class="nav-icon fa fa-tree"></i>
+            <p>Estoque</p>
+          <% end %>
+        </li>
+        
+        <li class="nav-item">
+          <%= link_to vendas_path, class: "nav-link" do %>
+            <i class="nav-icon fa fa-tree"></i>
+            <p>Fazer uma Carrinho</p>
+          <% end %>
+        </li>
+        
+        <li class="nav-item">
+          <%= link_to cartlist_orderables_path, class: "nav-link" do %>
+            <i class="nav-icon fa fa-tree"></i>
+            <p>Finalizar Vendas</p>
+          <% end %>
+        </li>
+        
+        <li class="nav-item">
+          <%= link_to fornecedores_path, class: "nav-link" do %>
+            <i class="nav-icon fa fa-tree"></i>
+            <p>Fornecedores</p>
+          <% end %>
+        </li>
+        
+        <li class="nav-item">
+          <%= link_to clientes_path, class: "nav-link" do %>
+            <i class="nav-icon fa fa-tree"></i>
+            <p>Clientes</p>
+          <% end %>
+        </li>
+        
+        <li class="nav-item">
+          <%= link_to clientes_path, class: "nav-link" do %>
+            <i class="nav-icon fa fa-tree"></i>
+            <p>Histórico de Vendas Geral</p>
+          <% end %>
+        </li>
+        
+
+    </nav>
+    <!-- /.sidebar-menu -->
+  </div>
+  <!-- /.sidebar -->
+</aside>

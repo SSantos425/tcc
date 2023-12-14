@@ -14,10 +14,12 @@
  *= require_self
  */
  
-@import 'bootstrap';
+ @import 'adminlte/plugins/fontawesome-free/css/all.min.css';
 
-@import 'font-awesome';
+ @import 'adminlte/plugins/icheck-bootstrap/icheck-bootstrap.min.css';
+
+ @import 'adminlte/dist/css/adminlte.min.css';
 
 // Gentelella
-@import 'custom';
+//@import 'custom';
 

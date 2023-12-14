@@ -1,38 +1,45 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Tcc</title>
+    <title>Blabla</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-    <!--<%= javascript_include_tag "turbo", type: "module" %>-->
-    <%= javascript_include_tag "turbo", type: "module" %>
-    <!--<%= javascript_importmap_tags %>-->
-    <!--<%= javascript_importmap_tags %>-->
+    <%= javascript_importmap_tags %>
   </head>
 
-  <body class="nav-md">
-    <div class="container body">
-      <div class="main_container">  
-        
-        
-        
-        <%= render "layouts/header" %>
-        <div class="right_col" role="main">    
-          <div class="page-title">
-            <div class="title_left">
-              <% if user_signed_in?%>              
-                <%= render partial: "carts/cart" if @render_cart %>
-                <%= current_user.wallet.balance%>
-                <%= link_to "Home", home_path%>
-              <% end %>
-              <%= yield %>
-            </div>
-        </div>         
-      </div>
-    </div>
-  </body>
-</html>
+  <body data-scrollbar-auto-hide="n" class="hold-transition sidebar-mini layout-fixed">
+    <div class="wrapper">
+      <%= render "layouts/header2" %>
+      <%= render "layouts/sidebar" %>
+      
 
+      <div class="content-wrapper">
+        <div class="content-header">
+          <div class="container-fluid">
+            <div class="row mb-2">
+              <div class="col-sm-6">
+                <% if user_signed_in?%>              
+                  <%= render partial: "carts/cart" if @render_cart %>
+                  <%= current_user.wallet.balance%>
+                  <%= link_to "Home", home_path%>
+                <% end %>
+                <%= yield %>
+              </div><!-- /.col -->              
+            </div><!-- /.row -->
+          </div><!-- /.container-fluid -->
+        </div>
+
+        <div class="content container-fluid">
+          <div class="container-fluid">            
+          </div>
+        </div>
+      </div>
+
+      <%= render "layouts/footer" %>
+      <%= render "layouts/controlsidebar" %>
+    <div>
+</body>
+</html>
