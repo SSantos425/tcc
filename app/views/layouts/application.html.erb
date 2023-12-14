@@ -7,20 +7,32 @@
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <!--<%= javascript_include_tag "turbo", type: "module" %>-->
     <%= javascript_include_tag "turbo", type: "module" %>
+    <!--<%= javascript_importmap_tags %>-->
     <!--<%= javascript_importmap_tags %>-->
   </head>
 
-  <body>
-  
-    
-    <% if user_signed_in?%>
-    
-      <%= render partial: "carts/cart" if @render_cart %>
-      <%= current_user.wallet.balance%>
-      <%= link_to "Home", home_path%>
-    <% end %>
-    
-    <%= yield %>
+  <body class="nav-md">
+    <div class="container body">
+      <div class="main_container">  
+        
+        
+        
+        <%= render "layouts/header" %>
+        <div class="right_col" role="main">    
+          <div class="page-title">
+            <div class="title_left">
+              <% if user_signed_in?%>              
+                <%= render partial: "carts/cart" if @render_cart %>
+                <%= current_user.wallet.balance%>
+                <%= link_to "Home", home_path%>
+              <% end %>
+              <%= yield %>
+            </div>
+        </div>         
+      </div>
+    </div>
   </body>
 </html>
+
