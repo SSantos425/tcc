@@ -27,7 +27,18 @@
             <%= f.hidden_field :user_id, value: current_user.id %>
             <%= f.hidden_field :id, value: produto.id %>
             <%= f.number_field :quantity, value: 0, min: 1 %>
-            <%= f.submit "Add To Cart" %>
+
+            <%= button_tag(type: 'submit', class: 'btn btn-primary btn-sm') do %>
+              <i class="fas fa-cart-plus fa-lg mr-2"> Adicionar</i>
+            <% end %>
+
+            
+            
+            
+
+          
+            
+            
           <% end %>
           
         </td>
