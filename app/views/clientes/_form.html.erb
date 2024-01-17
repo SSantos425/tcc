@@ -1,0 +1,15 @@
+<%= form_with model: @cliente, url: clientes_path do |form| %>
+  <div>
+    <%= form.label :nome %><br>
+    <%= form.text_field :nome %>
+  </div>
+
+  <div>
+    <%= form.label :cpf %><br>
+    <%= form.text_area :cpf %><br>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

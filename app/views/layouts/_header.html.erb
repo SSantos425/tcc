@@ -32,7 +32,7 @@
 
                 <li class="nav-item">
                     <%= link_to vendas_path, class: "nav-link" do %>
-                        <p>Fazer uma Carrinho</p>
+                        <p>Fazer uma Venda</p>
                         <% end %>
                 </li>
 
@@ -45,22 +45,26 @@
                 <li class="nav-item dropdown">
                     <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">Fornecedor</a>
                     <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow" style="left: 0px; right: inherit;">
-                        <li><%= link_to "Novo Fornecedor", home_path,class:"dropdown-item" %></li>
+                        <li><%= link_to "Novo Fornecedor", new_fornecedore_path ,class:"dropdown-item" %></li>
                         <li class="dropdown-divider"></li>   
                         <li><%= link_to "Listar Fornecedores", fornecedores_path,class:"dropdown-item" %></li>
                                      
                     </ul>
                 </li>
 
-                <li class="nav-item">
-                    <%= link_to clientes_path, class: "nav-link" do %>
-                        <p>Clientes</p>
-                        <% end %>
+               <li class="nav-item dropdown">
+                    <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">Cliente</a>
+                    <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow" style="left: 0px; right: inherit;">
+                        <li><%= link_to "Novo cliente", new_cliente_path ,class:"dropdown-item" %></li>
+                        <li class="dropdown-divider"></li>   
+                        <li><%= link_to "Listar Clientes", clientes_path,class:"dropdown-item" %></li>
+                                     
+                    </ul>
                 </li>
 
                 <li class="nav-item">
                     <%= link_to clientes_path, class: "nav-link" do %>
-                        <p>Histórico de Vendas Geral</p>
+                        <p>Histórico</p>
                         <% end %>
                 </li>
 
@@ -68,7 +72,7 @@
         
             <div class="order-1 order-md-3 navbar-nav navbar-no-expand ml-auto">
                 <div class="nav-item dropdown">
-                    <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle"><i class="fa fa-user"> <%= current_user.email %></i></a>
+                    <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle"><i class="fa fa-user"> <%= current_user.username %></i></a>
                     <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow" style="left: 0px; right: inherit;">
                         <li><%= button_to "Sair", destroy_user_session_path, method: :delete,class:"dropdown-item" %></li>
                     </ul>

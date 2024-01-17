@@ -1,0 +1,25 @@
+<%= form_with model: @fornecedor, url: fornecedores_path do |form| %>
+  <div>
+    <%= form.label :nome %><br>
+    <%= form.text_field :nome %>
+  </div>
+
+  <div>
+    <%= form.label :endereco %><br>
+    <%= form.text_area :endereco %><br>
+  </div>
+
+   <div>
+    <%= form.label :cnpj %><br>
+    <%= form.text_area :cnpj %><br>
+  </div>
+
+   <div>
+    <%= form.label :insc_estadual %><br>
+    <%= form.text_area :insc_estadual %><br>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
