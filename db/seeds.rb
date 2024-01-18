@@ -77,7 +77,7 @@ produto29 = Produto.create(nome: "CAIBRO 3,5X6 8,5M", unidade: "PCA", preco: 59.
 produto30 = Produto.create(nome: "CAIBRO 6X6", unidade: "M", preco: 12)
 
 # RIPA
-produto31 = Produto.create(nome: "RIPA 1,2X5", unidade: "DZ", preco: 12)
+produto31 = Produto.create(nome: "RIPA 1,2X5", unidade: "DZ", preco: 80)
 
 #estoque na verdade é a list de produtos no estoque
 Inventorylist.create(user_id: user.id, produto_id: produto17.id, quantity:300)

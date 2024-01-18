@@ -184,12 +184,12 @@
                       <%= form_with(url: add_path) do |f| %>
                         <%= f.hidden_field :id, value: product.id %>
                         <%= f.number_field :quantity, value: orderable.quantity, min: 0, class: "form-control"%>
-                        <%= f.submit "Atualizar", class: "btn btn-success btn-sm mb-1" %>
+                        <%= f.submit "Atualizar", class: "btn btn-success btn-sm mr-1" %>
                       <% end %>
           
                       <%= form_with(url: remove_path) do |f| %>
                         <%= f.hidden_field :id, value: orderable.id %>
-                        <%= f.submit "Remover", class: "btn btn-danger btn-sm" %>
+                        <%= f.submit "Remover", class: "btn btn-danger btn-sm " %>
                       <% end %>
                     </div>
                   </td>
@@ -198,6 +198,26 @@
               <% end %>
             </tbody>
           </table>
+
+          <div class="card-header">
+            <div class="form-inline">
+              <%= form_with(url: add_path) do |f| %>
+                <%= f.number_field:id, placeholder:"Desconto" %>
+                <%= button_tag(type: 'submit', class: 'btn btn-success btn-sm mr-1') do %>
+                <i class=" fa fa-solid fa-check"></i>
+                <% end %>
+              <% end %>
+
+              
+              <%= form_with(url: add_path) do |f| %>
+                <%= f.number_field:id , placeholder:"Acrescimo"%>
+                <%= button_tag(type: 'submit', class: 'btn btn-success btn-sm') do %>
+                <i class=" fa fa-solid fa-check"></i>
+                <% end %>
+              <% end %>
+            </div>
+
+          </div>
 
           <div class="card-header">
             <% has_avista_button = false %>
@@ -209,7 +229,7 @@
                 <% unless has_avista_button %>
                   <%= form_with(url: adicionar_ao_cartlist_vista_path) do |f| %>
                     <%= f.hidden_field :cliente_id, value: orderable.cliente_id %>
-                    <%= f.submit "A VISTA", class: "btn btn-primary btn-sm mr-1" %>
+                    <%= f.submit "#{@cart.total} A VISTA", class: "btn btn-primary btn-sm mr-1" %>
                   <% end %>
                   <% has_avista_button = true %>
                 <% end %>
@@ -223,6 +243,8 @@
               </div>
             <%end %>
           </div>
+
+          
         </div>
         <!-- /.card-body -->
       </div>
