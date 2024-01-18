@@ -1,20 +1,62 @@
-<%= form_with model: @produto do |form| %>
+<%= form_with model: @compra do |form| %>
   <div>
-    <%= form.label :nome %><br>
-    <%= form.text_field :nome %>
-  </div>
-
-  <div>
-    <%= form.label :unidade %><br>
-    <%= form.text_area :unidade %><br>
+    <%= form.label :fornecedor_id %><br>
+    <%= form.text_field :fornecedor_id %>
   </div>
  
   <div>
-    <%= form.label :preco %><br>
-    <%= form.text_area :preco %><br>
+    <%= form.label :numero_nota%><br>
+    <%= form.text_area :numero_nota%><br>
+  </div>
+ 
+  <div>
+    <%= form.label :serie %><br>
+    <%= form.text_area :serie %><br>
   </div>
  
 
+  <div>
+    <%= form.label :data_emissao %><br>
+    <%= form.text_field :data_emissao %>
+  </div>
+
+  <div>
+    <%= form.label :data_recebimento %><br>
+    <%= form.text_area :data_recebimento %><br>
+  </div>
+ 
+  <div>
+    <%= form.label :total_nota %><br>
+    <%= form.text_area :total_nota %><br>
+  </div>
+
+
+  <div>
+    <%= form.label :total_produtos %><br>
+    <%= form.text_area :total_produtos %><br>
+  </div>
+ 
+  <div>
+    <%= form.label :desconto %><br>
+    <%= form.text_area :desconto %><br>
+  </div>
+
+  <div>
+    <%= form.label :acrescimos %><br>
+    <%= form.text_area :acrescimos %><br>
+  </div>
+ 
+  <div>
+    <%= form.label :frete %><br>
+    <%= form.text_area :frete %><br>
+  </div>
+
+
+
+
+
+
+  
   <div>
     <%= form.submit %>
   </div>
