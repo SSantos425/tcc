@@ -1,0 +1,23 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  numero_nota: 1
+  serie: 1
+  data_emissao: MyString
+  data_recebimento: MyString
+  total_nota: 1.5
+  total_produtos: 1.5
+  desconto: 1.5
+  acrescimos: 1.5
+  frete: 1.5
+
+two:
+  numero_nota: 1
+  serie: 1
+  data_emissao: MyString
+  data_recebimento: MyString
+  total_nota: 1.5
+  total_produtos: 1.5
+  desconto: 1.5
+  acrescimos: 1.5
+  frete: 1.5

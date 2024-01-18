@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_12_08_120450) do
+ActiveRecord::Schema[7.0].define(version: 2024_01_18_020438) do
   create_table "cartlist_orderables", force: :cascade do |t|
     t.integer "user_id"
     t.integer "produto_id"
@@ -44,6 +44,22 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_08_120450) do
     t.string "cpf"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "compras", force: :cascade do |t|
+    t.integer "fornecedor_id"
+    t.integer "numero_nota"
+    t.integer "serie"
+    t.string "data_emissao"
+    t.string "data_recebimento"
+    t.float "total_nota"
+    t.float "total_produtos"
+    t.float "desconto"
+    t.float "acrescimos"
+    t.float "frete"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["fornecedor_id"], name: "index_compras_on_fornecedor_id"
   end
 
   create_table "fornecedors", force: :cascade do |t|
@@ -81,6 +97,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_08_120450) do
 
   create_table "produtos", force: :cascade do |t|
     t.string "nome"
+    t.string "unidade"
     t.float "preco"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -121,6 +138,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_08_120450) do
   add_foreign_key "cartlist_orderables", "produtos"
   add_foreign_key "cartlist_orderables", "users"
   add_foreign_key "cartlists", "clientes"
+  add_foreign_key "compras", "fornecedors"
   add_foreign_key "inventorylists", "produtos"
   add_foreign_key "inventorylists", "users"
   add_foreign_key "orderables", "carts"

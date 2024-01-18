@@ -30,7 +30,7 @@ class ProdutosController < ApplicationController
 
   private
       def produto_params
-          params.require(:produto).permit(:nome,:preco)
+          params.require(:produto).permit(:nome,:unidade,:preco)
         
       end
 
