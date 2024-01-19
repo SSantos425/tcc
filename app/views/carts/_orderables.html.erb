@@ -200,15 +200,30 @@
           </table>
 
           <div class="card-header">
-            <div class="form-inline">
-              <%= form_with(url: add_path) do |f| %>
-                <%= f.number_field:id, placeholder:"Desconto" %>
-                <%= button_tag(type: 'submit', class: 'btn btn-success btn-sm mr-1') do %>
-                <i class=" fa fa-solid fa-check"></i>
-                <% end %>
-              <% end %>
+            <%= "TOTAL :#{@cart.total}" %>
+          </div>
 
+          <div class="card-header">        
+            <div class="form-inline">
               
+              <% if @cart.desconto === 0 %>
+                  <%= form_with(url: aplicar_desconto_path) do |f| %>
+                  <%= f.number_field :desconto, placeholder: "Desconto" %>
+                  <%= button_tag(type: 'submit', class: 'btn btn-success btn-sm mr-3') do %>
+                    <i class=" fa fa-solid fa-check"></i>
+                  <% end %>
+                <% end %>
+              <% else %>
+                <%= "Desconto Aplicado : R$ #{@cart.desconto}" %>
+              <%end %>
+              
+              
+            
+
+
+
+
+              <!--
               <%= form_with(url: add_path) do |f| %>
                 <%= f.number_field:id , placeholder:"Acrescimo"%>
                 <%= button_tag(type: 'submit', class: 'btn btn-success btn-sm') do %>
@@ -216,32 +231,13 @@
                 <% end %>
               <% end %>
             </div>
+            -->
 
           </div>
 
           <div class="card-header">
-            <% has_avista_button = false %>
-            <% has_aprazo_button = false %>
-            
             Forma de Pagamento :
-            <% @cart.orderables.each do |orderable| %>              
-              <div class="btn-group">
-                <% unless has_avista_button %>
-                  <%= form_with(url: adicionar_ao_cartlist_vista_path) do |f| %>
-                    <%= f.hidden_field :cliente_id, value: orderable.cliente_id %>
-                    <%= f.submit "#{@cart.total} A VISTA", class: "btn btn-primary btn-sm mr-1" %>
-                  <% end %>
-                  <% has_avista_button = true %>
-                <% end %>
-                <% unless has_aprazo_button %>
-                  <%= form_with(url: adicionar_ao_cartlist_prazo_path) do |f| %>
-                    <%= f.hidden_field :cliente_id, value: orderable.cliente_id %>
-                    <%= f.submit "A PRAZO", class: "btn btn-warning btn-sm" %>
-                  <% end %>
-                  <% has_aprazo_button = true %>
-                <% end %>
-              </div>
-            <%end %>
+            <%= render "carts/vistaprazo" %>
           </div>
 
           

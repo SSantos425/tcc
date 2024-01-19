@@ -35,6 +35,9 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_18_020438) do
   end
 
   create_table "carts", force: :cascade do |t|
+    t.float "valor"
+    t.float "desconto"
+    t.float "acrescimo"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

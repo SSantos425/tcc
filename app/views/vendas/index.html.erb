@@ -1,5 +1,19 @@
+<!---->
 <h1>Fazer uma venda</h1>
-<p>Selecione um produto e a quantidade abaixo para vende-lo<P>
+<p>Selecione o Id do cliente e a quantidade do produto<P>
+
+  <div class="dropdown">
+    <button class="btn btn-secondary dropdown-toggle" type="button" id="clienteDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      Lista de Clientes
+    </button>
+    <div class="dropdown-menu" aria-labelledby="clienteDropdown">
+      <% Cliente.all.each do |cliente| %>
+        <a class="dropdown-item" href="#" data-cliente-id="<%= cliente.id %>">
+          <%= "#{cliente.id} - #{cliente.nome}" %>
+        </a>
+      <% end %>
+    </div>
+  </div>
 
 <table class="table table-hover">
   <thead>
@@ -14,11 +28,7 @@
       <tr>
         <td><%= produto.nome %></td>
         <td><%= number_to_currency(produto.preco) %></td>
-        
-       <!--  <td>
-          <%= link_to "Destroy", produto_path(produto), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %> 
-        </td>
-        -->
+
         <td>
           <%= form_with(url: add_path) do |f| %>
             <%= f.label :cliente_id, "ID do Cliente"  %>
@@ -31,6 +41,7 @@
             <%= button_tag(type: 'submit', class: 'btn btn-primary btn-sm') do %>
               <i class="fas fa-cart-plus fa-lg mr-2"> Adicionar</i>
             <% end %>
+
           <% end %>
           
         </td>

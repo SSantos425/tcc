@@ -19,6 +19,7 @@ class CartsController < ApplicationController
       current_orderable.destroy
     else
       @cart.orderables.create(user_id: user_id, produto: @produto, cliente_id: cliente_id, quantity:quantity)
+
     end
 
     respond_to do |format|
@@ -42,9 +43,11 @@ class CartsController < ApplicationController
     end
   end
 
-  def empty_cart
-    @cart.orderables.destroy_all
-  
+  def aplicar_desconto
+    @cart.desconto = params[:desconto].to_f
+    @cart.update(valor:@cart.total - @cart.desconto)
+    @cart.save
+    
     respond_to do |format|
       format.turbo_stream do
         render turbo_stream: turbo_stream.replace('cart',
@@ -52,6 +55,16 @@ class CartsController < ApplicationController
                                                   locals: { cart: @cart })
       end
     end
+  end 
+
+  def empty_cart
+    @cart.update(valor:0, desconto:0, acrescimo:0)
+    @cart.save
+
+    @cart.orderables.destroy_all
+    
+    redirect_to vendas_path
+
     
   end
 
@@ -71,6 +84,9 @@ class CartsController < ApplicationController
     end
 
     @cart.orderables.destroy_all
+
+    @cart.update(valor:0,desconto:0,acrescimo:0)
+    @cart.save
 
     respond_to do |format|
       format.turbo_stream do
@@ -99,6 +115,9 @@ class CartsController < ApplicationController
     end
 
     @cart.orderables.destroy_all
+
+    @cart.update(valor:0,desconto:0,acrescimo:0)
+    @cart.save
 
     respond_to do |format|
       format.turbo_stream do
