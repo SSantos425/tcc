@@ -1,63 +1,79 @@
-<%= form_with model: @compra do |form| %>
+<div>
   <div>
-    <%= form.label :fornecedor_id %><br>
-    <%= form.text_field :fornecedor_id %>
-  </div>
- 
-  <div>
-    <%= form.label :numero_nota%><br>
-    <%= form.text_area :numero_nota%><br>
-  </div>
- 
-  <div>
-    <%= form.label :serie %><br>
-    <%= form.text_area :serie %><br>
-  </div>
- 
+    <!-- /.login-logo -->
+    <div class="card card-outline card-primary larger-card">
+      <div class="card-header text-center">
+        <div>
+          <h1>Nova Compra</h1>
+        </div>
+      </div>
 
-  <div>
-    <%= form.label :data_emissao %><br>
-    <%= form.text_field :data_emissao %>
+      <div class="card-body">     
+        <%= form_with model: @compra, class: 'mb-3' do |form| %>
+          <div class="row" style="justify-content: center;">
+            <div class="col-md-5">
+              <div class="form-group">
+                <%= form.label :fornecedor_id, "Fornecedor" %>
+                <%= form.text_field :fornecedor_id, class: 'form-control', placeholder: "Fornecedor" %>
+              </div>
+
+              <div class="form-group">
+                <%= form.label :numero_nota, "Número da Nota" %>
+                <%= form.number_field :numero_nota, class: 'form-control', placeholder: "Número da Nota" %>
+              </div>
+
+              <div class="form-group">
+                <%= form.label :serie, "Série" %>
+                <%= form.number_field :serie, class: 'form-control', placeholder: "Série" %>
+              </div>
+
+              <div class="form-group">
+                <%= form.label :data_emissao, "Data de Emissão" %>
+                <%= form.date_field :data_emissao, class: 'form-control', placeholder: "Data de Emissão" %>
+              </div>
+            
+              <div class="form-group">
+                <%= form.label :data_recebimento, "Data de Recebimento" %>
+                <%= form.date_field :data_recebimento, class: 'form-control', placeholder: "Data de Recebimento" %>
+              </div>
+            </div>
+
+            <div class="col-md-5">             
+              <div class="form-group">
+                <%= form.label :total_nota, "Total da Nota" %>
+                <%= form.number_field :total_nota, class: 'form-control', placeholder: "Total da Nota" %>
+              </div>
+
+              <div class="form-group">
+                <%= form.label :total_produtos, "Total de Produtos" %>
+                <%= form.number_field :total_produtos, class: 'form-control', placeholder: "Total de Produtos" %>
+              </div>
+
+              <div class="form-group">
+                <%= form.label :desconto, "Desconto" %>
+                <%= form.number_field :desconto, class: 'form-control', placeholder: "Desconto" %>
+              </div>
+
+              <div class="form-group">
+                <%= form.label :acrescimos, "Acréscimos" %>
+                <%= form.number_field :acrescimos, class: 'form-control', placeholder: "Acréscimos" %>
+              </div>
+
+              <div class="form-group">
+                <%= form.label :frete, "Frete" %>
+                <%= form.number_field :frete, class: 'form-control', placeholder: "Frete" %>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-3">
+            <%= form.submit 'Salvar', class: 'btn btn-block btn-primary' %>
+          </div>
+        <% end %>
+      </div>
+      <!-- /.card-body -->
+    </div>
+    <!-- /.card -->
   </div>
-
-  <div>
-    <%= form.label :data_recebimento %><br>
-    <%= form.text_area :data_recebimento %><br>
-  </div>
- 
-  <div>
-    <%= form.label :total_nota %><br>
-    <%= form.text_area :total_nota %><br>
-  </div>
-
-
-  <div>
-    <%= form.label :total_produtos %><br>
-    <%= form.text_area :total_produtos %><br>
-  </div>
- 
-  <div>
-    <%= form.label :desconto %><br>
-    <%= form.text_area :desconto %><br>
-  </div>
-
-  <div>
-    <%= form.label :acrescimos %><br>
-    <%= form.text_area :acrescimos %><br>
-  </div>
- 
-  <div>
-    <%= form.label :frete %><br>
-    <%= form.text_area :frete %><br>
-  </div>
-
-
-
-
-
-
-  
-  <div>
-    <%= form.submit %>
-  </div>
-<% end %>
+  <!-- /.login-box -->
+</div>

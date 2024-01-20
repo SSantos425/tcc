@@ -1,36 +1,41 @@
 <p>Selecione a quantidade e adicione no estoque</p>
-<table class="table table-hover">
-  <thead>
-    <tr>
-      <th>Nome</th>
-      <th>Unidade</th>
-      <th>Preço</th>
-      <th>Ações</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @produtos.each do |produto| %>
-      <tr>
-        <td><%= produto.nome %></td>
-        <td><%= produto.unidade %></td>
-        <td><%= number_to_currency(produto.preco) %></td>
-        
-       <!--  <td>
-          <%= link_to "Destroy", produto_path(produto), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %> 
-        </td>
-        -->
-        <td>
-          <%= form_with(url: adicionar_ao_estoque_path, method: :post) do |form| %>
-            <%= form.hidden_field :user_id , value:current_user.id%>
-            <%= form.hidden_field :produto_id , value:produto.id%>
+<div class="card">
+  <div class="card-body">
+    <table class="table table-bordered table-hover">
+      <thead>
+        <tr>
+          <th>Nome</th>
+          <th>Unidade</th>
+          <th>Preço</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @produtos.each do |produto| %>
+          <tr>
+            <td><%= produto.nome %></td>
+            <td><%= produto.unidade %></td>
+            <td><%= number_to_currency(produto.preco) %></td>
+            
+          <!--  <td>
+              <%= link_to "Destroy", produto_path(produto), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %> 
+            </td>
+            -->
+            <td>
+              <%= form_with(url: adicionar_ao_estoque_path, method: :post) do |form| %>
+                <%= form.hidden_field :user_id , value:current_user.id%>
+                <%= form.hidden_field :produto_id , value:produto.id%>
 
-            <%= form.number_field :quantity, placeholder: 'Quantidade' %>
-            <%= form.submit 'Adicionar ao estoque' %>
-          <% end %>
+                <%= form.number_field :quantity, placeholder: 'Quantidade' %>
+                <%= button_tag(type: 'submit', class: 'btn btn-primary btn-sm') do %>
+                  Adicionar ao Estoque
+                <% end %>
+              <% end %>
 
-          
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

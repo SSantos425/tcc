@@ -29,6 +29,7 @@ Rails.application.routes.draw do
   post 'remove', to: 'carts#remove', as: 'remove'
   post 'aplicar_desconto', to: 'carts#aplicar_desconto', as: 'aplicar_desconto'
   post 'aplicar_acrescimo', to: 'carts#aplicar_acrescimo', as: 'aplicar_acrescimo'
+  post 'data', to: 'carts#data', as: 'data'
   post 'adicionar_ao_cartlist_prazo', to: 'carts#adicionar_ao_cartlist_prazo', as: 'adicionar_ao_cartlist_prazo'
   post 'adicionar_ao_cartlist_vista', to: 'carts#adicionar_ao_cartlist_vista', as: 'adicionar_ao_cartlist_vista'
   post 'empty_cart', to: 'carts#empty_cart', as: 'empty_cart'

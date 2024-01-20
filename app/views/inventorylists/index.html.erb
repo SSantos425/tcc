@@ -1,19 +1,22 @@
 <h1>Estoque de produtos</h1>
 
-
-<table class='table table-hover'>
-  <thead>
-    <tr>
-      <th>Nome do Produto</th>
-      <th>Quantidade disponivel no estoque</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @inventory_lists.each do |inventorylist| %>
-      <tr>
-        <td><%= inventorylist.produto.nome %></td>      
-        <td><%= inventorylist.quantity %></td>      
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<div class="card">
+  <div class="card-body">
+    <table class="table table-bordered table-hover">
+      <thead>
+        <tr>
+          <th>Nome do Produto</th>
+          <th>Quantidade disponível no estoque</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @inventory_lists.each do |inventorylist| %>
+          <tr>
+            <td><%= inventorylist.produto.nome %></td>      
+            <td><%= inventorylist.quantity %></td>      
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

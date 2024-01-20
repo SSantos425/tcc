@@ -22,6 +22,8 @@ class CartsController < ApplicationController
 
     end
 
+    @cart.update(valor: @cart.total)
+
     respond_to do |format|
       format.turbo_stream do
         render turbo_stream: [turbo_stream.replace('cart',
@@ -72,8 +74,22 @@ class CartsController < ApplicationController
     end
   end 
 
+  def data
+    @cart.data = params[:data]
+    @cart.update(data:@cart.data)
+    @cart.save
+    
+    respond_to do |format|
+      format.turbo_stream do
+        render turbo_stream: turbo_stream.replace('cart',
+                                                  partial: 'carts/cart',
+                                                  locals: { cart: @cart })
+      end
+    end
+  end 
+
   def empty_cart
-    @cart.update(valor:0, data:0,acrescimo:0,desconto:0)
+    @cart.update(valor:0, data:nil,acrescimo:0,desconto:0)
     @cart.save
 
     @cart.orderables.destroy_all
@@ -91,11 +107,12 @@ class CartsController < ApplicationController
 
 
   def adicionar_ao_cartlist_vista
+    data = params[:data]
     desconto = params[:desconto].to_i
     acrescimo = params[:acrescimo].to_i
 
     cliente_id = params[:cliente_id]
-    cartlist = Cartlist.create(valor:@cart.valor,forma_de_pagamento: 1,cliente_id:cliente_id, data:nil, desconto:desconto, acrescimo:acrescimo)
+    cartlist = Cartlist.create(valor:@cart.valor,forma_de_pagamento: 1,cliente_id:cliente_id, data:data, desconto:desconto, acrescimo:acrescimo)
     user = User.first
     wallet = user.wallet
 
@@ -121,7 +138,12 @@ class CartsController < ApplicationController
     end
 
     wallet.update(balance: wallet.balance + cartlist.valor)
-    @cart.update(valor:0, data:0,acrescimo:0,desconto:0)
+    if wallet.save
+      puts("DEU CERTO")
+    else
+      puts("DEU ERRADO")
+    end
+    @cart.update(valor:0, data:nil,acrescimo:0,desconto:0)
     @cart.save
     
     @cart.orderables.destroy_all
@@ -155,7 +177,7 @@ class CartsController < ApplicationController
 
     @cart.orderables.destroy_all
 
-    @cart.update(valor:0, data:0,acrescimo:0,desconto:0)
+    @cart.update(valor:0, data:nil,acrescimo:0,desconto:0)
     @cart.save
     
     @cart.orderables.destroy_all

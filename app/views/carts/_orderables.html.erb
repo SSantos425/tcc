@@ -1,159 +1,39 @@
-<!--
-<table class="table table-bordered table-hover">
-  <thead>
-    <tr>
-      <th>Nome</th>
-      <th>Preço Unitário</th>
-      <th>Editar</th>
-      <th>Total Parcial</th>
-      <th>Cliente</th>
-      <th>
-        <%= button_to empty_cart_path, data: { confirm: 'Deseja esvaziar o carrinho?' }, class: 'btn btn-danger btn-sm' do %>
-          <i class="far fa-trash-alt"></i> Esvaziar Carrinho
-        <% end %>
-      </th>
-    </tr>
-  </thead>
-
-  <tbody class="table-group-divider">
-    <% has_avista_button = false %>
-    <% has_aprazo_button = false %>
-    <% last_client_name = nil %>
-
-    <% @cart.orderables.each do |orderable| %>
-      <% valor_total = @cart.total %>
-      <% product = orderable.produto %>
-      <tr>
-        <td><%= product.nome %></td>
-        <td><%= product.preco %></td>
-        <td>
-          <div class="form-inline">
-            <%= form_with(url: add_path) do |f| %>
-              <%= f.hidden_field :id, value: product.id %>
-              <%= f.number_field :quantity, value: orderable.quantity, min: 0, class: "form-control"%>
-              <%= f.submit "Atualizar", class: "btn btn-success btn-sm mb-1" %>
-            <% end %>
-
-            <%= form_with(url: remove_path) do |f| %>
-              <%= f.hidden_field :id, value: orderable.id %>
-              <%= f.submit "Remover", class: "btn btn-danger btn-sm" %>
-            <% end %>
-          </div>
-        </td>
-        <td><%= orderable.total %></td>
-        <td>
-          <% if orderable.cliente.nome != last_client_name %>
-            <%= orderable.cliente.nome %>
-          <% end %>
-          <% last_client_name = orderable.cliente.nome %>
-        </td>
-
-        
-        <td>
-          <% unless has_avista_button %>
-            
-              <%= form_with(url: adicionar_ao_cartlist_vista_path) do |f| %>
-                <%= f.hidden_field :cliente_id, value: orderable.cliente_id %>
-                <%= f.submit "A VISTA", class: "btn btn-primary btn-sm" %>
-              <% end %>
-            <% has_avista_button = true %>
-          <% end %>
-
-          <% unless has_aprazo_button %>
-          
-              <%= form_with(url: adicionar_ao_cartlist_prazo_path) do |f| %>
-                <%= f.hidden_field :cliente_id, value: orderable.cliente_id %>
-                <%= f.submit "A PRAZO", class: "btn btn-warning btn-sm" %>
-              <% end %>
-            
-            <% has_aprazo_button = true %>
-          <% end %>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-
-
-<table class="table table-bordered table-hover">
-  <thead>
-    <tr>
-      <th>Nome do Produto</th>
-      <th>Preço Unitário</th>
-      <th>Quantidade</th>
-      <th>Total Parcial</th>
-      <th>Cliente</th>
-      <th>Ações</th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% has_avista_button = false %>
-    <% has_aprazo_button = false %>
-    <% last_client_name = nil %>
-
-    <% @cart.orderables.each do |orderable| %>
-      <% valor_total = @cart.total %>
-      <% product = orderable.produto %>
-      <tr>
-        <td><%= product.nome %></td>
-        <td><%= product.preco %></td>
-        <td>
-          <%= form_with(url: add_path) do |f| %>
-            <%= f.hidden_field :id, value: product.id %>
-            <%= f.number_field :quantity, value: orderable.quantity, min: 0, class: "form-control form-control-sm"%>
-          <% end %>
-        </td>
-        <td><%= orderable.total %></td>
-        <td>
-          <% if orderable.cliente.nome != last_client_name %>
-            <%= orderable.cliente.nome %>
-          <% end %>
-          <% last_client_name = orderable.cliente.nome %>
-        </td>
-        <td>
-          <div class="btn-group">
-            <%= form_with(url: add_path) do |f| %>
-              <%= f.hidden_field :id, value: product.id %>
-              <%= f.number_field :quantity, value: orderable.quantity, min: 0, class: "form-control form-control-sm"%>
-              <%= f.submit "Atualizar", class: "btn btn-success btn-sm" %>
-            <% end %>
-            <%= form_with(url: remove_path) do |f| %>
-              <%= f.hidden_field :id, value: orderable.id %>
-              <%= f.submit "Remover", class: "btn btn-danger btn-sm" %>
-            <% end %>
-          </div>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-</div>
-
--->
-
 <div class="container">
   <div class="row">
     <div class="col-md-12">
-      <div class="card">
-        <div class="card-header d-flex justify-content-between">
-          <% last_client_name = nil %>
-          <% @cart.orderables.each do |orderable| %>
-            <h3 class="card-title justify-content-start">
-              <% if orderable.cliente.nome != last_client_name %>            
-                <strong><%="Cliente: #{orderable.cliente.nome}"%> </strong>
+      <div class="card border border-success">
+        <div class="card-header">
+          <% if @cart.data === nil %>
+
+            <%= form_with(url: data_path) do |f| %>
+              <%= f.date_field :data, placeholder: "Data" %>
+              <%= button_tag(type: 'submit', class: 'btn btn-success btn-sm mr-3') do %>
+                <i class="fa fa-solid fa-check"></i>
               <% end %>
-              <% last_client_name = orderable.cliente.nome %>
-            </h3>
+            <% end %>
+
+          <% else %>   
+
+            <% last_client_name = nil %>
+            <% @cart.orderables.each do |orderable| %>
+              <h3 class="card-title justify-content-start">
+                <% if orderable.cliente.nome != last_client_name %>            
+                  <strong><%="Cliente: #{orderable.cliente.nome} | Data: #{@cart.data&.strftime('%d/%m/%Y')}"%> </strong>
+                <% end %>
+                <% last_client_name = orderable.cliente.nome %>
+              </h3>
+            <% end %>  
+
+            <%= button_to empty_cart_path, data: { confirm: 'Deseja esvaziar o carrinho?' }, class: 'btn btn-danger btn-sm' do %>
+              <i class="far fa-trash-alt"></i> Esvaziar Carrinho
+            <% end %>
+
           <% end %>
-        
           
-          <%= button_to empty_cart_path, data: { confirm: 'Deseja esvaziar o carrinho?' }, class: 'btn btn-danger btn-sm' do %>
-            <i class="far fa-trash-alt"></i> Esvaziar Carrinho
-          <% end %>
-          
+
         </div>
+
+        
         
 
 
@@ -178,7 +58,7 @@
                 <% product = orderable.produto %>
                 <tr>
                   <td><%= product.nome %></td>
-                  <td><%= product.preco %></td>
+                  <td><%= number_to_currency(product.preco, unit: 'R$', separator: ',', delimiter: '.') %></td>
                   <td>
                     <div class="form-inline">
                       <%= form_with(url: add_path) do |f| %>
@@ -193,14 +73,15 @@
                       <% end %>
                     </div>
                   </td>
-                  <td><%= orderable.total %></td>                
+                  <td><%= number_to_currency(orderable.total, unit: 'R$', separator: ',', delimiter: '.')  %></td>  
+                               
                 </tr>
               <% end %>
             </tbody>
           </table>
 
           <div class="card-header">
-            <%= "TOTAL :#{@cart.total}" %>
+            <%= "TOTAL :#{number_to_currency(@cart.total, unit: 'R$', separator: ',', delimiter: '.')}" %>
           </div>
 
           <div class="card-header">        
@@ -222,31 +103,19 @@
                 <% end %>
               
               <% elsif @cart.desconto != 0 %>
-                <%= "Desconto Aplicado: R$ #{@cart.desconto}" %>
+                <%= "Desconto Aplicado: R$ #{number_to_currency(@cart.desconto, unit: 'R$', separator: ',', delimiter: '.')}" %>
+                
               
               <% elsif @cart.acrescimo != 0 %>
-                <%= "Acrescimo Aplicado: R$ #{@cart.acrescimo}" %>
+                <%= "Acrescimo Aplicado: R$ #{number_to_currency(@cart.acrescimo, unit: 'R$', separator: ',', delimiter: '.')}" %>
               <% end %>
-            
-
-              <!--
-              <%= form_with(url: add_path) do |f| %>
-                <%= f.number_field:id , placeholder:"Acrescimo"%>
-                <%= button_tag(type: 'submit', class: 'btn btn-success btn-sm') do %>
-                <i class=" fa fa-solid fa-check"></i>
-                <% end %>
-              <% end %>
-            </div>
-            -->
-
           </div>
 
-          <div class="card-header">
+          <div class="card-footer">
             Forma de Pagamento :
             <%= render "carts/vistaprazo" %>
           </div>
 
-          
         </div>
         <!-- /.card-body -->
       </div>

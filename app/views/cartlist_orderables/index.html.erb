@@ -6,7 +6,7 @@
       <div class="col-md-12">
         <div class="card card-primary card-outline">
           <div class="card-header">
-            <h3 class="card-title">Cliente: <%= cartlist.cliente.nome %>| Data: <%= cartlist.data %></h3>
+            <strong><%="Cliente: #{cartlist.cliente.nome} | Data: #{cartlist.data&.strftime('%d/%m/%Y')}"%> </strong>
           </div>
           
           <div class="card-body p-0">
@@ -26,25 +26,35 @@
                     <td><%= cartlist_orderable.produto.nome %></td>
                     <td><%= cartlist_orderable.quantity %></td>
                     <td><%= cartlist_orderable.produto.unidade %></td>
-                    <td><%= cartlist_orderable.total %></td>
+                    <td><%= number_to_currency(cartlist_orderable.total, unit: 'R$', separator: ',', delimiter: '.')%></td>
+                    
                   </tr>
                 <% end %>
               </tbody>
             </table>
 
-            <% if cartlist.desconto != 0 %>
+            <% if cartlist.desconto && cartlist.acrescimo === 0 %>
               <div class="card-footer">        
-                <strong>Desconto:</strong> <%= cartlist.desconto%>
+                <strong>Total:</strong> <%= number_to_currency(cartlist.valor, unit: 'R$', separator: ',', delimiter: '.') %>
+              </div>
+            <% elsif cartlist.desconto != 0 && cartlist.acrescimo === 0 %>
+              <div class="card-footer">        
+                <strong>Desconto:</strong> <%= number_to_currency(cartlist.desconto, unit: 'R$', separator: ',', delimiter: '.') %>
               </div>
 
               <div class="card-footer">        
-                <strong>Total:</strong> <%= cartlist.valor %>
+                <strong>Total:</strong> <%= number_to_currency(cartlist.valor, unit: 'R$', separator: ',', delimiter: '.') %>
               </div>
             <% else %>
               <div class="card-footer">        
-                <strong>Total:</strong> <%= cartlist.valor %>
+                <strong>Acréscimo:</strong> <%= number_to_currency(cartlist.acrescimo, unit: 'R$', separator: ',', delimiter: '.') %>
+              </div>
+
+              <div class="card-footer">        
+                <strong>Total:</strong> <%= number_to_currency(cartlist.valor, unit: 'R$', separator: ',', delimiter: '.') %>
               </div>
             <% end %>
+
 
             
 

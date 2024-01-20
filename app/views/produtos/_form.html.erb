@@ -1,21 +1,52 @@
-<%= form_with model: @produto do |form| %>
-  <div>
-    <%= form.label :nome %><br>
-    <%= form.text_field :nome %>
-  </div>
+<div class="hold-transition login-page">
+  <div class="login-box">
+    <!-- /.login-logo -->
+    <div class="card card-outline card-primary">
+      <div class="card-header text-center">
+        <div>
+          <h1> Novo Produto </h1>
+        </div>
+      </div>
+      <div class="card-body">     
+        <%= form_with model: @produto, class: 'mb-3' do |form| %>
+          <div class="input-group">
+            <%= form.label :nome, class: 'sr-only' %>
+            <%= form.text_field :nome, class: 'form-control', placeholder: 'Nome do Produto' %>
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span class="fas fa-user"></span>
+              </div>
+            </div>
+          </div>
 
-  <div>
-    <%= form.label :unidade %><br>
-    <%= form.text_area :unidade %><br>
-  </div>
- 
-  <div>
-    <%= form.label :preco %><br>
-    <%= form.text_area :preco %><br>
-  </div>
- 
+          <div class="input-group mt-3">
+            <%= form.label :unidade, class: 'sr-only' %>
+            <%= form.text_area :unidade, class: 'form-control', placeholder: 'Unidade' %>
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span class="fas fa-university"></span>
+              </div>
+            </div>
+          </div>
 
-  <div>
-    <%= form.submit %>
+          <div class="input-group mt-3">
+            <%= form.label :preco, class: 'sr-only' %>
+            <%= form.text_area :preco, class: 'form-control', placeholder: 'Preço' %>
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span class="fas fa-dollar-sign"></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-3">
+            <%= form.submit 'Salvar', class: 'btn btn-block btn-primary' %>
+          </div>
+        <% end %>
+      </div>
+      <!-- /.card-body -->
+    </div>
+    <!-- /.card -->
   </div>
-<% end %>
+  <!-- /.login-box -->
+</div>
