@@ -11,7 +11,7 @@ class ApplicationController < ActionController::Base
 
     return unless @cart.nil?
 
-    @cart = Cart.create
+    @cart = Cart.create(valor:0,desconto:0,acrescimo:0,data:nil)
     session[:cart_id] = @cart.id
   end
   

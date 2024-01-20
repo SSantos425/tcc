@@ -28,6 +28,9 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_18_020438) do
   create_table "cartlists", force: :cascade do |t|
     t.float "valor"
     t.integer "forma_de_pagamento"
+    t.date "data"
+    t.float "desconto"
+    t.float "acrescimo"
     t.integer "cliente_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -38,6 +41,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_18_020438) do
     t.float "valor"
     t.float "desconto"
     t.float "acrescimo"
+    t.date "data"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

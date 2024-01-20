@@ -1,58 +1,67 @@
-<h1>lista de carrinhos</h1>
-<table class="table table-hover">
-    <thead>
-      <tr>
-        <th>Data</th>
-      <th>Cliente</th>
-      <th>nome do produto</th>
-      <th>unidade</th>
-      <th>quantidade</th>
-      <th>valor parcial</th>
-      <th>valor total</th>
-      <th>forma de forma_de_pagamento</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @cartlist.each do |cartlist| %>
-        <tr>
-          <% if cartlist.forma_de_pagamento === 1 %>
-            <td><%= cartlist.id%></td>
-            <td>DD/MM/AAAA</td>        
-            <td>A VISTA</td>           
-            <td><%= cartlist.cliente.nome %></td>
-            <td><%= cartlist.valor%></td>
-            <td><%= link_to 'Finalizar Venda', show_path(cartlist.id) %></td>
-          <% end %>
-        </tr>        
-      <% end %>
-    </tbody>
-</table>
+<h1>Relatório de Vendas</h1>
 
-<table class="table table-hover">
-  <thead>
-    <tr>
-      <th>Data</th>
-      <th>Cliente</th>
-      <th>nome do produto</th>
-      <th>unidade</th>
-      <th>quantidade</th>
-      <th>valor parcial</th>
-      <th>valor total</th>
-      <th>forma de forma_de_pagamento</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @cartlist.each do |cartlist| %>
-      <tr>
-        <% if cartlist.forma_de_pagamento === 2 %>
-          <td><%= cartlist.id%></td>
-          <td>DD/MM/AAAA</td>        
-          <td>A PRAZO</td>           
-          <td><%= cartlist.cliente.nome %></td>
-          <td><%= cartlist.valor%></td>
-          <td><%= link_to 'Finalizar Venda', show_path(cartlist.id) %></td>
-        <% end %>
-      </tr>        
-    <% end %>
-  </tbody>
-</table>
+<% @cartlists.each do |cartlist| %>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card card-primary card-outline">
+          <div class="card-header">
+            <h3 class="card-title">Cliente: <%= cartlist.cliente.nome %>| Data: <%= cartlist.data %></h3>
+          </div>
+          
+          <div class="card-body p-0">
+            <table class="table table-bordered table-hover">
+              <thead>
+                <tr>
+                  <th>Produto</th>
+                  <th>Quantidade</th>
+                  <th>Unidade</th>        
+                  <th>Valor Parcial</th>    
+                </tr>
+              </thead>
+
+              <tbody>
+                <% cartlist.cartlist_orderables.each do |cartlist_orderable| %>
+                  <tr>
+                    <td><%= cartlist_orderable.produto.nome %></td>
+                    <td><%= cartlist_orderable.quantity %></td>
+                    <td><%= cartlist_orderable.produto.unidade %></td>
+                    <td><%= cartlist_orderable.total %></td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+
+            <% if cartlist.desconto != 0 %>
+              <div class="card-footer">        
+                <strong>Desconto:</strong> <%= cartlist.desconto%>
+              </div>
+
+              <div class="card-footer">        
+                <strong>Total:</strong> <%= cartlist.valor %>
+              </div>
+            <% else %>
+              <div class="card-footer">        
+                <strong>Total:</strong> <%= cartlist.valor %>
+              </div>
+            <% end %>
+
+            
+
+            
+            
+
+            <div class="card-footer">
+              <strong>Forma de Pagamento:</strong> <%= cartlist.forma_de_pagamento %>
+            </div>
+          </div>
+          <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+      </div>
+      <!-- /.col -->
+    </div>
+    <!-- /.row -->
+  </div>
+  <!-- /.container -->
+<% end %>

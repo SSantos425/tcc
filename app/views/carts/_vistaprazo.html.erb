@@ -1,12 +1,14 @@
 <% has_avista_button = false %>
 <% has_aprazo_button = false %>
-<% if @cart.valor === 0 %>
+<% if @cart.valor == 0 %>
     <% @cart.orderables.each do |orderable| %>              
         <div class="btn-group">
                     
                 
             <% unless has_avista_button %>
                 <%= form_with(url: adicionar_ao_cartlist_vista_path) do |f| %>
+                    <%= f.hidden_field :desconto, value: @cart.desconto %>
+                    <%= f.hidden_field :acrescimo, value: @cart.acrescimo %>
                     <%= f.hidden_field :cliente_id, value: orderable.cliente_id %>
                     <%= f.submit "A VISTA", class: "btn btn-primary btn-sm mr-1" %>
                 <% end %>
@@ -15,6 +17,8 @@
                         
             <% unless has_aprazo_button %>
                 <%= form_with(url: adicionar_ao_cartlist_prazo_path) do |f| %>
+                    <%= f.hidden_field :desconto, value: @cart.desconto %>
+                    <%= f.hidden_field :acrescimo, value: @cart.acrescimo %>
                     <%= f.hidden_field :cliente_id, value: orderable.cliente_id %>
                     <%= f.submit "A PRAZO", class: "btn btn-warning btn-sm" %>
                 <% end %>
@@ -29,6 +33,8 @@
         <div class="btn-group">
             <% unless has_avista_button %>
                 <%= form_with(url: adicionar_ao_cartlist_vista_path) do |f| %>
+                <%= f.hidden_field :desconto, value: @cart.desconto %>
+                <%= f.hidden_field :acrescimo, value: @cart.acrescimo %>
                 <%= f.hidden_field :cliente_id, value: orderable.cliente_id %>
                 <%= f.submit "R$#{@cart.valor} A VISTA", class: "btn btn-primary btn-sm mr-1" %>
                 <% end %>
@@ -37,6 +43,8 @@
 
             <% unless has_aprazo_button %>
                 <%= form_with(url: adicionar_ao_cartlist_prazo_path) do |f| %>
+                    <%= f.hidden_field :desconto, value: @cart.desconto %>
+                    <%= f.hidden_field :acrescimo, value: @cart.acrescimo %>
                     <%= f.hidden_field :cliente_id, value: orderable.cliente_id %>
                     <%= f.submit "R$#{@cart.valor} A PRAZO", class: "btn btn-warning btn-sm" %>
                 <% end %>

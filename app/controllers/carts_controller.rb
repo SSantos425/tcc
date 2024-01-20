@@ -57,22 +57,47 @@ class CartsController < ApplicationController
     end
   end 
 
+
+  def aplicar_acrescimo
+    @cart.acrescimo = params[:acrescimo].to_f
+    @cart.update(valor:@cart.total + @cart.acrescimo)
+    @cart.save
+    
+    respond_to do |format|
+      format.turbo_stream do
+        render turbo_stream: turbo_stream.replace('cart',
+                                                  partial: 'carts/cart',
+                                                  locals: { cart: @cart })
+      end
+    end
+  end 
+
   def empty_cart
-    @cart.update(valor:0, desconto:0, acrescimo:0)
+    @cart.update(valor:0, data:0,acrescimo:0,desconto:0)
     @cart.save
 
     @cart.orderables.destroy_all
     
-    redirect_to vendas_path
+    respond_to do |format|
+      format.turbo_stream do
+        render turbo_stream: turbo_stream.replace('cart',
+                                                  partial: 'carts/cart',
+                                                  locals: { cart: @cart })
+      end
+    end
 
     
   end
 
 
   def adicionar_ao_cartlist_vista
+    desconto = params[:desconto].to_i
+    acrescimo = params[:acrescimo].to_i
+
     cliente_id = params[:cliente_id]
-    cartlist = Cartlist.create(valor:@cart.total,forma_de_pagamento: 1,cliente_id:cliente_id)
+    cartlist = Cartlist.create(valor:@cart.valor,forma_de_pagamento: 1,cliente_id:cliente_id, data:nil, desconto:desconto, acrescimo:acrescimo)
     user = User.first
+    wallet = user.wallet
 
     @cart.orderables.each do |orderable|
       produto = orderable.produto
@@ -83,10 +108,23 @@ class CartsController < ApplicationController
                                                       quantity: orderable.quantity)
     end
 
-    @cart.orderables.destroy_all
+    cartlist_orderables = CartlistOrderable.where(cartlist_id:cartlist.id)
 
-    @cart.update(valor:0,desconto:0,acrescimo:0)
+    cartlist_orderables.each do |cartlist_orderable|
+      inventory_list = Inventorylist.find_by(user_id: user.id, produto_id: cartlist_orderable.produto.id)
+      inventory_list.update(quantity: inventory_list.quantity - cartlist_orderable.quantity)
+      if inventory_list.save
+        puts("DEU CERTO")
+      else
+        puts("DEU ERRADO")
+      end
+    end
+
+    wallet.update(balance: wallet.balance + cartlist.valor)
+    @cart.update(valor:0, data:0,acrescimo:0,desconto:0)
     @cart.save
+    
+    @cart.orderables.destroy_all
 
     respond_to do |format|
       format.turbo_stream do
@@ -95,6 +133,7 @@ class CartsController < ApplicationController
                                                   locals: { cart: @cart })
       end
     end
+    
   
 
   end  
@@ -116,9 +155,10 @@ class CartsController < ApplicationController
 
     @cart.orderables.destroy_all
 
-    @cart.update(valor:0,desconto:0,acrescimo:0)
+    @cart.update(valor:0, data:0,acrescimo:0,desconto:0)
     @cart.save
-
+    
+    @cart.orderables.destroy_all
     respond_to do |format|
       format.turbo_stream do
         render turbo_stream: turbo_stream.replace('cart',

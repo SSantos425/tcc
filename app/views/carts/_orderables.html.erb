@@ -206,22 +206,28 @@
           <div class="card-header">        
             <div class="form-inline">
               
-              <% if @cart.desconto === 0 %>
-                  <%= form_with(url: aplicar_desconto_path) do |f| %>
+              <% if @cart.desconto.zero? && @cart.acrescimo.zero? %>
+                <%= form_with(url: aplicar_desconto_path) do |f| %>
                   <%= f.number_field :desconto, placeholder: "Desconto" %>
                   <%= button_tag(type: 'submit', class: 'btn btn-success btn-sm mr-3') do %>
-                    <i class=" fa fa-solid fa-check"></i>
+                    <i class="fa fa-solid fa-check"></i>
                   <% end %>
                 <% end %>
-              <% else %>
-                <%= "Desconto Aplicado : R$ #{@cart.desconto}" %>
-              <%end %>
               
+                <%= form_with(url: aplicar_acrescimo_path) do |f| %>
+                  <%= f.number_field :acrescimo, placeholder: "Acrescimo" %>
+                  <%= button_tag(type: 'submit', class: 'btn btn-success btn-sm mr-3') do %>
+                    <i class="fa fa-solid fa-check"></i>
+                  <% end %>
+                <% end %>
               
+              <% elsif @cart.desconto != 0 %>
+                <%= "Desconto Aplicado: R$ #{@cart.desconto}" %>
+              
+              <% elsif @cart.acrescimo != 0 %>
+                <%= "Acrescimo Aplicado: R$ #{@cart.acrescimo}" %>
+              <% end %>
             
-
-
-
 
               <!--
               <%= form_with(url: add_path) do |f| %>

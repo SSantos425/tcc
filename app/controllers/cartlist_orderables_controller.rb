@@ -1,6 +1,7 @@
 class CartlistOrderablesController < ApplicationController
   def index
-    @cartlist = Cartlist.all
+    @cartlists = Cartlist.all
+    @cartlist_orderables = CartlistOrderable.all
   end
 
   def show
@@ -8,6 +9,7 @@ class CartlistOrderablesController < ApplicationController
     @cartlist_orderables = CartlistOrderable.where(cartlist_id:params[:id])
   end
 
+  #remover esse metodo esta obsoleto
   def dar_baixa_na_venda
     user = User.first
     wallet = user.wallet
@@ -21,6 +23,7 @@ class CartlistOrderablesController < ApplicationController
     end
 
     wallet.update(balance: wallet.balance + cartlist.valor)
+    wallet.save
     redirect_to root_path
   end
 
