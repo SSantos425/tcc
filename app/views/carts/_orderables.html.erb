@@ -16,16 +16,16 @@
 
             <% last_client_name = nil %>
             <% @cart.orderables.each do |orderable| %>
-              <h3 class="card-title justify-content-start">
+              <h3 class="card-title justify-content-start " style="float: inline-end;">
                 <% if orderable.cliente.nome != last_client_name %>            
                   <strong><%="Cliente: #{orderable.cliente.nome} | Data: #{@cart.data&.strftime('%d/%m/%Y')}"%> </strong>
                 <% end %>
                 <% last_client_name = orderable.cliente.nome %>
               </h3>
-            <% end %>  
+            <% end %>          
 
-            <%= button_to empty_cart_path, data: { confirm: 'Deseja esvaziar o carrinho?' }, class: 'btn btn-danger btn-sm' do %>
-              <i class="far fa-trash-alt"></i> Esvaziar Carrinho
+            <%= button_to empty_cart_path, data: { confirm: 'Deseja esvaziar o carrinho?' }, class: 'btn btn-danger btn-sm ' do %>
+              <i class="far fa-trash-alt"></i>Esvaziar Carrinho
             <% end %>
 
           <% end %>

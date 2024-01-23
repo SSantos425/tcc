@@ -33,11 +33,13 @@
               </tbody>
             </table>
 
-            <% if cartlist.desconto && cartlist.acrescimo === 0 %>
+            <% if cartlist.desconto == 0 && cartlist.acrescimo == 0 %>
               <div class="card-footer">        
                 <strong>Total:</strong> <%= number_to_currency(cartlist.valor, unit: 'R$', separator: ',', delimiter: '.') %>
               </div>
-            <% elsif cartlist.desconto != 0 && cartlist.acrescimo === 0 %>
+            <% end %>
+
+            <% if cartlist.desconto != 0 && cartlist.acrescimo == 0  %>
               <div class="card-footer">        
                 <strong>Desconto:</strong> <%= number_to_currency(cartlist.desconto, unit: 'R$', separator: ',', delimiter: '.') %>
               </div>
@@ -45,7 +47,9 @@
               <div class="card-footer">        
                 <strong>Total:</strong> <%= number_to_currency(cartlist.valor, unit: 'R$', separator: ',', delimiter: '.') %>
               </div>
-            <% else %>
+            <% end %>
+
+            <% if cartlist.desconto == 0 && cartlist.acrescimo != 0  %>
               <div class="card-footer">        
                 <strong>Acréscimo:</strong> <%= number_to_currency(cartlist.acrescimo, unit: 'R$', separator: ',', delimiter: '.') %>
               </div>
@@ -53,16 +57,16 @@
               <div class="card-footer">        
                 <strong>Total:</strong> <%= number_to_currency(cartlist.valor, unit: 'R$', separator: ',', delimiter: '.') %>
               </div>
-            <% end %>
+            <% end %>    
 
-
-            
-
-            
-            
 
             <div class="card-footer">
-              <strong>Forma de Pagamento:</strong> <%= cartlist.forma_de_pagamento %>
+              <strong>Forma de Pagamento:</strong> 
+              <% if cartlist.forma_de_pagamento === 1 %>
+                <%= "A VISTA" %>
+              <% else %>
+                <%= "A PRAZO" %>
+              <% end %>
             </div>
           </div>
           <!-- /.card-body -->

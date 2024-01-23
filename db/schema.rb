@@ -49,6 +49,18 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_18_020438) do
   create_table "clientes", force: :cascade do |t|
     t.string "nome"
     t.string "cpf"
+    t.string "tipo_cliente"
+    t.integer "cep"
+    t.string "logradouro"
+    t.string "bairro"
+    t.string "localidade"
+    t.string "uf"
+    t.string "cnpj"
+    t.string "inscricao_estadual"
+    t.string "inscricao_municipal"
+    t.string "ramo_de_atividade"
+    t.integer "cod_ibge"
+    t.text "obs"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

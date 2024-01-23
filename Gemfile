@@ -77,3 +77,4 @@ gem "foreman", github: "ddollar/foreman"
 gem 'devise', '~> 4.9'
 gem 'rubocop'
 gem 'ruby-lsp'
+gem 'correios-cep', '~> 0.8.0'

@@ -7,4 +7,32 @@ import "bootstrap";
 import "adminlte";
 
 
-  
+const hideFields = () => {
+  document.querySelectorAll('.cnpj, .inscricao-estadual, .inscricao-municipal, .ramo-de-atividade, .cod-ibge').forEach(field => {
+    field.style.display = 'none';
+  });
+};
+
+const showFields = () => {
+  document.querySelectorAll('.cnpj, .inscricao-estadual, .inscricao-municipal, .ramo-de-atividade, .cod-ibge').forEach(field => {
+    field.style.display = 'block';
+  });
+};
+
+
+
+document.addEventListener('DOMContentLoaded', () => {
+  const clienteTypeSelect = document.querySelector('#cliente_tipo_cliente');
+
+  hideFields();
+
+  clienteTypeSelect.addEventListener('change', () => {
+    const clienteType = clienteTypeSelect.value;
+
+    if (clienteType === 'Pessoa Fisica') {
+      hideFields();
+    } else {
+      showFields();
+    }
+  });
+});

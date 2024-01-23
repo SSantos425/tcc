@@ -23,6 +23,7 @@ Rails.application.routes.draw do
 
   get "/home", to: "home_page#index"
 
+  post 'cep', to: 'clientes#cep', as: 'cep'
 
   get 'cart', to: 'carts#show', as: 'cart'
   post 'add', to: 'carts#add', as: 'add'

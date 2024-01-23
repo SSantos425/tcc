@@ -17,6 +17,10 @@ class ClientesController < ApplicationController
     end
   end
 
+  def cep
+    
+  end
+
   def destroy
     @cliente = cliente.find(params[:id])
     @cliente.destroy
@@ -27,6 +31,10 @@ class ClientesController < ApplicationController
   private
 
   def cliente_params
-    params.require(:cliente).permit(:nome, :cpf)
+    params.require(:cliente).permit(:tipo_cliente, :nome,:cpf,
+     :cep, :logradouro, :bairro, :localidade,:uf, 
+     :cnpj,:inscricao_estadual, :inscricao_municipal, :ramo_de_atividade, :cod_ibge,
+     :obs
+    )
   end
 end
