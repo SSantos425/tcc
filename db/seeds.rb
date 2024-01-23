@@ -37,7 +37,7 @@ compra2 = Compra.create( fornecedor_id: fornecedor2.id,
 
 
 user = User.create(email:"admin@admin.com", password:123456)
-wallet = Wallet.create(user_id:user.id, balance:0)
+#wallet = Wallet.create(user_id:user.id, balance:0,data:Date.today, reforco:0)
 
 # VIGAS
 produto1 = Produto.create(nome: "VIGA 8X18 2,5M", unidade: "ML", preco: 65)

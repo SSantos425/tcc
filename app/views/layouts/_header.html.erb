@@ -8,10 +8,14 @@
                     <% end %>
                 </li>
 
-                <li class="nav-item">
-                    <%= link_to new_wallet_path, class:"navbar-brand" do  %>
-                    <i class="fa fa-brazilian-real-sign"><%= current_user.wallet.balance %> Caixa</i>
-                    <% end %>
+                <li class="nav-item dropdown">
+                    <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">Caixa</a>
+                    <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow" style="left: 0px; right: inherit;">
+                        <li><%= link_to "Abrir o Caixa", new_wallet_path,class:"dropdown-item" %></li>
+                        <li class="dropdown-divider"></li>   
+                        <li><%= link_to "Ver Caixa", wallets_path,class:"dropdown-item" %></li>
+                                     
+                    </ul>
                 </li>
 
                 <li class="nav-item dropdown">

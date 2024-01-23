@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_01_18_020438) do
+ActiveRecord::Schema[7.0].define(version: 2024_01_23_202135) do
   create_table "cartlist_orderables", force: :cascade do |t|
     t.integer "user_id"
     t.integer "produto_id"
@@ -100,6 +100,16 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_18_020438) do
     t.index ["user_id"], name: "index_inventorylists_on_user_id"
   end
 
+  create_table "list_wallets", force: :cascade do |t|
+    t.integer "wallet_id", null: false
+    t.date "data"
+    t.float "valor"
+    t.string "obs"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["wallet_id"], name: "index_list_wallets_on_wallet_id"
+  end
+
   create_table "orderables", force: :cascade do |t|
     t.integer "user_id"
     t.integer "produto_id"
@@ -147,6 +157,8 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_18_020438) do
   create_table "wallets", force: :cascade do |t|
     t.integer "user_id"
     t.float "balance"
+    t.float "reforco"
+    t.date "data"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_wallets_on_user_id"
@@ -160,6 +172,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_18_020438) do
   add_foreign_key "compras", "fornecedors"
   add_foreign_key "inventorylists", "produtos"
   add_foreign_key "inventorylists", "users"
+  add_foreign_key "list_wallets", "wallets"
   add_foreign_key "orderables", "carts"
   add_foreign_key "orderables", "clientes"
   add_foreign_key "orderables", "produtos"

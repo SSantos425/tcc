@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   resources :clientes #COLOCAR O ONLY AQUI PRA NAO FICAR UMAS ROTAS AVULSAS
   resources :wallets #COLOCAR O ONLY AQUI PRA NAO FICAR UMAS ROTAS AVULSAS
   resources :compras #COLOCAR O ONLY AQUI PRA NAO FICAR UMAS ROTAS AVULSAS
+  resources :list_wallets #COLOCAR O ONLY AQUI PRA NAO FICAR UMAS ROTAS AVULSAS
 
   #post 'adicionar_ao_estoque/:user_id/:produto_id/:quantity', to: 'inventorylists#adicionar_ao_estoque', as: 'adicionar_ao_estoque'
   post 'adicionar_ao_estoque', to: 'inventorylists#adicionar_ao_estoque', as: 'adicionar_ao_estoque'
@@ -28,9 +29,14 @@ Rails.application.routes.draw do
   get 'cart', to: 'carts#show', as: 'cart'
   post 'add', to: 'carts#add', as: 'add'
   post 'remove', to: 'carts#remove', as: 'remove'
+
+  post 'reforco_caixa', to: 'list_wallets#reforco_caixa', as: 'reforco_caixa'
+  post 'retirar_caixa', to: 'list_wallets#retirar_caixa', as: 'retirar_caixa'
+
   post 'aplicar_desconto', to: 'carts#aplicar_desconto', as: 'aplicar_desconto'
   post 'aplicar_acrescimo', to: 'carts#aplicar_acrescimo', as: 'aplicar_acrescimo'
   post 'data', to: 'carts#data', as: 'data'
+  post 'caixa_data', to: 'wallets#caixa_data', as: 'caixa_data'
   post 'adicionar_ao_cartlist_prazo', to: 'carts#adicionar_ao_cartlist_prazo', as: 'adicionar_ao_cartlist_prazo'
   post 'adicionar_ao_cartlist_vista', to: 'carts#adicionar_ao_cartlist_vista', as: 'adicionar_ao_cartlist_vista'
   post 'empty_cart', to: 'carts#empty_cart', as: 'empty_cart'

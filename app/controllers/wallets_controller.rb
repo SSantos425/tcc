@@ -3,6 +3,8 @@ class WalletsController < ApplicationController
 
     def index
       @wallets = Wallet.all
+      @wallet_last = Wallet.last
+      @list_wallets = ListWallet.all
     end
   
     def show
@@ -14,6 +16,14 @@ class WalletsController < ApplicationController
   
     def create
       @wallet = Wallet.new(wallet_params)
+      if @wallet.reforco === nil
+        @wallet.update(reforco:0)
+        @wallet.save
+      else
+        @wallet.update(balance:@wallet.balance + @wallet.reforco)
+        @wallet.save
+      end
+
   
       if @wallet.save
         redirect_to wallets_path, notice: 'Wallet was successfully created.'
@@ -32,19 +42,15 @@ class WalletsController < ApplicationController
         render :edit, status: :unprocessable_entity
       end
     end
-  
+
+
     def destroy
       @wallet.destroy
       redirect_to wallets_path, notice: 'Wallet was successfully destroyed.'
     end
   
-    private
-  
-    def set_wallet
-      @wallet = Wallet.find(params[:id])
-    end
-  
+
     def wallet_params
-      params.require(:wallet).permit(:user_id, :balance)
+      params.require(:wallet).permit(:user_id, :balance, :reforco, :data)
     end
 end
