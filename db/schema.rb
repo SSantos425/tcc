@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_01_23_202135) do
+ActiveRecord::Schema[7.0].define(version: 2024_01_24_205445) do
   create_table "cartlist_orderables", force: :cascade do |t|
     t.integer "user_id"
     t.integer "produto_id"
@@ -100,6 +100,16 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_23_202135) do
     t.index ["user_id"], name: "index_inventorylists_on_user_id"
   end
 
+  create_table "list_compras", force: :cascade do |t|
+    t.integer "compra_id", null: false
+    t.integer "produto_id", null: false
+    t.integer "quantity"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["compra_id"], name: "index_list_compras_on_compra_id"
+    t.index ["produto_id"], name: "index_list_compras_on_produto_id"
+  end
+
   create_table "list_wallets", force: :cascade do |t|
     t.integer "wallet_id", null: false
     t.date "data"
@@ -174,6 +184,8 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_23_202135) do
   add_foreign_key "compras", "fornecedors"
   add_foreign_key "inventorylists", "produtos"
   add_foreign_key "inventorylists", "users"
+  add_foreign_key "list_compras", "compras"
+  add_foreign_key "list_compras", "produtos"
   add_foreign_key "list_wallets", "wallets"
   add_foreign_key "orderables", "carts"
   add_foreign_key "orderables", "clientes"

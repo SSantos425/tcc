@@ -1,5 +1,3 @@
-<h1>Compras</h1>
-
 <table class="table table-hover">
   <thead>
     <tr>
@@ -12,6 +10,7 @@
       <th>Desconto</th>
       <th>Acrescimos</th>
       <th>Frete</th>
+      <th>Ações</th>
     </tr>
   </thead>
   <tbody>
@@ -26,7 +25,7 @@
         <td><%= compra.desconto %></td>
         <td><%= compra.acrescimos %></td>
         <td><%= compra.frete %></td>
-        <td><button>Incluir Produtos</button></td>
+        <td><%= link_to "Detalhes", compra_path(compra) %></td>
       </tr>
     <% end %>
   </tbody>

@@ -3,6 +3,7 @@ class ProdutosController < ApplicationController
   def index
     @produtos = Produto.all
     @user = User.all
+    @compras = Compra.all
   end
 
   def new
@@ -19,6 +20,8 @@ class ProdutosController < ApplicationController
       end
     
   end
+
+ 
 
   def destroy
     @produto = Produto.find(params[:id]) 

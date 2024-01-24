@@ -20,7 +20,7 @@
           <!--  <td>
               <%= link_to "Destroy", produto_path(produto), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %> 
             </td>
-            -->
+            
             <td>
               <%= form_with(url: adicionar_ao_estoque_path, method: :post) do |form| %>
                 <%= form.hidden_field :user_id , value:current_user.id%>
@@ -28,11 +28,28 @@
 
                 <%= form.number_field :quantity, placeholder: 'Quantidade' %>
                 <%= button_tag(type: 'submit', class: 'btn btn-primary btn-sm') do %>
-                  Adicionar ao Estoque
+                  Incluir na compra
                 <% end %>
               <% end %>
 
             </td>
+            -->
+            <td>
+              <%= form_with(url:incluir_produtos_path) do |f|%>
+                <% f.hidden_field :compra_id %>
+                manda o id o produto da find no controller e faz o create dele la
+                <% f.hidden_field :produto_id , value:produto.id%>
+                <%=f.number_field :quantity, placeholder: 'Quantidade' %>
+                
+    
+                <%= f.submit 'Incluir produto', class: 'btn btn-block btn-primary' %>
+      
+                
+              <% end %>
+            
+            </td>
+
+            
           </tr>
         <% end %>
       </tbody>

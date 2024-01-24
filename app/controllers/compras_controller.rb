@@ -18,6 +18,22 @@ class ComprasController < ApplicationController
 
   end
 
+  def show
+    @compra = Compra.find(params[:id])
+    @produtos = Produto.all
+    @list_compras = ListCompra.all
+  end
+
+  def incluir_produtos
+    compra = params[:compra_id].to_i
+    produto = params[:produto_id].to_i
+    quantity = params[:quantity]
+    @listcompra = ListCompra.new(compra_id:compra,produto_id:produto,quantity:quantity)
+    @listcompra.save
+
+    redirect_to compra_path(compra)
+  end
+
   private
     def compra_params 
       params.require(:compra).permit(
