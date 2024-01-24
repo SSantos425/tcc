@@ -5,6 +5,7 @@ class CreateListWallets < ActiveRecord::Migration[7.0]
       t.date :data
       t.float :valor
       t.string :obs
+      t.integer :tipo
       t.timestamps
     end
   end

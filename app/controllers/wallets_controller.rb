@@ -16,6 +16,8 @@ class WalletsController < ApplicationController
   
     def create
       @wallet = Wallet.new(wallet_params)
+      @wallet.update(caixa_status:0)
+      @wallet.save
       if @wallet.reforco === nil
         @wallet.update(reforco:0)
         @wallet.save
@@ -51,6 +53,6 @@ class WalletsController < ApplicationController
   
 
     def wallet_params
-      params.require(:wallet).permit(:user_id, :balance, :reforco, :data)
+      params.require(:wallet).permit(:user_id, :balance, :reforco, :data,:caixa_status)
     end
 end

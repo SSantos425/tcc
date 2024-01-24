@@ -1,71 +1,159 @@
-<div class="card card-outline card-primary">
+<%if  @wallet_last.caixa_status == 1 %>
+<div class="card card-outline card-dark">
   <div class="card-header">
-    <h1><%="Caixa Data: #{@wallet_last.data&.strftime('%d/%m/%Y')}"%></h1>
-  </div>
-  
-  <div class="card-body">
-    <table class="table table-bordered table-hover">
-      <thead>
-        <tr>
-          <th>Valor</th>
-          <th>Data</th>
-          <th>Reforço Aplicado</th>
-        </tr>
-      </thead>
-      <tbody>
-          <tr>
-            <td><%=number_to_currency(@wallet_last.balance, unit: 'R$' , separator: ',' , delimiter: '.' ) %></td>
-            <td><%= @wallet_last.data %></td>
-            <td><%= @wallet_last.reforco %></td>
-          </tr>
-      </tbody>
-    </table>
-  </div>
-
-  <div class="card-footer">
-    <div class="form-inline">
-
-      <%= form_with(url: reforco_caixa_path) do |f| %>
+    <div class="form-inline" style="justify-content: space-between;">
+      <h1><%="Saldo do dia: #{number_to_currency(@wallet_last.balance, unit: 'R$' , separator: ',' , delimiter: '.' )}" %></h1>
+      <%= form_with(url: retirar_caixa_path) do |f| %>
         <%= f.hidden_field :wallet_id, value: @wallet_last.id %>
         <%= f.hidden_field :data, value: @wallet_last.data %>
-        <%= f.number_field :valor, placeholder: "Valor"%>
-        <%= f.text_field :obs, placeholder: "Justificativa"%>
-        <%= f.submit "Reforço", class: "btn btn-primary btn-sm mr-1" %>
-      <% end %>
 
-      <%= form_with(url: reforco_caixa_path) do |f| %>
-        <%= f.hidden_field :wallet_id, value: @wallet_last.id %>
-        <%= f.hidden_field :data, value: @wallet_last.data %>
-        <%= f.number_field :valor, placeholder: "Valor"%>
-        <%= f.text_field :obs, placeholder: "Justificativa"%>
-        <%= f.submit "Retirada", class: "btn btn-primary btn-sm mr-1" %>
+        <%= f.submit "Fechar o Caixa", class: "btn btn-warning" %>
       <% end %>
-      <button>fechar caixa</button>
     </div>
   </div>
-</div>
+  <div class="card-body">    
+    <div class="row">
+      <div class="col-md-6">
+        <div class="card border border-primary">
+          <div class="card-body ">
+            <%= form_with(url: reforco_caixa_path) do |f| %>
+              <%= f.hidden_field :wallet_id, value: @wallet_last.id %>
+              <%= f.hidden_field :data, value: @wallet_last.data %>
+    
+              <div class="form-group">
+                <%= f.label :valor, "Valor Reforço" %>
+                <%= f.number_field :valor, class: "form-control", placeholder: "Valor" %>
+              </div>
+    
+              <div class="form-group">
+                <%= f.label :obs, "Justificativa" %>
+                <%= f.text_area :obs, class: "form-control", placeholder: "Justificativa" %>
+              </div>
+    
+              <%= f.submit "Reforço", class: "btn btn-primary btn-sm" %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+        
+      
+      <div class="col-md-6">
+        <div class="card border border-danger">
+          <div class="card-body">
+            <%= form_with(url: retirar_caixa_path) do |f| %>
+              <%= f.hidden_field :wallet_id, value: @wallet_last.id %>
+              <%= f.hidden_field :data, value: @wallet_last.data %>
+    
+              <div class="form-group">
+                <%= f.label :valor, "Valor Retirada" %>
+                <%= f.number_field :valor, class: "form-control", placeholder: "Valor" %>
+              </div>
+    
+              <div class="form-group">
+                <%= f.label :obs, "Justificativa" %>
+                <%= f.text_area :obs, class: "form-control", placeholder: "Justificativa" %>
+              </div>
+    
+              <%= f.submit "Retirada", class: "btn btn-primary btn-sm" %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <h1>Reforços e Retiradas</h1>
 
-<div class="card card-outline card-primary">
-  <div class="card-body">
-    <table class="table table-bordered table-hover">
+
+    <table class="table table-bordered table-hover mt-4">
       <thead>
         <tr>
-          <th>wallet_id</th>
           <th>Data</th>
-          <th>valor</th>
-          <th>obs</th>
+          <th>Valor</th>
+          <th>Justificativa</th>
+          <!--
+          <th>Ações</th>
+          -->
         </tr>
       </thead>
+      
       <tbody>
-        <%= @list_wallets.each do |list_wallet| %>
+        <% @list_wallets.each do |list_wallet| %>
           <tr>
-            <td><%=list_wallet.wallet_id%></td>
-            <td><%=list_wallet.data%></td>
-            <td><%=list_wallet.valor%></td>
-            <td><%=list_wallet.obs%></td>
+            <td><%= list_wallet.data.strftime("%d/%m/%Y") %></td>
+            <% if list_wallet.tipo === 1  %>
+              <td style="color: blue;"><%="#{number_to_currency(list_wallet.valor, unit: 'R$ +' , separator: ',' , delimiter: '.' )}" %></td>
+              <%= %>
+            <% else %>
+              <td style="color: red;"><%="#{number_to_currency(list_wallet.valor, unit: 'R$ -' , separator: ',' , delimiter: '.' )}" %></td>
+            <% end %>
+            
+            
+            <td><%= list_wallet.obs %></td>
+            <!--
+            <td>
+              <%= link_to 'Detalhes', list_wallet, class: 'btn btn-info btn-sm' %>
+              <%= link_to 'Editar', edit_list_wallet_path(list_wallet), class: 'btn btn-warning btn-sm' %>
+              <%= link_to 'Excluir', list_wallet, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-sm' %>
+            </td>
+            -->
           </tr>
         <% end %>
       </tbody>
     </table>
   </div>
 </div>
+<%end %>
+<%if  @wallet_last.caixa_status == 0 %>
+  <div class="card card-outline card-dark">
+    <div class="card-header">
+      <h1>Reforços e Retiradas</h1>
+    </div>
+
+    <table class="table table-bordered table-hover mt-4">
+      <thead>
+        <tr>
+          <th>Data</th>
+          <th>Valor</th>
+          <th>Justificativa</th>
+          <!--
+          <th>Ações</th>
+          -->
+        </tr>
+      </thead>
+      
+      <tbody>
+        <% @list_wallets.each do |list_wallet| %>
+          <tr>
+            <td><%= list_wallet.data.strftime("%d/%m/%Y") %></td>
+            <% if list_wallet.tipo === 1  %>
+              <td style="color: blue;"><%="#{number_to_currency(list_wallet.valor, unit: 'R$ +' , separator: ',' , delimiter: '.' )}" %></td>
+              <%= %>
+            <% else %>
+              <td style="color: red;"><%="#{number_to_currency(list_wallet.valor, unit: 'R$ -' , separator: ',' , delimiter: '.' )}" %></td>
+            <% end %>
+            
+            
+            <td><%= list_wallet.obs %></td>
+            <!--
+            <td>
+              <%= link_to 'Detalhes', list_wallet, class: 'btn btn-info btn-sm' %>
+              <%= link_to 'Editar', edit_list_wallet_path(list_wallet), class: 'btn btn-warning btn-sm' %>
+              <%= link_to 'Excluir', list_wallet, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-sm' %>
+            </td>
+            -->
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+    <div class="card-footer">
+      <% if @wallet_last.balance >= 0  %>
+        <td style="color: blue;"><%="Saldo do dia: #{number_to_currency(@wallet_last.balance, unit: 'R$' , separator: ',' , delimiter: '.' )}" %></td>
+        <%= %>
+      <% else %>
+        <td style="color: red;"><%="Saldo do dia: #{number_to_currency(@wallet_last.balance, unit: 'R$' , separator: ',' , delimiter: '.' )}" %></td>
+      <% end %>
+    </div>
+  </div>
+    
+<% end %>
+

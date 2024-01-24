@@ -105,6 +105,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_23_202135) do
     t.date "data"
     t.float "valor"
     t.string "obs"
+    t.integer "tipo"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["wallet_id"], name: "index_list_wallets_on_wallet_id"
@@ -159,6 +160,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_23_202135) do
     t.float "balance"
     t.float "reforco"
     t.date "data"
+    t.integer "caixa_status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_wallets_on_user_id"

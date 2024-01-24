@@ -5,7 +5,7 @@ class CreateWallets < ActiveRecord::Migration[7.0]
       t.float :balance
       t.float :reforco
       t.date :data
-
+      t.integer :caixa_status
       t.timestamps
     end
   end
