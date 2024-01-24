@@ -32,6 +32,7 @@ Rails.application.routes.draw do
 
   post 'reforco_caixa', to: 'list_wallets#reforco_caixa', as: 'reforco_caixa'
   post 'retirar_caixa', to: 'list_wallets#retirar_caixa', as: 'retirar_caixa'
+  post 'fechar_caixa', to: 'list_wallets#fechar_caixa', as: 'fechar_caixa'
 
   post 'aplicar_desconto', to: 'carts#aplicar_desconto', as: 'aplicar_desconto'
   post 'aplicar_acrescimo', to: 'carts#aplicar_acrescimo', as: 'aplicar_acrescimo'

@@ -1,4 +1,8 @@
 class ListWalletsController < ApplicationController
+  def index
+    @wallets = Wallet.all
+    @list_wallets = ListWallet.all
+  end
   def reforco_caixa
     wallet_id = params[:wallet_id]
     data = params[:data]
@@ -29,8 +33,9 @@ class ListWalletsController < ApplicationController
   end
 
   def fechar_caixa
-    # caixa_status:1-ABERTO | caixa_status:0 - FECHADO
-    @wallet.last.update(caixa_status:0)
+    wallet = Wallet.last
+    # caixa_status:0-ABERTO | caixa_status:1- FECHADO
+    wallet.update(caixa_status:1)
     redirect_to wallets_path
   end
 end
