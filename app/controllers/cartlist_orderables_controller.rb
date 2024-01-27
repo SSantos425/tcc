@@ -9,23 +9,7 @@ class CartlistOrderablesController < ApplicationController
     @cartlist_orderables = CartlistOrderable.where(cartlist_id:params[:id])
   end
 
-  #remover esse metodo esta obsoleto
-  def dar_baixa_na_venda
-    user = User.first
-    wallet = user.wallet
 
-    cartlist = Cartlist.find(params[:id])
-    cartlist_orderables = CartlistOrderable.where(cartlist_id:params[:id])
-
-    cartlist_orderables.each do |cartlist_orderable|
-      inventory_list = Inventorylist.find_by(user_id: user.id, produto_id: cartlist_orderable.produto.id)
-      inventory_list.update(quantity: inventory_list.quantity - cartlist_orderable.quantity)
-    end
-
-    wallet.update(balance: wallet.balance + cartlist.valor)
-    wallet.save
-    redirect_to root_path
-  end
 
   private
 

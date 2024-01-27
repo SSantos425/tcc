@@ -34,6 +34,54 @@ class ComprasController < ApplicationController
     redirect_to compra_path(compra)
   end
 
+  
+  def comprar
+    compra_id = params[:compra_id]
+    valor_total = params[:valor_total].to_f
+    list_compras = ListCompra.where(compra_id:compra_id)
+    data = params[:data]
+
+    
+    
+
+    wallet = Wallet.last
+
+    list_compras.each do |list_compra|
+      inventory_list = Inventorylist.find_by(user_id: current_user.id, produto_id: list_compra.produto_id)
+      inventory_list.update(quantity: inventory_list.quantity + list_compra.quantity)
+      if inventory_list.save
+        puts("DEU CERTO")
+      else
+        puts("DEU ERRADO")
+      end
+    end
+
+    wallet.update(balance: wallet.balance - valor_total)
+    ListWallet.create(wallet_id:wallet.id,data:data, valor:valor_total, obs:"Compra de Madeira", tipo:0)
+
+    redirect_to wallets_path
+   
+  end  
+
+  def atualizar_item_listcompra
+    list_compra_id = params[:list_compra]
+    compra_id = params[:compra_id].to_i
+    quantity = params[:quantity].to_i
+
+    current_listcompra = ListCompra.find_by(id: list_compra_id)
+    current_listcompra.update(quantity: quantity)
+
+    redirect_to compra_path(compra_id)
+  end
+
+  def remover_item_listcompra
+    compra = params[:compra_id].to_i
+
+    ListCompra.find_by(id: compra).destroy
+
+    redirect_to compra_path(compra)
+  end
+
   private
     def compra_params 
       params.require(:compra).permit(

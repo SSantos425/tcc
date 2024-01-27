@@ -36,6 +36,13 @@ Rails.application.routes.draw do
   post 'retirar_caixa', to: 'list_wallets#retirar_caixa', as: 'retirar_caixa'
   post 'fechar_caixa', to: 'list_wallets#fechar_caixa', as: 'fechar_caixa'
 
+  post 'comprar', to: 'compras#comprar', as: 'comprar'
+
+  post 'remover_item_listcompra', to: 'compras#remover_item_listcompra', as: 'remover_item_listcompra'
+  post 'atualizar_item_listcompra', to: 'compras#atualizar_item_listcompra', as: 'atualizar_item_listcompra'
+
+
+
   post 'aplicar_desconto', to: 'carts#aplicar_desconto', as: 'aplicar_desconto'
   post 'aplicar_acrescimo', to: 'carts#aplicar_acrescimo', as: 'aplicar_acrescimo'
   post 'data', to: 'carts#data', as: 'data'
