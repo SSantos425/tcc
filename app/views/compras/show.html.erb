@@ -79,7 +79,7 @@
     <%= form_with(url: comprar_path) do |form| %>
     <%= form.hidden_field :data, value:@compra.data_recebimento %>
     <%= form.hidden_field :compra_id, value: @compra.id %>
-    <%= form.hidden_field :valor_total, value: @compra.total_produtos %>
+    <%= form.hidden_field :valor_total, value: @compra.total(@compra.id) %>
       <%= button_tag(type: 'submit', class: 'btn btn-primary btn-sm') do %>
         
         Finalizar Compra A vista
@@ -88,6 +88,7 @@
   </div>
 </div>
 
+<!--COLOCAR PREÇO DE COMPRA NAO DE VENDA-->
 
 <div class="card mt-3">
   <div class="card-body">

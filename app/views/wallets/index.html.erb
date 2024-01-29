@@ -1,6 +1,6 @@
 <%if  @wallet_last.caixa_status === 0 %>
-  <div class="card card-outline card-dark">
-    <div class="card-header">
+  <div class="card card-primary">
+    <div class="card-header">      
       <div class="form-inline" style="justify-content: space-between;">
         <h1><%="Saldo do dia: #{number_to_currency(@wallet_last.balance, unit: 'R$' , separator: ',' , delimiter: '.' )}" %></h1>
         <%= form_with(url: fechar_caixa_path) do |f| %>
@@ -105,12 +105,19 @@
 
 <%else%>
 
-  <div class="card card-outline card-dark">
-    <div class="card-header">
-      <h1>Reforços e Retiradas</h1>
+  <div class="card card-primary">
+
+    <div class="card-header d-flex justify-content-between align-items-center">
+      <div>
+        <%= "Saldo de Abertura: #{number_to_currency(@wallet_last.valor_inicial, unit: 'R$' , separator: ',' , delimiter: '.' )}" %>
+      </div>
+  
+      <div>
+        <%= "Saldo de Fechamento: #{number_to_currency(@wallet_last.valor_final, unit: 'R$' , separator: ',' , delimiter: '.' )}" %>
+      </div>
     </div>
 
-    <table class="table table-bordered table-hover mt-4">
+    <table class="table table-bordered table-hover">
       <thead>
         <tr>
           <th>Data</th>
@@ -167,3 +174,69 @@
     
 <% end %>
 
+
+<div class="card card-primary">
+  <div class="card-header">
+    <strong>Entradas e Saidas</strong>
+  </div>
+  <div class="card-body">
+      <div class="row">
+          <div class="col-md-6">
+              <div class="card border border-primary">
+                  <div class="card-body">
+                      <h5 class="card-title">Entradas</h5>
+                      <table class="table table-bordered table-hover mt-4">
+                          <thead>
+                              <tr>
+                                  <th>Valor</th>
+                                  <th>Justificativa</th>
+                              </tr>
+                          </thead>
+                          <tbody>
+                              <% @list_wallets.each do |list_wallet| %>
+                                  <% if list_wallet.data === @wallet_last.data %> 
+                                      <% if list_wallet.tipo === 1  %>
+                                          <tr>
+                                              <td style="color: blue;"><%="#{number_to_currency(list_wallet.valor, unit: 'R$ +' , separator: ',' , delimiter: '.' )}" %></td>
+                                              <td><%= list_wallet.obs %></td>
+                                          </tr>
+                                      <% end %>
+                                  <% end %>
+                              <% end %>
+                          </tbody>
+                      </table>
+                  </div>
+              </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="card border border-danger">
+                  <div class="card-body">
+                      <h5 class="card-title">Saídas</h5>
+                      <table class="table table-bordered table-hover mt-4">
+                          <thead>
+                              <tr>
+                                  <th>Valor</th>
+                                  <th>Justificativa</th>
+                              </tr>
+                          </thead>
+                          <tbody>
+                              <% @list_wallets.each do |list_wallet| %>
+                                  <% if list_wallet.data === @wallet_last.data %> 
+                                      <% if list_wallet.tipo != 1  %>
+                                          <tr>
+                                              <td style="color: red;"><%="#{number_to_currency(list_wallet.valor, unit: 'R$ -' , separator: ',' , delimiter: '.' )}" %></td>
+                                              <td><%= list_wallet.obs %>
+                                              </td>
+                                          </tr>
+                                      <% end %>
+                                  <% end %>
+                              <% end %>
+                          </tbody>
+                      </table>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>

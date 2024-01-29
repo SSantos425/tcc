@@ -6,10 +6,8 @@ class CartlistOrderablesController < ApplicationController
 
   def show
     @cartlist = Cartlist.find(params[:id])
-    @cartlist_orderables = CartlistOrderable.where(cartlist_id:params[:id])
+    @cartlist_orderables = CartlistOrderable.where(cartlist_id: params[:id])
   end
-
-
 
   private
 

@@ -17,8 +17,22 @@ class ClientesController < ApplicationController
     end
   end
 
-  def cep
-    
+  def show
+    @cliente = Cliente.find(params[:id])
+  end
+
+  def edit
+    @cliente = Cliente.find(params[:id])
+  end
+
+  def update
+    @cliente = Cliente.find(params[:id])
+
+    if @cliente.update(cliente_params)
+      redirect_to clientes_path
+    else
+      render :edit, status: :unprocessable_entity
+    end
   end
 
   def destroy
@@ -31,10 +45,9 @@ class ClientesController < ApplicationController
   private
 
   def cliente_params
-    params.require(:cliente).permit(:tipo_cliente, :nome,:cpf,
-     :cep, :logradouro, :bairro, :localidade,:uf, 
-     :cnpj,:inscricao_estadual, :inscricao_municipal, :ramo_de_atividade, :cod_ibge,
-     :obs
-    )
+    params.require(:cliente).permit(:tipo_cliente, :nome, :cpf,
+                                    :cep, :logradouro, :bairro, :localidade, :uf,
+                                    :cnpj, :inscricao_estadual, :inscricao_municipal, :ramo_de_atividade, :cod_ibge,
+                                    :obs)
   end
 end

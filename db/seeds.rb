@@ -5,11 +5,38 @@
 #
 #   movies = Movie.create( name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
-cliente1 = Cliente.create(nome:"CLIENTES ADVERSOS", cpf:"-")
-cliente2 = Cliente.create(nome:"AB CONSTRUÇÓES", cpf:"-")
 
-fornecedor1 = Fornecedor.create(nome:"SAMUEL",endereco:"-",cnpj:"-",insc_estadual:"-")
-fornecedor2 = Fornecedor.create(nome:"ANTONIO",endereco:"-",cnpj:"-",insc_estadual:"-")
+
+cliente1 = Cliente.create(nome:"CLIENTES DIVERSOS", tipo_cliente:"Pessoa Fisica") #0 P.FISICA
+cliente2 = Cliente.create(nome:"AB CONSTRUÇÓES", tipo_cliente:"Pessoa Juridica") #1 P.JURIDICA
+
+
+
+fornecedor1 = Fornecedor.create(nome:"ABRAMAX MADEIRAS",
+cep:"68450-000",
+endereco:"VIA MARGEM DIREITA DO RIO MOJU",
+numero:0,
+complento:"-",
+bairro:"PARAISO",
+cidade:"MOJU",
+estado:"Pará",
+fone:"91 99292-1254",
+cnpj:"08.990.062/0001-08",
+insc_estadual:"15.263.622-6",
+razao_social:"ABRAMAX COMERCIO EXPORTAÇÃO DE MADEIRAS LTDA-EPP")
+
+fornecedor2 = Fornecedor.create(nome:"MADEIREIRA NOVA ERA",
+cep:"68450-000",
+endereco:"Rua Agropalma",
+numero:0,
+complento:"CAIXA POSTAL 083, ESQUINA COM RUA ARAUARI",
+bairro:"Altos",
+cidade:"MOJU",
+estado:"Pará",
+fone:"91 99916-1022",
+cnpj:"08.242.838/0001-01",
+insc_estadual:"15.257.811-0",
+razao_social:"NOVA ERA INDUSTRIA COMERCIO EXPORTAÇÃO DE MADEIRAS LIMITADA me")
 
 compra1 = Compra.create(fornecedor_id: fornecedor1.id,
   numero_nota: "1130",
@@ -74,7 +101,7 @@ produto28 = Produto.create(nome: "CAIBRO 3,5X6 8,0M", unidade: "PCA", preco: 56)
 produto29 = Produto.create(nome: "CAIBRO 3,5X6 8,5M", unidade: "PCA", preco: 59.50)
 
 # FRECHAL
-produto30 = Produto.create(nome: "CAIBRO 6X6", unidade: "M", preco: 12)
+produto30 = Produto.create(nome: "FRECHAL 6X6", unidade: "M", preco: 12)
 
 # RIPA
 produto31 = Produto.create(nome: "RIPA 1,2X5", unidade: "DZ", preco: 80)

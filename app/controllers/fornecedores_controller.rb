@@ -3,9 +3,7 @@ class FornecedoresController < ApplicationController
     @fornecedores = Fornecedor.all
   end
 
-
-  def show
-  end
+  def show; end
 
   def new
     @fornecedor = Fornecedor.new
@@ -21,8 +19,7 @@ class FornecedoresController < ApplicationController
     end
   end
 
-  def edit
-  end
+  def edit; end
 
   def update
     if @fornecedor.update(fornecedor_params)
@@ -44,7 +41,6 @@ class FornecedoresController < ApplicationController
   end
 
   def fornecedor_params
-    params.require(:fornecedor).permit(:nome,:endereco,:cnpj,:insc_estadual)
+    params.require(:fornecedor).permit(:nome, :endereco, :cnpj, :insc_estadual)
   end
-
 end

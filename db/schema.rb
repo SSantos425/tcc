@@ -83,9 +83,17 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_24_205445) do
 
   create_table "fornecedors", force: :cascade do |t|
     t.string "nome"
+    t.string "cep"
     t.string "endereco"
+    t.string "numero"
+    t.string "complento"
+    t.string "bairro"
+    t.string "cidade"
+    t.string "estado"
+    t.string "fone"
     t.string "cnpj"
     t.string "insc_estadual"
+    t.string "razao_social"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -171,6 +179,8 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_24_205445) do
     t.float "reforco"
     t.date "data"
     t.integer "caixa_status"
+    t.float "valor_inicial"
+    t.float "valor_final"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_wallets_on_user_id"
