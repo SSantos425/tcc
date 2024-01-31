@@ -1,16 +1,155 @@
-<!-- app/views/wallets/show.html.erb -->
+<div class="card card-primary">
 
-<p id="notice"><%= notice %></p>
+  <div class="card-header d-flex justify-content-between align-items-center">
+    <div>
+      <%= "Saldo de Abertura: #{number_to_currency(@wallet.valor_inicial, unit: 'R$' , separator: ',' , delimiter: '.' )}"
+        %>
+    </div>
 
-<p>
-  <strong>User:</strong>
-  <%= @wallet.user_id %>
-</p>
+    <div>
+      <%= "Saldo de Fechamento: #{number_to_currency(@wallet.valor_final, unit: 'R$' , separator: ',' , delimiter: '.' )}"
+        %>
+    </div>
+  </div>
 
-<p>
-  <strong>Balance:</strong>
-  <%= @wallet.balance %>
-</p>
+  <table class="table table-bordered table-hover">
+    <thead>
+      <tr>
+        <th>Data</th>
+        <th>Valor</th>
+        <th>Justificativa</th>
+        <!--
+        <th>Ações</th>
+        -->
+      </tr>
+    </thead>
 
-<%= link_to 'Edit', edit_wallet_path(@wallet) %> |
-<%= link_to 'Back', wallets_path %>
+    <tbody>
+      <% @list_wallets.each do |list_wallet| %>
+        <% if list_wallet.data===@wallet.data %>
+          <tr>
+            <td>
+              <%= list_wallet.data.strftime("%d/%m/%Y") %>
+            </td>
+            <% if list_wallet.tipo===1 %>
+              <td style="color: blue;">
+                <%="#{number_to_currency(list_wallet.valor, unit: 'R$ +' , separator: ',' , delimiter: '.' )}" %>
+              </td>
+            <% else %>
+              <td style="color: red;">
+                <%="#{number_to_currency(list_wallet.valor, unit: 'R$ -' , separator: ',' , delimiter: '.' )}" %>
+              </td>
+            <% end %>
+
+
+                    <td>
+                      <%= list_wallet.obs %>
+                    </td>
+                    <!--
+            <td>
+              <%= link_to 'Detalhes', list_wallet, class: 'btn btn-info btn-sm' %>
+              <%= link_to 'Editar', edit_list_wallet_path(list_wallet), class: 'btn btn-warning btn-sm' %>
+              <%= link_to 'Excluir', list_wallet, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-sm' %>
+            </td>
+            -->
+          </tr>
+          <% end %>
+        <% end %>
+    </tbody>
+  </table>
+
+  <div class="card-footer">
+    <strong>
+      <h1>Saldo do dia:</h1>
+    </strong>
+    <% if @wallet.balance>= 0 %>
+      <div style="color: blue;">
+        <%= number_to_currency(@wallet.balance, unit: 'R$' , separator: ',' , delimiter: '.' ) %>
+      </div>
+      <% else %>
+        <div style="color: red;">
+          <%= number_to_currency(@wallet.balance, unit: 'R$' , separator: ',' , delimiter: '.' ) %>
+        </div>
+      <% end %>
+  </div>
+
+
+</div>
+
+
+
+
+<div class="card card-primary">
+  <div class="card-header">
+    <strong>Entradas e Saidas</strong>
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="card border border-primary">
+          <div class="card-body">
+            <h5 class="card-title">Entradas</h5>
+            <table class="table table-bordered table-hover mt-4">
+              <thead>
+                <tr>
+                  <th>Valor</th>
+                  <th>Justificativa</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% @list_wallets.each do |list_wallet| %>
+                  <% if list_wallet.data===@wallet.data %>
+                    <% if list_wallet.tipo===1 %>
+                      <tr>
+                        <td style="color: blue;">
+                          <%="#{number_to_currency(list_wallet.valor, unit: 'R$ +' , separator: ',' , delimiter: '.' )}"
+                            %>
+                        </td>
+                        <td>
+                          <%= list_wallet.obs %>
+                        </td>
+                      </tr>
+                    <% end %>
+                  <% end %>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="card border border-danger">
+          <div class="card-body">
+            <h5 class="card-title">Saídas</h5>
+            <table class="table table-bordered table-hover mt-4">
+              <thead>
+                <tr>
+                  <th>Valor</th>
+                  <th>Justificativa</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% @list_wallets.each do |list_wallet| %>
+                  <% if list_wallet.data===@wallet.data %>
+                    <% if list_wallet.tipo !=1 %>
+                      <tr>
+                        <td style="color: red;">
+                          <%="#{number_to_currency(list_wallet.valor, unit: 'R$ -' , separator: ',' , delimiter: '.' )}"
+                            %>
+                        </td>
+                        <td>
+                          <%= list_wallet.obs %>
+                        </td>
+                      </tr>
+                    <% end %>
+                  <% end %>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

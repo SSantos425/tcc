@@ -4,6 +4,9 @@ class ListWalletsController < ApplicationController
     @list_wallets = ListWallet.all
   end
 
+
+
+
   def reforco_caixa
     wallet_id = params[:wallet_id]
     data = params[:data]

@@ -1,24 +1,33 @@
-<table class="table">
-    <thead>
-      <tr>
-        <th>Data</th>
-        <th>Valor</th>
-        <th>Observações</th>
-        <!-- Adicione as colunas adicionais conforme necessário -->
-        <!-- <th>Ações</th> -->
-      </tr>
-    </thead>
-    <tbody>
-      <% @wallets.each do |wallet| %>        
+<div class="card card-primary">
+  <div class="card-header">
+    Relatório de Caixas
+  </div>
+
+  <div class="card-body">
+    <table class="table">
+      <thead>
         <tr>
-          <td><%= wallet.data.strftime("%d/%m/%Y") %></td>
-          <td><%= wallet.balance %></td>
-          <td> <button>detalhes</button></td>
+          <th>Data</th>
+          <th>Valor</th>
+          <th>Observações</th>
+          <!-- Adicione as colunas adicionais conforme necessário -->
+          <!-- <th>Ações</th> -->
         </tr>
-      <% end %>
-    </tbody>
-</table>
-  
+      </thead>
+      <tbody>
+        <% @wallets.each do |wallet| %>
+          <tr>
+            <td><%= wallet.data.strftime("%d/%m/%Y") %></td>
+            <td><%= number_to_currency(wallet.balance, unit: 'R$', separator: ',', delimiter: '.')%></td>
+            <td><%= link_to 'Detalhes', wallet_path(wallet), class: 'btn btn-warning' %></td>
+          </tr>
+          <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
 
 
 

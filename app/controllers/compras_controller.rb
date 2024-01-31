@@ -10,6 +10,7 @@ class ComprasController < ApplicationController
 
   def create
     @compra = Compra.new(compra_params)
+    @compra.update(tipo:1)
 
     if @compra.save
       redirect_to compras_path
@@ -40,6 +41,9 @@ class ComprasController < ApplicationController
     list_compras = ListCompra.where(compra_id:)
     data = params[:data]
 
+    compra = Compra.find_by(id:compra_id)
+    compra.update(tipo:0)
+
     wallet = Wallet.last
 
     list_compras.each do |list_compra|
@@ -52,9 +56,10 @@ class ComprasController < ApplicationController
       end
     end
 
+    
+
     wallet.update(balance: wallet.balance - valor_total)
-    ListWallet.create(wallet_id: wallet.id, data:, valor: valor_total, obs: 'Compra de Mercadorias para Revenda',
-                      tipo: 0)
+    ListWallet.create(wallet_id: wallet.id, data:data, valor: valor_total, obs: 'Compra de Mercadorias para Revenda', tipo: 0)
 
     redirect_to wallets_path
   end

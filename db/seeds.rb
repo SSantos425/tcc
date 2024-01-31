@@ -41,25 +41,27 @@ razao_social:"NOVA ERA INDUSTRIA COMERCIO EXPORTAÇÃO DE MADEIRAS LIMITADA me")
 compra1 = Compra.create(fornecedor_id: fornecedor1.id,
   numero_nota: "1130",
   serie: "1",
-  data_emissao: "13/12/2023",
-  data_recebimento: "16/12/2023",
+  data_emissao: Date.new(2023, 11, 20),
+  data_recebimento: Date.new(2023, 11, 22),
   total_nota: 12564.32,
   total_produtos: 12564.35,
   desconto: 0.03,
   acrescimos: 0,
-  frete: 7920
+  frete: 7920,
+  tipo:1
 )
 
 compra2 = Compra.create( fornecedor_id: fornecedor2.id,
   numero_nota: "3247",
   serie: "1",
-  data_emissao: "10/11/2023",
-  data_recebimento: "17/11/2023",
+  data_emissao: Date.new(2023, 11, 21),
+  data_recebimento: Date.new(2023, 11, 23),
   total_nota: 14347.91,
   total_produtos: 14347.92,
   desconto: 0.01,
   acrescimos: 0,
-  frete: 12830.76
+  frete: 12830.76,
+  tipo:1
 )
 
 

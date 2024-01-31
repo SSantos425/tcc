@@ -69,13 +69,14 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_24_205445) do
     t.integer "fornecedor_id"
     t.integer "numero_nota"
     t.integer "serie"
-    t.string "data_emissao"
-    t.string "data_recebimento"
+    t.date "data_emissao"
+    t.date "data_recebimento"
     t.float "total_nota"
     t.float "total_produtos"
     t.float "desconto"
     t.float "acrescimos"
     t.float "frete"
+    t.integer "tipo"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["fornecedor_id"], name: "index_compras_on_fornecedor_id"

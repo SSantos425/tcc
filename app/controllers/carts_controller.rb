@@ -134,7 +134,7 @@ class CartsController < ApplicationController
 
     wallet.update(balance: wallet.balance + cartlist.valor)
 
-    ListWallet.create(wallet_id: wallet.id, data:, valor: cartlist.valor, obs: 'Venda de Mercadorias', tipo: 1)
+    ListWallet.create(wallet_id: wallet.id, data:data, valor: cartlist.valor, obs: 'Venda de Mercadorias', tipo: 1)
 
     # adicionar aqui
     @cart.update(valor: 0, data: nil, acrescimo: 0, desconto: 0)
