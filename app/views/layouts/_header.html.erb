@@ -3,7 +3,7 @@
         <div class="collapse navbar-collapse order-3" id="navbarCollapse">
             <ul class="navbar-nav">
                 <li>
-                    <%= link_to home_path, class: "navbar-brand" do %>
+                    <%= link_to wallets_path, class: "navbar-brand" do %>
                         <i class="fa fa-home"><span class="brand-text font-weight-light"> Inicio</span></i>
                     <% end %>
                 </li>
@@ -14,8 +14,7 @@
                         <li><%= link_to "Abrir o Caixa", new_wallet_path,class:"dropdown-item" %></li>
                         <li class="dropdown-divider"></li>   
                         <li><%= link_to "Ver Caixa", wallets_path,class:"dropdown-item" %></li>
-                        <li class="dropdown-divider"></li> 
-                        <li><%= link_to "Listar Caixas", list_wallets_path,class:"dropdown-item" %></li>
+                        
                                      
                     </ul>
                 </li>
@@ -38,22 +37,29 @@
                     <% end %>
                 </li>
 
-                <li class="nav-item">
-                    <%= link_to vendas_path, class: "nav-link" do %>
-                        <p>Vender</p>
-                    <% end %>
-                </li>
+                <% if @wallet_last.caixa_status===0 %> <!--CAIXA EM ABERTO-->
+                    <li class="nav-item">
+                        <%= link_to vendas_path, class: "nav-link" do %>
+                            <p>Vender</p>
+                        <% end %>
+                    </li>
+                
+                <% end %>
 
-                <li class="nav-item dropdown">
-                    <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">Compra</a>
-                    <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow" style="left: 0px; right: inherit;">
-                        <li><%= link_to "Novo Compra", new_compra_path ,class:"dropdown-item" %></li>
-                        <li class="dropdown-divider"></li>   
-                        <li><%= link_to "Lista de Compras", compras_path,class:"dropdown-item" %></li>
-                        
-                                     
-                    </ul>
-                </li>
+
+
+                <% if @wallet_last.caixa_status === 0 %> 
+                    <li class="nav-item dropdown">
+                        <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">Compra</a>
+                        <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow" style="left: 0px; right: inherit;">
+                            <li><%= link_to "Novo Compra", new_compra_path ,class:"dropdown-item" %></li>
+                            <li class="dropdown-divider"></li>   
+                            <li><%= link_to "Lista de Compras", compras_path,class:"dropdown-item" %></li>              
+                        </ul>
+                    </li>
+                <%end%>
+                
+
 
 
 
@@ -61,8 +67,7 @@
                     <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">Fornecedor</a>
                     <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow" style="left: 0px; right: inherit;">
                         <li><%= link_to "Novo Fornecedor", new_fornecedore_path ,class:"dropdown-item" %></li>
-                        <li class="dropdown-divider"></li>   
-                        <li><%= link_to "Listar Fornecedores", fornecedores_path,class:"dropdown-item" %></li>
+
                         
                                      
                     </ul>
@@ -71,17 +76,22 @@
                <li class="nav-item dropdown">
                     <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">Cliente</a>
                     <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow" style="left: 0px; right: inherit;">
-                        <li><%= link_to "Novo cliente", new_cliente_path ,class:"dropdown-item" %></li>
-                        <li class="dropdown-divider"></li>   
-                        <li><%= link_to "Listar Clientes", clientes_path,class:"dropdown-item" %></li>
-                                     
+                        <li><%= link_to "Novo cliente", new_cliente_path ,class:"dropdown-item" %></li>                           
                     </ul>
                 </li>
 
-                <li class="nav-item">
-                    <%= link_to cartlist_orderables_path, class: "nav-link" do %>
-                        <p>Relatórios</p>
-                    <% end %>
+                <li class="nav-item dropdown">
+                    <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">Relatórios</a>
+                    <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow" style="left: 0px; right: inherit;">
+                        <li><%= link_to "Vendas", cartlist_orderables_path ,class:"dropdown-item" %></li>
+                        <li class="dropdown-divider"></li>   
+                        <li><%= link_to "Clientes", clientes_path,class:"dropdown-item" %></li>
+                        <li class="dropdown-divider"></li>   
+                        <li><%= link_to "Caixas", list_wallets_path,class:"dropdown-item" %></li>
+                        <li class="dropdown-divider"></li>   
+                        <li><%= link_to "Lista de Fornecedores", fornecedores_path,class:"dropdown-item" %></li>
+                                     
+                    </ul>
                 </li>
 
             </ul>

@@ -109,7 +109,7 @@ class CartsController < ApplicationController
     cartlist = Cartlist.create(valor: @cart.valor, forma_de_pagamento: 1, cliente_id:, data:,
                                desconto:, acrescimo:)
     user = User.first
-    wallet = user.wallet
+    wallet = Wallet.last
 
     @cart.orderables.each do |orderable|
       produto = orderable.produto

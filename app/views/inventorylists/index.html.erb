@@ -15,7 +15,8 @@
         <% @inventory_lists.each do |inventorylist| %>
           <tr>
             <td><%= inventorylist.produto.nome %></td>      
-            <td><%= inventorylist.quantity %></td>      
+            <td><%= inventorylist.quantity %></td>    
+            <td><%= link_to "Editar" , edit_inventorylist_path(inventorylist), class:"btn btn-warning btn-sm"%></td>  
           </tr>
         <% end %>
       </tbody>

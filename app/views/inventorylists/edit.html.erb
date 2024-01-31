@@ -1,0 +1,24 @@
+
+<div class="card card-outline card-primary larger-card">
+    <div class="card-header text-center">
+      <div>
+        <h1>Atualizar Quantidade </h1>
+      </div>
+    </div>
+
+    <div class="card-body">     
+        <%= form_with model: @inventory_list do |form| %>
+            <%= form.hidden_field :user_id %>
+            <%= form.hidden_field :produto_id %>
+            
+
+            <div class="form-group">
+              <%= form.label :quantity, "Quantidade" %>
+              <%= form.number_field :quantity, class: 'form-control' %>
+            </div>
+          <%= form.submit 'Atualizar', class: 'btn btn-block btn-primary' %>
+      <% end %>
+    </div>
+    <!-- /.card-body -->
+  </div>
+  <!-- /.card -->

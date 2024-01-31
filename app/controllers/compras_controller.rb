@@ -19,6 +19,13 @@ class ComprasController < ApplicationController
     end
   end
 
+
+def compras_cliente
+  @cartlist_orderables = CartlistOrderable.where(cliente_id: params[:cliente_id])
+end
+
+  
+
   def show
     @compra = Compra.find(params[:id])
     @produtos = Produto.all

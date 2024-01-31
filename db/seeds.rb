@@ -11,7 +11,7 @@ cliente1 = Cliente.create(nome:"CLIENTES DIVERSOS", tipo_cliente:"Pessoa Fisica"
 cliente2 = Cliente.create(nome:"AB CONSTRUÇÓES", tipo_cliente:"Pessoa Juridica") #1 P.JURIDICA
 
 
-
+ 
 fornecedor1 = Fornecedor.create(nome:"ABRAMAX MADEIRAS",
 cep:"68450-000",
 endereco:"VIA MARGEM DIREITA DO RIO MOJU",
@@ -42,7 +42,7 @@ compra1 = Compra.create(fornecedor_id: fornecedor1.id,
   numero_nota: "1130",
   serie: "1",
   data_emissao: Date.new(2023, 11, 20),
-  data_recebimento: Date.new(2023, 11, 22),
+  data_recebimento: Date.new(2023, 11, 23),
   total_nota: 12564.32,
   total_produtos: 12564.35,
   desconto: 0.03,
@@ -54,8 +54,8 @@ compra1 = Compra.create(fornecedor_id: fornecedor1.id,
 compra2 = Compra.create( fornecedor_id: fornecedor2.id,
   numero_nota: "3247",
   serie: "1",
-  data_emissao: Date.new(2023, 11, 21),
-  data_recebimento: Date.new(2023, 11, 23),
+  data_emissao: Date.new(2023, 11, 20),
+  data_recebimento: Date.new(2023, 11, 30),
   total_nota: 14347.91,
   total_produtos: 14347.92,
   desconto: 0.01,
@@ -66,7 +66,7 @@ compra2 = Compra.create( fornecedor_id: fornecedor2.id,
 
 
 user = User.create(email:"admin@admin.com", password:123456)
-#wallet = Wallet.create(user_id:user.id, balance:0,data:Date.today, reforco:0)
+wallet = Wallet.create(user_id:user.id, balance:0,data:Date.new(2023, 11, 1), reforco:0,caixa_status:0)
 
 # VIGAS
 produto1 = Produto.create(nome: "VIGA 8X18 2,5M", unidade: "ML", preco: 65)
@@ -127,6 +127,7 @@ Inventorylist.create(user_id: user.id, produto_id: produto13.id, quantity: 75)
 Inventorylist.create(user_id: user.id, produto_id: produto14.id, quantity: 130)
 Inventorylist.create(user_id: user.id, produto_id: produto15.id, quantity: 170)
 Inventorylist.create(user_id: user.id, produto_id: produto16.id, quantity: 220)
+Inventorylist.create(user_id: user.id, produto_id: produto0.id, quantity: 100)
 Inventorylist.create(user_id: user.id, produto_id: produto17.id, quantity: 110)
 Inventorylist.create(user_id: user.id, produto_id: produto18.id, quantity: 190)
 Inventorylist.create(user_id: user.id, produto_id: produto19.id, quantity: 260)

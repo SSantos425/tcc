@@ -20,7 +20,7 @@ Rails.application.routes.draw do
 
   post 'adicionar_uma_venda', to: 'vendas#adicionar_uma_venda', as: 'adicionar_uma_venda'
   post 'vender', to: 'vendalists#vender', as: 'vender'
-  root 'home_page#index'
+  root 'wallets#new'
 
   get "/home", to: "home_page#index"
 
@@ -40,7 +40,8 @@ Rails.application.routes.draw do
 
   post 'remover_item_listcompra', to: 'compras#remover_item_listcompra', as: 'remover_item_listcompra'
   post 'atualizar_item_listcompra', to: 'compras#atualizar_item_listcompra', as: 'atualizar_item_listcompra'
-
+  
+  get '/compras_cliente/:cliente_id', to: 'compras#compras_cliente', as: 'compras_cliente'
 
 
   post 'aplicar_desconto', to: 'carts#aplicar_desconto', as: 'aplicar_desconto'

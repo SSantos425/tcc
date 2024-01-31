@@ -36,22 +36,15 @@
                 <%="#{number_to_currency(list_wallet.valor, unit: 'R$ +' , separator: ',' , delimiter: '.' )}" %>
               </td>
             <% else %>
-              <td style="color: red;">
-                <%="#{number_to_currency(list_wallet.valor, unit: 'R$ -' , separator: ',' , delimiter: '.' )}" %>
-              </td>
+                <td style="color: red;">
+                  <%="#{number_to_currency(list_wallet.valor, unit: 'R$ -' , separator: ',' , delimiter: '.' )}" %>
+                </td>
             <% end %>
 
 
                     <td>
                       <%= list_wallet.obs %>
                     </td>
-                    <!--
-            <td>
-              <%= link_to 'Detalhes', list_wallet, class: 'btn btn-info btn-sm' %>
-              <%= link_to 'Editar', edit_list_wallet_path(list_wallet), class: 'btn btn-warning btn-sm' %>
-              <%= link_to 'Excluir', list_wallet, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-sm' %>
-            </td>
-            -->
           </tr>
           <% end %>
         <% end %>

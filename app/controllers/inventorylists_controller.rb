@@ -3,6 +3,21 @@ class InventorylistsController < ApplicationController
     @inventory_lists = Inventorylist.all
   end
 
+
+  def edit
+    @inventory_list = Inventorylist.find(params[:id])
+  end
+
+  def update
+    @inventory_list = Inventorylist.find(params[:id])
+
+    if @inventory_list.update(inventorylist_params)
+      redirect_to inventorylists_path
+    else
+      render :edit, status: :unprocessable_entity
+    end
+  end
+
   def adicionar_ao_estoque
     user_id = params[:user_id]
     produto_id = params[:produto_id]
@@ -24,4 +39,13 @@ class InventorylistsController < ApplicationController
       redirect_to root_path
     end
   end
+
+
+  private
+
+    def inventorylist_params
+
+      params.require(:inventorylist).permit(:user_id,:produto_id,:quantity)
+    
+    end
 end

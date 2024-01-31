@@ -111,10 +111,13 @@
               <% end %>
           </div>
 
-          <div class="card-footer">
-            Forma de Pagamento :
-            <%= render "carts/vistaprazo" %>
-          </div>
+          <% if @cart.data.present? %>
+            <div class="card-footer">
+              Forma de Pagamento :
+              <%= render "carts/vistaprazo" %>
+            </div>
+          <% end %>
+          
 
         </div>
         <!-- /.card-body -->

@@ -13,8 +13,8 @@
             <% end %>
             <% has_avista_button = true %>
         <% end %>
-
-        <% unless has_aprazo_button %>
+ <!-- 
+          <% unless has_aprazo_button %>
             <%= form_with(url: adicionar_ao_cartlist_prazo_path) do |f| %>
                 <%= f.hidden_field :data, value: @cart.data %>
                 <%= f.hidden_field :desconto, value: @cart.desconto %>
@@ -24,5 +24,7 @@
             <% end %>
         <% has_aprazo_button = true %>
         <% end %>
+        -->
+
     </div>
 <%end %>

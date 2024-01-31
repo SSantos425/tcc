@@ -1,6 +1,8 @@
 class ApplicationController < ActionController::Base
   before_action :set_render_cart
+  before_action :set_wallet_last
   before_action :initialize_cart
+  before_action :authenticate_user!
 
   def set_render_cart
     @render_cart = true
@@ -15,4 +17,9 @@ class ApplicationController < ActionController::Base
     session[:cart_id] = @cart.id
   end
   
+  def set_wallet_last
+    @wallet_last = Wallet.last
+
+    
+  end
 end
