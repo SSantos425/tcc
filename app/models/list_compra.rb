@@ -6,4 +6,7 @@ class ListCompra < ApplicationRecord
       produto.preco * quantity
     end
 
+    def total_compra_parcial
+      produto.preco_compra * quantity
+    end
 end

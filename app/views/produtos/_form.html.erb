@@ -5,7 +5,7 @@
         </div>
       </div>
       <div class="card-body">     
-        <%= form_with model: @produto, class: 'mb-3' do |form| %>
+        <%= form_with model: @produto do |form| %>
           <div class="input-group">
             <%= form.label :nome, class: 'sr-only' %>
             <%= form.text_field :nome, class: 'form-control', placeholder: 'Nome do Produto' %>
@@ -28,7 +28,17 @@
 
           <div class="input-group mt-3">
             <%= form.label :preco, class: 'sr-only' %>
-            <%= form.text_area :preco, class: 'form-control', placeholder: 'Preço' %>
+            <%= form.number_field :preco, step: 0.01, class: 'form-control', placeholder: 'Preço' %>
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span class="fas fa-dollar-sign"></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="input-group mt-3">
+            <%= form.label :preco_compra, class: 'sr-only' %>
+            <%= form.number_field :preco_compra, step: 0.01, class: 'form-control', placeholder: 'Preço de compra' %>
             <div class="input-group-append">
               <div class="input-group-text">
                 <span class="fas fa-dollar-sign"></span>
@@ -43,4 +53,4 @@
       </div>
       <!-- /.card-body -->
     </div>
-    <!-- /.card -->
+<!-- /.card -->

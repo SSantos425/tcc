@@ -3,7 +3,7 @@ class CreateListCompras < ActiveRecord::Migration[7.0]
     create_table :list_compras do |t|
       t.references :compra, null: false, foreign_key: true
       t.references :produto, null: false, foreign_key: true
-      t.integer :quantity
+      t.float :quantity
 
       t.timestamps
     end

@@ -4,6 +4,7 @@ class CreateProdutos < ActiveRecord::Migration[7.0]
       t.string :nome
       t.string :unidade
       t.float :preco
+      t.float :preco_compra
 
       t.timestamps
     end

@@ -20,19 +20,42 @@ const showFields = () => {
 };
 
 
-
+/*
 document.addEventListener('DOMContentLoaded', () => {
   const clienteTypeSelect = document.querySelector('#cliente_tipo_cliente');
 
   hideFields();
 
-  clienteTypeSelect.addEventListener('change', () => {
-    const clienteType = clienteTypeSelect.value;
+    if (clienteTypeSelect){
+      clienteTypeSelect.addEventListener('change', () => {
+        const clienteType = clienteTypeSelect.value;
 
-    if (clienteType === 'Pessoa Fisica') {
-      hideFields();
-    } else {
-      showFields();
+        if (clienteType === 'Pessoa Fisica') {
+          hideFields();
+        } else {
+          showFields();
+        }
+      });
     }
-  });
+
 });
+
+*/
+document.addEventListener('DOMContentLoaded', () => {
+  const clienteTypeSelect = document.querySelector('#cliente_tipo_cliente');
+
+  if (clienteTypeSelect) {
+    hideFields();
+
+    clienteTypeSelect.addEventListener('change', () => {
+      const clienteType = clienteTypeSelect.value;
+
+      if (clienteType === 'Pessoa Fisica') {
+        hideFields();
+      } else {
+        showFields();
+      }
+    });
+  }
+});
+

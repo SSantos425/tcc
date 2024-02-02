@@ -63,7 +63,7 @@
                     <div class="form-inline">
                       <%= form_with(url: add_path) do |f| %>
                         <%= f.hidden_field :id, value: product.id %>
-                        <%= f.number_field :quantity, value: orderable.quantity, min: 0, class: "form-control"%>
+                        <%= f.number_field :quantity, step:0.01, value: orderable.quantity, class: "form-control"%>
                         <%= f.submit "Atualizar", class: "btn btn-success btn-sm mr-1" %>
                       <% end %>
           
@@ -89,14 +89,14 @@
               
               <% if @cart.desconto.zero? && @cart.acrescimo.zero? %>
                 <%= form_with(url: aplicar_desconto_path) do |f| %>
-                  <%= f.number_field :desconto, placeholder: "Desconto" %>
+                  <%= f.number_field :desconto, step:0.01, placeholder: "Desconto" %>
                   <%= button_tag(type: 'submit', class: 'btn btn-success btn-sm mr-3') do %>
                     <i class="fa fa-solid fa-check"></i>
                   <% end %>
                 <% end %>
               
                 <%= form_with(url: aplicar_acrescimo_path) do |f| %>
-                  <%= f.number_field :acrescimo, placeholder: "Acrescimo" %>
+                  <%= f.number_field :acrescimo, step:0.01, placeholder: "Acrescimo" %>
                   <%= button_tag(type: 'submit', class: 'btn btn-success btn-sm mr-3') do %>
                     <i class="fa fa-solid fa-check"></i>
                   <% end %>

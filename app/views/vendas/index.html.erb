@@ -55,32 +55,26 @@
       <tbody>
         <% @produtos.each do |produto| %>
           <tr>
-            <td>
-              <%= produto.nome %>
-            </td>
+            <td><%= produto.nome %></td>
 
-            <td>
-              <%=number_to_currency(produto.preco, unit: 'R$' , separator: ',' , delimiter: '.' ) %>
-            </td>
+            <td><%=number_to_currency(produto.preco, unit: 'R$' , separator: ',' , delimiter: '.' ) %></td>
 
             <td>
               <%= form_with(url: add_path) do |f| %>
                 <%= f.label :cliente_id, "ID do Cliente" %>
-                  <%= f.number_field :cliente_id %>
+                <%= f.number_field :cliente_id %>
 
-                    <%= f.hidden_field :user_id, value: current_user.id %>
-                      <%= f.hidden_field :id, value: produto.id %>
-                        <%= f.number_field :quantity, value: 0, min: 1 %>
+                <%= f.hidden_field :user_id, value: current_user.id %>
+                <%= f.hidden_field :id, value: produto.id %>
+                <%= f.number_field :quantity, step:0.01, value: 0, min: 1 %>
 
-                          <%= button_tag(type: 'submit' , class: 'btn btn-primary btn-sm' ) do %>
-                            <i class="fas fa-cart-plus fa-lg mr-2"> Adicionar</i>
-                            <% end %>
-
-                              <% end %>
-
+                <%= button_tag(type: 'submit' , class: 'btn btn-primary btn-sm' ) do %>
+                  <i class="fas fa-cart-plus fa-lg mr-2"> Adicionar</i>
+                <% end %>
+              <% end %>
             </td>
           </tr>
-          <% end %>
+        <% end %>
       </tbody>
     </table>
   </div>

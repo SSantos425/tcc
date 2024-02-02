@@ -21,7 +21,7 @@ class InventorylistsController < ApplicationController
   def adicionar_ao_estoque
     user_id = params[:user_id]
     produto_id = params[:produto_id]
-    quantity = params[:quantity].to_i
+    quantity = params[:quantity].to_f
 
     inventory_list = Inventorylist.find_by(user_id:, produto_id:)
 

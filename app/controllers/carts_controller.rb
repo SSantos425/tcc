@@ -7,7 +7,7 @@ class CartsController < ApplicationController
     cliente_id = params[:cliente_id]
     user_id = params[:user_id]
     @produto = Produto.find_by(id: params[:id])
-    quantity = params[:quantity].to_i
+    quantity = params[:quantity].to_f
 
     current_orderable = @cart.orderables.find_by(produto_id: @produto.id)
 

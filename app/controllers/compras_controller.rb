@@ -20,9 +20,9 @@ class ComprasController < ApplicationController
   end
 
 
-def compras_cliente
-  @cartlist_orderables = CartlistOrderable.where(cliente_id: params[:cliente_id])
-end
+  def compras_cliente
+    @cartlist_orderables = CartlistOrderable.where(cliente_id: params[:cliente_id])
+  end
 
   
 
@@ -35,7 +35,7 @@ end
   def incluir_produtos
     compra = params[:compra_id].to_i
     produto = params[:produto_id].to_i
-    quantity = params[:quantity]
+    quantity = params[:quantity].to_f
     @listcompra = ListCompra.new(compra_id: compra, produto_id: produto, quantity:)
     @listcompra.save
 
@@ -74,7 +74,7 @@ end
   def atualizar_item_listcompra
     list_compra_id = params[:list_compra]
     compra_id = params[:compra_id].to_i
-    quantity = params[:quantity].to_i
+    quantity = params[:quantity].to_f
 
     current_listcompra = ListCompra.find_by(id: list_compra_id)
     current_listcompra.update(quantity:)

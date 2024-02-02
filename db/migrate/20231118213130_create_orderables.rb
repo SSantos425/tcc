@@ -5,7 +5,7 @@ class CreateOrderables < ActiveRecord::Migration[7.0]
       t.references :produto, foreign_key: true
       t.references :cart, foreign_key: true
       t.references :cliente,foreign_key: true
-      t.integer :quantity
+      t.float :quantity
       
       
       

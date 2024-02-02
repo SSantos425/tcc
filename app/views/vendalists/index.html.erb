@@ -22,7 +22,7 @@
             <%= form.hidden_field :user_id , value:current_user.id%>
             <%= form.hidden_field :produto_id , value:venda.produto.id%>
 
-            <%= form.number_field :quantity, value:venda.quantity %>
+            <%= form.number_field :quantity, step:0.01, value:venda.quantity %>
             <%= form.submit 'Fazer uma venda' %>
           <% end %>
 

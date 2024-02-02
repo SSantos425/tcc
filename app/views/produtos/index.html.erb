@@ -39,7 +39,7 @@
                 <% f.hidden_field :compra_id %>
                 manda o id o produto da find no controller e faz o create dele la
                 <% f.hidden_field :produto_id , value:produto.id%>
-                <%=f.number_field :quantity, placeholder: 'Quantidade' %>
+                <%=f.number_field :quantity, step:0.01, placeholder: 'Quantidade' %>
                 
     
                 <%= f.submit 'Incluir produto', class: 'btn btn-block btn-primary' %>
@@ -56,3 +56,38 @@
     </table>
   </div>
 </div>
+
+
+
+<p>Selecione a quantidade e adicione no estoque</p>
+<div class="card">
+  <div class="card-body">
+    <table class="table table-bordered table-hover">
+      <thead>
+        <tr>
+          <th>Nome</th>
+          <th>Unidade</th>
+          <th>Preço</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @produtos.each do |produto| %>
+          <tr>
+            <td><%= produto.nome %></td>
+            <td><%= produto.unidade %></td>
+            <td><%= number_to_currency(produto.preco) %></td>
+            <td><%= number_to_currency(produto.preco_compra) %></td>
+            
+
+           <td><%= link_to "Editar", edit_produto_path(produto), class: "btn btn-warning btn-sm" %></td> 
+
+            
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+

@@ -10,6 +10,7 @@ class CreateCompras < ActiveRecord::Migration[7.0]
       t.float :total_produtos
       t.float :desconto
       t.float :acrescimos
+      t.float :imposto
       t.float :frete
       t.integer :tipo
 

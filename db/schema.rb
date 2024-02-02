@@ -16,7 +16,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_24_205445) do
     t.integer "produto_id"
     t.integer "cartlist_id"
     t.integer "cliente_id"
-    t.integer "quantity"
+    t.float "quantity"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["cartlist_id"], name: "index_cartlist_orderables_on_cartlist_id"
@@ -75,6 +75,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_24_205445) do
     t.float "total_produtos"
     t.float "desconto"
     t.float "acrescimos"
+    t.float "imposto"
     t.float "frete"
     t.integer "tipo"
     t.datetime "created_at", null: false
@@ -102,7 +103,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_24_205445) do
   create_table "inventorylists", force: :cascade do |t|
     t.integer "user_id"
     t.integer "produto_id"
-    t.integer "quantity"
+    t.float "quantity"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["produto_id"], name: "index_inventorylists_on_produto_id"
@@ -112,7 +113,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_24_205445) do
   create_table "list_compras", force: :cascade do |t|
     t.integer "compra_id", null: false
     t.integer "produto_id", null: false
-    t.integer "quantity"
+    t.float "quantity"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["compra_id"], name: "index_list_compras_on_compra_id"
@@ -135,7 +136,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_24_205445) do
     t.integer "produto_id"
     t.integer "cart_id"
     t.integer "cliente_id"
-    t.integer "quantity"
+    t.float "quantity"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["cart_id"], name: "index_orderables_on_cart_id"
@@ -148,6 +149,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_24_205445) do
     t.string "nome"
     t.string "unidade"
     t.float "preco"
+    t.float "preco_compra"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -167,7 +169,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_24_205445) do
   create_table "vendas", force: :cascade do |t|
     t.integer "user_id"
     t.integer "produto_id"
-    t.integer "quantity"
+    t.float "quantity"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["produto_id"], name: "index_vendas_on_produto_id"

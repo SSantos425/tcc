@@ -20,6 +20,20 @@ class ProdutosController < ApplicationController
     end
   end
 
+  def edit
+    @produto = Produto.find(params[:id])
+  end
+
+  def update
+    @produto = Produto.find(params[:id])
+
+    if @produto.update(produto_params)
+      redirect_to produtos_path
+    else
+      render :edit, status: :unprocessable_entity
+    end
+  end
+
   def destroy
     @produto = Produto.find(params[:id])
     @produto.destroy
@@ -30,6 +44,6 @@ class ProdutosController < ApplicationController
   private
 
   def produto_params
-    params.require(:produto).permit(:nome, :unidade, :preco)
+    params.require(:produto).permit(:nome, :unidade, :preco, :preco_compra)
   end
 end

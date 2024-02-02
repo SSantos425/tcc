@@ -25,12 +25,12 @@
 
               <div class="form-group">
                 <%= form.label :numero_nota, "Número da Nota" %>
-                <%= form.number_field :numero_nota, class: 'form-control', placeholder: "Número da Nota" %>
+                <%= form.number_field :numero_nota, step:0.01, class: 'form-control', placeholder: "Número da Nota" %>
               </div>
 
               <div class="form-group">
                 <%= form.label :serie, "Série" %>
-                <%= form.number_field :serie, class: 'form-control', placeholder: "Série" %>
+                <%= form.number_field :serie, step:0.01, class: 'form-control', placeholder: "Série" %>
               </div>
 
               <div class="form-group">
@@ -47,27 +47,27 @@
             <div class="col-md-5">             
               <div class="form-group">
                 <%= form.label :total_nota, "Total da Nota" %>
-                <%= form.number_field :total_nota, class: 'form-control', placeholder: "Total da Nota" %>
+                <%= form.number_field :total_nota, step:0.01, class: 'form-control', placeholder: "Total da Nota" %>
               </div>
 
               <div class="form-group">
                 <%= form.label :total_produtos, "Total de Produtos" %>
-                <%= form.number_field :total_produtos, class: 'form-control', placeholder: "Total de Produtos" %>
+                <%= form.number_field :total_produtos, step:0.01, class: 'form-control', placeholder: "Total de Produtos" %>
               </div>
 
               <div class="form-group">
                 <%= form.label :desconto, "Desconto" %>
-                <%= form.number_field :desconto, class: 'form-control', placeholder: "Desconto" %>
+                <%= form.number_field :desconto, step:0.01, class: 'form-control', placeholder: "Desconto" %>
               </div>
 
               <div class="form-group">
                 <%= form.label :acrescimos, "Acréscimos" %>
-                <%= form.number_field :acrescimos, class: 'form-control', placeholder: "Acréscimos" %>
+                <%= form.number_field :acrescimos, step:0.01, class: 'form-control', placeholder: "Acréscimos" %>
               </div>
 
               <div class="form-group">
                 <%= form.label :frete, "Frete" %>
-                <%= form.number_field :frete, class: 'form-control', placeholder: "Frete" %>
+                <%= form.number_field :frete, step:0.01, class: 'form-control', placeholder: "Frete" %>
               </div>
             </div>
           </div>

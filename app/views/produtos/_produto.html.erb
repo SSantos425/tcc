@@ -6,7 +6,7 @@
       <%= produto.preco %>
       <%= form_with(url: add_path) do |f| %>
         <%= f.hidden_field :id, value: produto.id %>
-        <%= f.number_field :quantity, value: 0, min: 1 %>
+        <%= f.number_field :quantity, step:0.01 %>
         <%= f.submit "Add To Cart" %>
       <% end %>
     </div>
