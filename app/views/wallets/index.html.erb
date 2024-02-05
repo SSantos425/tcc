@@ -61,9 +61,8 @@
           </div>
         </div>
       </div>
+
       <h1>Reforços e Retiradas</h1>
-
-
       <table class="table table-bordered table-hover mt-4">
         <thead>
           <tr>
@@ -110,11 +109,11 @@
 
     <div class="card-header d-flex justify-content-between align-items-center">
       <div>
-        <%= "Saldo de Abertura: #{number_to_currency(@wallet_last.valor_inicial, unit: 'R$' , separator: ',' , delimiter: '.' )}" %>
+        <strong><%= "Saldo de Abertura: #{number_to_currency(@wallet_last.valor_inicial, unit: 'R$' , separator: ',' , delimiter: '.' )}" %></strong>
       </div>
   
       <div>
-        <%= "Saldo de Fechamento: #{number_to_currency(@wallet_last.valor_final, unit: 'R$' , separator: ',' , delimiter: '.' )}" %>
+        <strong><%= "Saldo de Fechamento: #{number_to_currency(@wallet_last.valor_final, unit: 'R$' , separator: ',' , delimiter: '.' )}" %></strong>
       </div>
     </div>
 

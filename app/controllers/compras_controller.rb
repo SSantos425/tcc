@@ -33,42 +33,42 @@ class ComprasController < ApplicationController
   end
 
   def incluir_produtos
-    compra = params[:compra_id].to_i
-    produto = params[:produto_id].to_i
+    compra_id = params[:compra_id].to_i
+    produto_id = params[:produto_id].to_i
     quantity = params[:quantity].to_f
-    @listcompra = ListCompra.new(compra_id: compra, produto_id: produto, quantity:)
+  
+    @listcompra = ListCompra.new(compra_id: compra_id, produto_id: produto_id, quantity: quantity)
     @listcompra.save
 
-    redirect_to compra_path(compra)
+    @list_compras = ListCompra.all
+    @produtos = Produto.all
+    @compra = Compra.find_by(id:compra_id)
+    render turbo_stream: turbo_stream.update('compralist', partial: 'compras/carrinhocompra', locals: { compra: @compra })
   end
+  
 
   def comprar
     compra_id = params[:compra_id]
     valor_total = params[:valor_total].to_f
     list_compras = ListCompra.where(compra_id:)
     data = params[:data]
-
-    compra = Compra.find_by(id:compra_id)
-    compra.update(tipo:0)
-
     wallet = Wallet.last
+
+    @list_compras = ListCompra.all
+    @produtos = Produto.all
+
+    @compra = Compra.find_by(id:compra_id)
+    @compra.update(tipo:0)
 
     list_compras.each do |list_compra|
       inventory_list = Inventorylist.find_by(user_id: current_user.id, produto_id: list_compra.produto_id)
       inventory_list.update(quantity: inventory_list.quantity + list_compra.quantity)
-      if inventory_list.save
-        puts('DEU CERTO')
-      else
-        puts('DEU ERRADO')
-      end
     end
-
-    
 
     wallet.update(balance: wallet.balance - valor_total)
     ListWallet.create(wallet_id: wallet.id, data:data, valor: valor_total, obs: 'Compra de Mercadorias para Revenda', tipo: 0)
 
-    redirect_to wallets_path
+    render turbo_stream: turbo_stream.update('compralist', partial: 'compras/carrinhocomprafinalizado', locals: { compra: @compra })
   end
 
   def atualizar_item_listcompra
@@ -76,18 +76,29 @@ class ComprasController < ApplicationController
     compra_id = params[:compra_id].to_i
     quantity = params[:quantity].to_f
 
-    current_listcompra = ListCompra.find_by(id: list_compra_id)
-    current_listcompra.update(quantity:)
+    @compra = Compra.find_by(id:compra_id)
+    @list_compras = ListCompra.all
+    @produtos = Produto.all
 
-    redirect_to compra_path(compra_id)
+    current_listcompra = ListCompra.find_by(id: list_compra_id)
+    current_listcompra.update(quantity: quantity)
+
+    render turbo_stream: turbo_stream.update('compralist', partial: 'compras/carrinhocompra', locals: { listcompra: @list_compras })
+
+    
   end
 
   def remover_item_listcompra
-    compra = params[:compra_id].to_i
+    list_compra_id = params[:list_compra]
+    compra_id = params[:compra_id].to_i
 
-    ListCompra.find_by(id: compra).destroy
+    @compra = Compra.find_by(id:compra_id)
 
-    redirect_to compra_path(compra)
+    ListCompra.find_by(id: list_compra_id).destroy
+
+    @list_compras = ListCompra.all
+    @produtos = Produto.all
+    render turbo_stream: turbo_stream.update('compralist', partial: 'compras/carrinhocompra', locals: { compra: @compra })
   end
 
   private

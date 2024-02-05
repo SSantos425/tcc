@@ -7,15 +7,14 @@
     <table class="table table-bordered table-hover">
       <thead>
         <tr>
-          <th>ID</th>
           <th>Nome do Produto</th>
           <th>Quantidade disponível no estoque</th>
+          <th>Ações</th>
         </tr>
       </thead>
       <tbody>
         <% @inventory_lists.each do |inventorylist| %>
           <tr>
-            <td><%= inventorylist.id %></td>
             <td><%= inventorylist.produto.nome %></td>      
             <td><%= inventorylist.quantity %></td>    
             <td><%= link_to "Editar" , edit_inventorylist_path(inventorylist), class:"btn btn-warning btn-sm"%></td>  

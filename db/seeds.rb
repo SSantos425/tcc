@@ -8,7 +8,7 @@
 
 
 cliente1 = Cliente.create(nome:"CLIENTES DIVERSOS", tipo_cliente:"Pessoa Fisica") #0 P.FISICA
-cliente2 = Cliente.create(nome:"AB CONSTRUÇÓES", tipo_cliente:"Pessoa Juridica") #1 P.JURIDICA
+cliente2 = Cliente.create(nome:"AB CONSTRUÇÕES", tipo_cliente:"Pessoa Juridica") #1 P.JURIDICA
 
 
  
@@ -38,27 +38,14 @@ cnpj:"08.242.838/0001-01",
 insc_estadual:"15.257.811-0",
 razao_social:"NOVA ERA INDUSTRIA COMERCIO EXPORTAÇÃO DE MADEIRAS LIMITADA me")
 
-compra1 = Compra.create(fornecedor_id: fornecedor1.id,
-  numero_nota: "1130",
-  serie: "1",
-  data_emissao: Date.new(2023, 11, 20),
-  data_recebimento: Date.new(2023, 11, 15),
-  total_nota: 12564.32,
-  total_produtos: 12564.35,
-  desconto: 0.03,
-  acrescimos: 0.0,
-  imposto:0.0,
-  frete: 7920,
-  tipo:1
-)
 
 compra2 = Compra.create( fornecedor_id: fornecedor2.id,
   numero_nota: "3247",
   serie: "1",
   data_emissao: Date.new(2023, 11, 1),
   data_recebimento: Date.new(2023, 11, 15),
-  total_nota: 57771.04,
-  total_produtos: 57771.04,
+  total_nota: 96614.0,
+  total_produtos: 81203.7,
   desconto: 0.0,
   acrescimos: 0.0,
   imposto:2579.54,

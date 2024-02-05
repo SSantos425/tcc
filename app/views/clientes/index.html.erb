@@ -52,6 +52,8 @@
           <td>
             <%= link_to "Detalhes", cliente_path(cliente), class: "btn btn-primary btn-sm" %>
             <%= link_to "Editar", edit_cliente_path(cliente), class: "btn btn-warning btn-sm" %>
+            <%= link_to "Visualizar Compras", compras_cliente_path(cliente), class: "btn btn-warning btn-sm" %>
+
           </td>
         </tr>
         <% end %>

@@ -1,0 +1,74 @@
+
+  <div class="card card-primary">
+
+    <div class="card-header">
+      <h1>Detalhes da Compra</h1>
+    </div>
+
+    <div class="card-body" style="text-align: center;">    
+      <table class="table table-hover" >
+        <thead>
+          <tr>
+            <th>Nota</th>
+            <th>Serie</th>
+            <th>Data de Emissao</th>
+            <th>Data de Recebimento</th>
+            <th>Total da Nota</th>
+            <th>Total Produtos</th>
+            <th>Desconto</th>
+            <th>Acrescimos</th>
+            <th>Frete</th>
+            <th>Imposto</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><%= @compra.numero_nota %></td>
+            <td><%= @compra.serie %></td>
+            <td><%= @compra.data_emissao.strftime('%d/%m/%Y') %></td>
+            <td><%= @compra.data_recebimento.strftime('%d/%m/%Y') %></td>
+            <td><%= number_to_currency(@compra.total_nota, unit: 'R$', separator: ',', delimiter: '.') %></td>
+            <td><%= number_to_currency(@compra.total_produtos, unit: 'R$', separator: ',', delimiter: '.') %></td>
+            <td><%= number_to_currency(@compra.desconto, unit: 'R$', separator: ',', delimiter: '.') %></td>
+            <td><%= number_to_currency(@compra.acrescimos, unit: 'R$', separator: ',', delimiter: '.') %></td>
+            <td><%= number_to_currency(@compra.frete, unit: 'R$', separator: ',', delimiter: '.') %></td>
+            <td><%= number_to_currency(@compra.imposto, unit: 'R$', separator: ',', delimiter: '.') %></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  
+    <div class="card-footer" >
+      <table class="table table-bordered table-hover">
+        <thead>
+          <tr>
+            <th>Nome</th>
+            <th>Unidade</th>
+            <th>Preço de Compra</th>
+            <th>Quantidade</th>                
+            <th>Preço Parcial</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @list_compras.each do |list_compra| %>
+            <% if list_compra.compra_id === @compra.id %>
+              <tr>
+                <td><%= list_compra.produto.nome %></td>
+                <td><%= list_compra.produto.unidade %></td>
+                <td><%= number_to_currency(list_compra.produto.preco_compra, unit: 'R$', separator: ',', delimiter: '.') %></td>
+                <td><%= list_compra.quantity %></td>
+                <td><%= number_to_currency(list_compra.total_parcial, unit: 'R$', separator: ',', delimiter: '.') %></td>
+              </tr>
+            <% end %>
+          <% end %>
+        </tbody>
+      </table>
+      
+      <strong><%= "TOTAL: #{number_to_currency(@compra.total_compra(@compra.id), unit: 'R$', separator: ',', delimiter: '.')}"  %></strong>
+    </div>
+  </div>
+
+
+
+

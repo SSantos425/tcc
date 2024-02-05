@@ -2,14 +2,13 @@
 
   <div class="card-header d-flex justify-content-between align-items-center">
     <div>
-      <%= "Saldo de Abertura: #{number_to_currency(@wallet.valor_inicial, unit: 'R$' , separator: ',' , delimiter: '.' )}"
-        %>
+      <%= "<b>Saldo de Abertura:</b> #{number_to_currency(@wallet.valor_inicial, unit: 'R$', separator: ',', delimiter: '.')}".html_safe %>
     </div>
-
+    
     <div>
-      <%= "Saldo de Fechamento: #{number_to_currency(@wallet.valor_final, unit: 'R$' , separator: ',' , delimiter: '.' )}"
-        %>
+      <%= "<b>Saldo de Fechamento:</b> #{number_to_currency(@wallet.valor_final, unit: 'R$', separator: ',', delimiter: '.')}".html_safe %>
     </div>
+    
   </div>
 
   <table class="table table-bordered table-hover">

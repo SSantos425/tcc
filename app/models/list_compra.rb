@@ -3,7 +3,7 @@ class ListCompra < ApplicationRecord
   belongs_to :produto
 
     def total_parcial
-      produto.preco * quantity
+      produto.preco_compra * quantity
     end
 
     def total_compra_parcial

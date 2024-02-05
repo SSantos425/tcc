@@ -14,7 +14,7 @@ class ProdutosController < ApplicationController
     @produto = Produto.new(produto_params)
 
     if @produto.save
-      redirect_to produtos_path
+      redirect_to listaprodutos_path
     else
       render :new, status: :unprocessable_entity
     end
@@ -28,10 +28,14 @@ class ProdutosController < ApplicationController
     @produto = Produto.find(params[:id])
 
     if @produto.update(produto_params)
-      redirect_to produtos_path
+      redirect_to listaprodutos_path
     else
       render :edit, status: :unprocessable_entity
     end
+  end
+
+  def listaprodutos
+    @produtos = Produto.all
   end
 
   def destroy

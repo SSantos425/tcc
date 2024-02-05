@@ -13,7 +13,7 @@
         <%= form.hidden_field :user_id ,value:current_user.id%>
         <div class="form-group">
             <%= form.label :balance, "Valor" %>
-            <%= form.number_field :balance, step:0.01, class: 'form-control', placeholder: "Valor", step: 0.01, value: number_with_precision(@wallet.balance, precision: 2) %>
+            <%= form.number_field :balance, step:0.01, class: 'form-control', placeholder: "Valor", value: number_with_precision(@wallet.balance, precision: 2) %>
 
         </div>
 

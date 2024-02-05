@@ -1,0 +1,33 @@
+<div class="card card-primary">
+    <div class="card-header">
+       <strong>Lista de Produtos</strong>
+    </div>
+  <div class="card-body">
+    <table class="table table-bordered table-hover">
+      <thead>
+        <tr>
+          <th>Nome</th>
+          <th>Unidade</th>
+          <th>Preço de Venda</th>
+          <th>Preço de Compra</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @produtos.each do |produto| %>
+          <tr>
+            <td><%= produto.nome %></td>
+            <td><%= produto.unidade %></td>
+            <td><%= number_to_currency(produto.preco) %></td>
+            <td><%= number_to_currency(produto.preco_compra) %></td>
+            
+
+           <td><%= link_to "Editar", edit_produto_path(produto), class: "btn btn-warning btn-sm" %></td> 
+
+            
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
