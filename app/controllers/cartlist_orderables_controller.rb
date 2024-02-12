@@ -1,12 +1,18 @@
 class CartlistOrderablesController < ApplicationController
   def index
-    @cartlists = Cartlist.all
-    @cartlist_orderables = CartlistOrderable.all
   end
 
   def show
     @cartlist = Cartlist.find(params[:id])
     @cartlist_orderables = CartlistOrderable.where(cartlist_id: params[:id])
+  end
+
+  def cartlist_data
+    @cartlist_data = Cartlist.where(data:params[:data])
+  end
+
+  def vendas_geral
+    @cartlists = Cartlist.all
   end
 
   private

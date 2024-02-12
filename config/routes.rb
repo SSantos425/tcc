@@ -55,6 +55,9 @@ Rails.application.routes.draw do
   post 'adicionar_ao_cartlist_vista', to: 'carts#adicionar_ao_cartlist_vista', as: 'adicionar_ao_cartlist_vista'
   post 'empty_cart', to: 'carts#empty_cart', as: 'empty_cart'
   post 'dar_baixa_na_venda/:id', to:'cartlist_orderables#dar_baixa_na_venda', as:'dar_baixa_na_venda'
+
+  get 'vendas_geral', to:'cartlist_orderables#vendas_geral', as:'vendas_geral'
+  get  'cartlist_data', to:'cartlist_orderables#cartlist_data', as:'cartlist_data'
   get 'show/:id', to: 'cartlist_orderables#show', as: 'show'
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
