@@ -1,4 +1,6 @@
 class Produto < ApplicationRecord
+    validates :nome, :unidade, :preco, :preco_compra, presence: true
+    
     has_many :inventorylists
     has_many :users, through: :inventorylists
 

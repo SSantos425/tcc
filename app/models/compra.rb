@@ -1,4 +1,5 @@
 class Compra < ApplicationRecord
+  validates :fornecedor_id,:numero_nota,:serie,:data_emissao,:data_recebimento,:total_nota,:total_produtos,:frete, presence: true
   belongs_to :fornecedor
 
   def total(valor)

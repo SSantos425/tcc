@@ -5,7 +5,7 @@ class ComprasController < ApplicationController
 
   def new
     @compra = Compra.new
-    @fornecedors = Fornecedor.all
+    @fornecedores = Fornecedor.all
   end
 
   def create

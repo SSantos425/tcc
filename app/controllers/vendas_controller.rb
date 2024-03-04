@@ -1,8 +1,9 @@
 class VendasController < ApplicationController
   def index
+    @cliente = Cliente.find_by(id: params[:cliente_id])
     @produtos = Produto.all
     @user = User.all
-    @cliente = Cliente.first
+    
   end
 
   def adicionar_uma_venda
@@ -17,4 +18,5 @@ class VendasController < ApplicationController
     flash[:success] = 'Produto adicionado ao estoque com sucesso!'
     redirect_to root_path
   end
+
 end

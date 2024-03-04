@@ -6,44 +6,36 @@
       </div>
       <div class="card-body">     
         <%= form_with model: @produto do |form| %>
-          <div class="input-group">
-            <%= form.label :nome, class: 'sr-only' %>
+          <div class="form-group">
+            <%= form.label :nome , "Nome"%>
             <%= form.text_field :nome, class: 'form-control', placeholder: 'Nome do Produto' %>
-            <div class="input-group-append">
-              <div class="input-group-text">
-                <span class="fas fa-user"></span>
-              </div>
-            </div>
+            <% @produto.errors.full_messages_for(:nome).each do |message| %>
+              <div style="color: red;"><%= "Campo não preenchido"%></div>
+            <% end %>
           </div>
 
-          <div class="input-group mt-3">
-            <%= form.label :unidade, class: 'sr-only' %>
-            <%= form.text_area :unidade, class: 'form-control', placeholder: 'Unidade' %>
-            <div class="input-group-append">
-              <div class="input-group-text">
-                <span class="fas fa-university"></span>
-              </div>
-            </div>
+          <div class="form-group">
+            <%= form.label :unidade, "Unidade" %>
+            <%= form.text_field :unidade, class: 'form-control', placeholder: 'Unidade' %>
+            <% @produto.errors.full_messages_for(:unidade).each do |message| %>
+              <div style="color: red;"><%= "Campo não preenchido"%></div>
+            <% end %>
           </div>
 
-          <div class="input-group mt-3">
-            <%= form.label :preco, class: 'sr-only' %>
-            <%= form.number_field :preco, step: 0.01, class: 'form-control', placeholder: 'Preço' %>
-            <div class="input-group-append">
-              <div class="input-group-text">
-                <span class="fas fa-dollar-sign"></span>
-              </div>
-            </div>
+          <div class="form-group">
+            <%= form.label :preco, "Preço de Venda" %>
+            <%= form.number_field :preco, step: 0.01, class: 'form-control', placeholder: 'Preço de Venda' %>
+            <% @produto.errors.full_messages_for(:preco).each do |message| %>
+              <div style="color: red;"><%= "Campo não preenchido"%></div>
+            <% end %>
           </div>
 
-          <div class="input-group mt-3">
-            <%= form.label :preco_compra, class: 'sr-only' %>
-            <%= form.number_field :preco_compra, step: 0.01, class: 'form-control', placeholder: 'Preço de compra' %>
-            <div class="input-group-append">
-              <div class="input-group-text">
-                <span class="fas fa-dollar-sign"></span>
-              </div>
-            </div>
+          <div class="form-group">
+            <%= form.label :preco_compra, "Preço de Compra" %>
+            <%= form.number_field :preco_compra, step: 0.01, class: 'form-control', placeholder: 'Preço de Compra ' %>
+            <% @produto.errors.full_messages_for(:preco_compra).each do |message| %>
+              <div style="color: red;"><%= "Campo não preenchido"%></div>
+            <% end %>
           </div>
 
           <div class="mt-3">

@@ -1,81 +1,47 @@
+
 <div class="card">
   <div class="card-header">
-    <div class="form-inline">
+    <div class="form-inline " style="justify-content: space-between;">
       <h1 class="mr-3">Fazer uma venda</h1>
-      <div class="dropdown">
-        <button class="btn btn-secondary dropdown-toggle" type="button" id="clienteDropdown" data-toggle="dropdown"
-          aria-haspopup="true" aria-expanded="false">
-          Dica
-        </button>
-        <div class="dropdown-menu">
-          <div class="card border">
-            <div class="card-header">
-              <ul class="list-group">
-                <li class="list-group-item "><strong>Selecione o ID do cliente e a quantidade do Produto</strong></li>
-                <li class="list-group-item">
-                  <div class="row" style="display: inline-flex;">
-                    <div class="col">
-                      <strong>Verifique o ID do cliente clicando no botão:</strong>
-                    </div>
-                    <div class="col">
-                      <div class="dropdown">
-                        <button class="btn btn-secondary dropdown-toggle" type="button" id="clienteDropdown"
-                          data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                          Lista de Clientes
-                        </button>
-                        <div class="dropdown-menu">
-                          <% Cliente.all.each do |cliente| %>
-                            <a href="#" class="dropdown-item btn btn-success">
-                              <%= "#{cliente.id} - #{cliente.nome}" %>
-                            </a>
-                            <% end %>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </li>
-
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
+      <%= render "vendas/cliente" %>
+      <%= link_to "Nova Venda", vendas_path, class: "btn btn-warning mr-3" %>
     </div>
-
+    
   </div>
-  <div class="card-body">
-    <table class="table table-bordered table-hover">
-      <thead>
-        <tr>
-          <th>Nome</th>
-          <th>Preço</th>
-          <th>Ações</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @produtos.each do |produto| %>
+  <% if @cliente.present? %>
+    <div class="card-body">
+      <table class="table table-bordered table-hover">
+        <thead>
           <tr>
-            <td><%= produto.nome %></td>
-
-            <td><%=number_to_currency(produto.preco, unit: 'R$' , separator: ',' , delimiter: '.' ) %></td>
-
-            <td>
-              <%= form_with(url: add_path) do |f| %>
-                <%= f.label :cliente_id, "ID do Cliente" %>
-                <%= f.number_field :cliente_id %>
-
-                <%= f.hidden_field :user_id, value: current_user.id %>
-                <%= f.hidden_field :id, value: produto.id %>
-                <%= f.number_field :quantity, step:0.01, value: 0, min: 1 %>
-
-                <%= button_tag(type: 'submit' , class: 'btn btn-primary btn-sm' ) do %>
-                  <i class="fas fa-cart-plus fa-lg mr-2"> Adicionar</i>
-                <% end %>
-              <% end %>
-            </td>
+            <th>Nome</th>
+            <th>Preço</th>
+            <th>Quantidade</th>
           </tr>
-        <% end %>
-      </tbody>
-    </table>
-  </div>
+        </thead>
+        <tbody>
+          <% @produtos.each do |produto| %>
+            <tr>
+              <td><%= produto.nome %></td>
+
+              <td><%=number_to_currency(produto.preco, unit: 'R$' , separator: ',' , delimiter: '.' ) %></td>
+
+              <td>
+                <%= form_with(url: add_path) do |f| %>
+                  <%= f.hidden_field :cliente_id , value: @cliente.id%>
+                  <%= f.hidden_field :user_id, value: current_user.id %>
+                  <%= f.hidden_field :id, value: produto.id %>
+                  <%= f.number_field :quantity, step:0.01, value: 0, min: 1 %>
+                  <%= button_tag(type: 'submit' , class: 'btn btn-primary btn-sm' ) do %>
+                    <i class="fas fa-cart-plus fa-lg mr-2"> Adicionar</i>
+                  <% end %>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  <% end%>
 </div>
+
+
