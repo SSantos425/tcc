@@ -1,4 +1,5 @@
 class Cliente < ApplicationRecord
+    validates :nome, presence: true
     has_many :orderables
     has_many :carts, through: :orderables
 

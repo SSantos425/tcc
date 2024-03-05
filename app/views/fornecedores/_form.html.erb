@@ -8,22 +8,35 @@
     <%= form_with model: @fornecedor, url: fornecedores_path, class: 'mb-3' do |form| %>
       <div class="form-group">
         <%= form.label :nome , "Nome" %>
-          <%= form.text_field :nome, class: 'form-control' , placeholder: "Nome" %>
+        <%= form.text_field :nome, class: 'form-control' , placeholder: "Nome" %>
+        <% @fornecedor.errors.full_messages_for(:nome).each do |message| %>
+          <div style="color: red;"><%= "Digite um Nome "%></div>
+        <% end %>
       </div>
 
       <div class="form-group">
         <%= form.label :endereco, "Endereço" %>
-          <%= form.text_area :endereco, class: 'form-control' , placeholder: "Endereço" %>
+        <%= form.text_field :endereco, class: 'form-control' , placeholder: "Endereço" %>
+        <% @fornecedor.errors.full_messages_for(:endereco).each do |message| %>
+          <div style="color: red;"><%= "Digite um Endereço "%></div>
+        <% end %>
       </div>
 
       <div class="form-group">
         <%= form.label :cnpj, "CNPJ" %>
-          <%= form.text_field :cnpj, class: 'form-control' , placeholder:"CNPJ" %>
+        <%= form.text_field :cnpj, class: 'form-control' , placeholder:"CNPJ" %>
+        <% @fornecedor.errors.full_messages_for(:cnpj).each do |message| %>
+          <div style="color: red;"><%= "Digite um CNPJ "%></div>
+        <% end %>
       </div>
 
       <div class="form-group">
-        <%= form.label :insc_estadual, "Inscrição Estadual" %>
-          <%= form.text_field :insc_estadual, class: 'form-control' , placeholder:"Inscrião Estadual" %>
+        <%= form.label :insc_estadual, "Inscrição Estadual" %> 
+        <%= form.text_field :insc_estadual, class: 'form-control' , placeholder:"Inscrião Estadual" %>
+        <% @fornecedor.errors.full_messages_for(:insc_estadual).each do |message| %>
+          <div style="color: red;"><%= "Digite a Inscrição Estadual "%></div>
+        <% end %>
+          
       </div>
 
       <div class="mt-3">
