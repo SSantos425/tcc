@@ -55,28 +55,29 @@
 
         <div class="col-md-5">
           <div class="form-group">
-            <%= form.label :cep, "CEP" %>
-            <%= form.text_field :cep, class: 'form-control', placeholder: "CEP" %>
+            <%= form.label :cep %>
+            <%= form.text_field :cep, id: 'cep_field' %>
+            <button type="button" onclick="buscarCep()">Buscar CEP</button>
           </div>
 
           <div class="form-group">
             <%= form.label :logradouro, "Logradouro" %>
-            <%= form.text_field :logradouro, class: 'form-control', placeholder: "Logradouro" %>
+            <%= form.text_field :logradouro, id: 'rua', class: 'form-control', placeholder: "Logradouro" %>
           </div>
 
           <div class="form-group">
             <%= form.label :bairro, "Bairro" %>
-            <%= form.text_field :bairro, class: 'form-control', placeholder: "Bairro" %>
+            <%= form.text_field :bairro, id: 'bairro', class: 'form-control', placeholder: "Bairro" %>
           </div>
 
           <div class="form-group">
             <%= form.label :localidade, "Localidade" %>
-            <%= form.text_field :localidade, class: 'form-control', placeholder: "Localidade" %>
+            <%= form.text_field :localidade,id:'cidade', class: 'form-control', placeholder: "Localidade" %>
           </div>
 
           <div class="form-group">
             <%= form.label :uf, "UF" %>
-            <%= form.text_field :uf, class: 'form-control', placeholder: "UF" %>
+            <%= form.text_field :uf, id: 'uf', class: 'form-control', placeholder: "UF" %>
           </div>
 
           <div class="form-group">
@@ -92,3 +93,20 @@
     <% end %>
   </div>
 </div>
+
+
+<script>
+  function buscarCep() {
+    var cep = document.getElementById('cep_field').value;
+    if (cep.length == 8) {
+      fetch('https://viacep.com.br/ws/' + cep + '/json/')
+        .then(response => response.json())
+        .then(data => {
+          document.getElementById('rua').value = data.logradouro;
+          document.getElementById('bairro').value = data.bairro;
+          document.getElementById('cidade').value = data.localidade;
+          document.getElementById('uf').value = data.uf;
+        });
+    }
+  }
+</script>

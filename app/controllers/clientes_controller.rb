@@ -5,11 +5,11 @@ class ClientesController < ApplicationController
 
   def new
     @cliente = Cliente.new
+    
   end
 
   def create
     @cliente = Cliente.new(cliente_params)
-
     if @cliente.save
       redirect_to clientes_path
     else

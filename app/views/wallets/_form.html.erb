@@ -13,13 +13,16 @@
         <%= form.hidden_field :user_id ,value:current_user.id%>
         <div class="form-group">
             <%= form.label :balance, "Valor" %>
-            <%= form.number_field :balance, step:0.01, class: 'form-control', placeholder: "Valor", value: number_with_precision(@wallet.balance, precision: 2) %>
+            <%= form.number_field :balance, step:0.01, class: 'form-control', placeholder: "Valor"%>
 
         </div>
 
         <div class="form-group">
           <%= form.label :data, "Data" %>
           <%= form.date_field :data, class: 'form-control', placeholder: "Data"  %>
+          <% @wallet.errors.full_messages_for(:data).each do |message| %>
+              <div style="color: red;"><%= "Selecione uma Data "%></div>
+          <% end %>
         </div>
 
         <div class="form-group">
