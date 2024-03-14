@@ -48,6 +48,6 @@ class ClientesController < ApplicationController
     params.require(:cliente).permit(:tipo_cliente, :nome, :cpf,
                                     :cep, :logradouro, :bairro, :localidade, :uf,
                                     :cnpj, :inscricao_estadual, :inscricao_municipal, :ramo_de_atividade, :cod_ibge,
-                                    :obs)
+                                    :obs,:numero)
   end
 end

@@ -56,6 +56,8 @@ Rails.application.routes.draw do
   post 'empty_cart', to: 'carts#empty_cart', as: 'empty_cart'
   post 'dar_baixa_na_venda/:id', to:'cartlist_orderables#dar_baixa_na_venda', as:'dar_baixa_na_venda'
 
+  get 'download_pdf_data/:data', to:'cartlist_orderables#download_pdf_data', as:'download_pdf_data'
+  get 'download_pdf', to:'cartlist_orderables#download_pdf', as:'download_pdf'
   get 'vendas_geral', to:'cartlist_orderables#vendas_geral', as:'vendas_geral'
   get  'cartlist_data', to:'cartlist_orderables#cartlist_data', as:'cartlist_data'
   get 'show/:id', to: 'cartlist_orderables#show', as: 'show'
